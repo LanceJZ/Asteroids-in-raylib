@@ -10,6 +10,7 @@ public:
 
 	bool Initialise();
 	bool Load();
+
 	void GameLoop();
 	void Shutdown();
 
@@ -17,6 +18,9 @@ public:
 
 
 private:
+	float windowWidth;
+	float windowHeight;
+
 	void ProcessInput();
 	void Update(float deltaTime);
 	void Draw();

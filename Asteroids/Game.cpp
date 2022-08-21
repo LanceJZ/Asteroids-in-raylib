@@ -13,19 +13,22 @@ Game::~Game()
 
 bool Game::Initialise()
 {
-	InitWindow(1280, 960, "Asteroids");
+	windowHeight = 960; //height
+	windowWidth = 1280;
+
+	InitWindow(windowWidth, windowHeight, "Asteroids");
 	SetTargetFPS(60);
 
 	// Define the camera to look into our 3D world
 	camera.position = { 0.0f, 0.0f, -50.0f };   // Camera position
 	camera.target = { 0.0f, 0.0f, 0.0f };      // Camera looking at point
-	camera.up = { 1.0f, 0.0f, 0.0f };          // Camera up vector (rotation towards target)
+	camera.up = { 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
 	camera.fovy = 45.0f;                       // Camera field-of-view Y
 	camera.projection = CAMERA_ORTHOGRAPHIC;   // Camera mode type
 
 	//SetCameraMode(camera, CAMERA_ORBITAL);
 
-	player = new Player({ 0 });
+	player = new Player({ 0 }, windowWidth,	windowWidth);
 
 	return 0;
 }

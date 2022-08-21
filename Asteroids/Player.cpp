@@ -7,9 +7,10 @@ Player::Player()
 	position = Vector2{ 0, 0 };
 }
 
-Player::Player(Vector2 pos) : position{ pos }
+Player::Player(Vector2 pos, float windowWidth, float windowHeight) : position{ pos }
 {
-
+	Player::windowWidth = windowWidth;
+	Player::windowHeight = windowHeight;
 }
 
 void Player::LoadModel(Camera *camera, Model ship)
@@ -52,9 +53,7 @@ void Player::Input()
 
 void Player::Update(float deltaTime)
 {
-	Matrix matRotate = MatrixRotateZ(angle);
-
-	ship.transform = matRotate;
+	ship.transform = MatrixRotateZ(angle);      // Rotate 3D model
 
 	if (thrustOff)
 	{
@@ -68,13 +67,35 @@ void Player::Update(float deltaTime)
 	position.y += velocity.y * deltaTime;
 
 	acceleration = { 0 };
+
+	float perH = 60;
+	float perW = 44;
+
+	if (position.x > windowWidth / perW)
+	{
+		position.x = -windowWidth / perW;
+	}
+
+	if (position.y > windowHeight / perH)
+	{
+		position.y = -windowHeight / perH;
+	}
+
+	if (position.x < -windowWidth / perW)
+	{
+		position.x = windowWidth / perW;
+	}
+
+	if (position.y < -windowHeight / perH)
+	{
+		position.y = windowHeight / perH;
+	}
+
 }
 
 void Player::Draw()
 {
-	Vector3 position3 = { position.x, position.y, 0 };
-
-	DrawModel(ship, position3, 0.250f, LIGHTGRAY);        // Draw 3d model with texture
+	DrawModel(ship, { position.x, position.y, 0 }, 0.250f, LIGHTGRAY);        // Draw 3D model
 
 
 }

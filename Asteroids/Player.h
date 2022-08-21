@@ -18,7 +18,7 @@ public:
 	void SetPosition(Vector2 pos);
 	Vector2 GetPosition();
 
-	Player(Vector2 pos);
+	Player(Vector2 pos, float windowWidth, float windowHeight);
 	Player();
 
 private:
@@ -27,6 +27,8 @@ private:
 	Camera *camera;
 	Vector2 position{ 0, 0 };
 	float radius{ 5 };
+	float windowWidth;
+	float windowHeight;
 	bool thrustOff;
 	Color color{ LIGHTGRAY };
 	const int screenWidth = 800;

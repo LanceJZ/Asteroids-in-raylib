@@ -38,7 +38,7 @@ bool Game::Load()
 	Model playerShip = LoadModel("models/playership.obj");
 	playerShip.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = LoadTexture("models/playership.png");
 
-	player->LoadModel(&camera, playerShip);
+	player->LoadModel(playerShip);
 
 
 	return 0;

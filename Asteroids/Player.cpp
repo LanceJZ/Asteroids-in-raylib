@@ -2,43 +2,38 @@
 #include "Game.h"
 #include "raymath.h"
 
-Player::Player()
-{
-	position = Vector2{ 0, 0 };
-}
-
-Player::Player(Vector2 pos, float windowWidth, float windowHeight) : position{ pos }
+Player::Player(Vector2 pos, float windowWidth, float windowHeight)
 {
 	Player::windowWidth = windowWidth;
 	Player::windowHeight = windowHeight;
+	MaxSpeed = 50;
 }
 
-void Player::LoadModel(Camera *camera, Model ship)
+void Player::LoadModel(Model ship)
 {
 	Player::ship = ship;
-	Player::camera = camera;
 }
 
 void Player::SetPosition(Vector2 pos)
 {
-	position = pos;
+	Position2 = pos;
 }
 
 Vector2 Player::GetPosition()
 {
-	return position;
+	return Position2;
 }
 
 void Player::Input()
 {
 	if (IsKeyDown(KEY_RIGHT))
 	{
-		angle += 0.1f;
+		RotationZ += 0.1f;
 	}
 
 	if (IsKeyDown(KEY_LEFT))
 	{
-		angle -= 0.1;
+		RotationZ -= 0.1;
 	}
 
 	if (IsKeyDown(KEY_UP))
@@ -53,57 +48,52 @@ void Player::Input()
 
 void Player::Update(float deltaTime)
 {
-	ship.transform = MatrixRotateZ(angle);      // Rotate 3D model
+	PositionedObject::Update(deltaTime);
+
+	ship.transform = MatrixRotateZ(RotationZ);      // Rotate 3D model
 
 	if (thrustOff)
 	{
-		acceleration.x = (-velocity.x * 0.1f) * deltaTime;
-		acceleration.y = (-velocity.y * 0.1f) * deltaTime;
+		Acceleration.x = (-Velocity.x * 0.1f) * deltaTime;
+		Acceleration.y = (-Acceleration.y * 0.1f) * deltaTime;
 	}
-
-	velocity.x += acceleration.x;
-	velocity.y += acceleration.y;
-	position.x += velocity.x * deltaTime;
-	position.y += velocity.y * deltaTime;
-
-	acceleration = { 0 };
 
 	float perH = 60;
 	float perW = 44;
 
-	if (position.x > windowWidth / perW)
+	if (X() > windowWidth / perW)
 	{
-		position.x = -windowWidth / perW;
+		X(-windowWidth / perW);
 	}
 
-	if (position.y > windowHeight / perH)
+	if (Y() > windowHeight / perH)
 	{
-		position.y = -windowHeight / perH;
+		Y(-windowHeight / perH);
 	}
 
-	if (position.x < -windowWidth / perW)
+	if (X() < -windowWidth / perW)
 	{
-		position.x = windowWidth / perW;
+		X(windowWidth / perW);
 	}
 
-	if (position.y < -windowHeight / perH)
+	if (Y() < -windowHeight / perH)
 	{
-		position.y = windowHeight / perH;
+		Y(windowHeight / perH);
 	}
 
 }
 
 void Player::Draw()
 {
-	DrawModel(ship, { position.x, position.y, 0 }, 0.250f, LIGHTGRAY);        // Draw 3D model
+	DrawModel(ship, Position, 0.250f, LIGHTGRAY);        // Draw 3D model
 
 
 }
 
 void Player::ThrustOn()
 {
-	acceleration.x = (cos(angle) * 0.1f);
-	acceleration.y = (sin(angle) * 0.1f);
+	Acceleration.x = (cos(RotationZ) * 0.1f);
+	Acceleration.y = (sin(RotationZ) * 0.1f);
 	thrustOff = false;
 }
 

@@ -8,9 +8,12 @@ class Shot : Entity
 public:
 	using Entity::Enabled;
 
-	void LoadModel(Model model);
-	Shot(Vector2 pos, float windowWidth, float windowHeight);
 	virtual void Update(float deltaTime);
+	virtual void Draw();
+	virtual void LoadModel(Model model);
+	void Spawn(Vector3 pos, Vector3 vel);
+
+	Shot(Vector2 pos, float windowWidth, float windowHeight);
 
 private:
 	Model shot;

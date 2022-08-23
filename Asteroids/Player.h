@@ -1,7 +1,6 @@
 #pragma once
 #include "raylib.h"
 #include "Entity.h"
-#include "PositionedObject.h"
 #include "Shot.h"
 
 class Player : Entity
@@ -26,7 +25,8 @@ private:
 	Color color{ LIGHTGRAY };
 	Model shotModel;
 	void ThrustOn();
-	void ThrustOff();
+	void ThrustOff(float deltaTime);
+	void Fire();
 
 	Shot* shot;
 };

@@ -8,12 +8,19 @@ Player::Player(float windowWidth, float windowHeight)
 	MaxSpeed = 50;
 
 	shot = new Shot({ 0 }, windowWidth, windowHeight);
+
+	float perH = 60;
+	float perW = 44;
+	ScreenWidth = windowWidth / perW;
+	ScreenHeight = windowHeight / perH;
 }
 
 void Player::LoadModel(Model model, Model shotmodel)
 {
 	Entity::model = model;
 	shotModel = shotmodel;
+
+	shot->LoadModel(shotModel);
 }
 
 void Player::Input()
@@ -34,43 +41,27 @@ void Player::Input()
 	}
 	else
 	{
-		ThrustOff();
+		thrustOff = true;
+	}
+
+	if (IsKeyPressed(KEY_RIGHT_CONTROL))
+	{
+		Fire();
 	}
 }
 
 void Player::Update(float deltaTime)
 {
 	Entity::Update(deltaTime);
+	Entity::CheckScreenEdge();
+
+	shot->Update(deltaTime);
 
 	model.transform = MatrixRotateZ(RotationZ);      // Rotate 3D model
 
 	if (thrustOff)
 	{
-		Acceleration.x = (-Velocity.x * 0.1f) * deltaTime;
-		Acceleration.y = (-Acceleration.y * 0.1f) * deltaTime;
-	}
-
-	float perH = 60;
-	float perW = 44;
-
-	if (X() > windowWidth / perW)
-	{
-		X(-windowWidth / perW);
-	}
-
-	if (Y() > windowHeight / perH)
-	{
-		Y(-windowHeight / perH);
-	}
-
-	if (X() < -windowWidth / perW)
-	{
-		X(windowWidth / perW);
-	}
-
-	if (Y() < -windowHeight / perH)
-	{
-		Y(windowHeight / perH);
+		ThrustOff(deltaTime);
 	}
 
 }
@@ -78,7 +69,7 @@ void Player::Update(float deltaTime)
 void Player::Draw()
 {
 	Entity::Draw();
-
+	shot->Draw();
 }
 
 void Player::ThrustOn()
@@ -88,7 +79,16 @@ void Player::ThrustOn()
 	thrustOff = false;
 }
 
-void Player::ThrustOff()
+void Player::ThrustOff(float deltaTime)
 {
-	thrustOff = true;
+	Acceleration.x = (-Velocity.x * 0.1f) * deltaTime;
+	Acceleration.y = (-Velocity.y * 0.1f) * deltaTime;
+}
+
+void Player::Fire()
+{
+	float vel = 15.5f;
+	Vector3 velocity = {((float)cos(RotationZ) * vel), ((float)sin(RotationZ) * vel), 0};
+
+	shot->Spawn(Position, velocity);
 }

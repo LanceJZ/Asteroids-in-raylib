@@ -14,8 +14,11 @@ public:
 	using PositionedObject::Velocity2;
 	using PositionedObject::Acceleration2;
 	using PositionedObject::Position2;
+	using PositionedObject::ScreenWidth;
+	using PositionedObject::ScreenHeight;
 
 	bool Enabled = true;
+	float Scale = 0.25f;
 
 	virtual float X();
 	virtual float Y();
@@ -29,6 +32,7 @@ public:
 	virtual void LoadModel(Model model);
 	virtual void Update(float deltaTime);
 	virtual void Draw();
+	virtual void CheckScreenEdge();
 
 	Entity();
 

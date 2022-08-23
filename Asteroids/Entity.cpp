@@ -49,7 +49,12 @@ void Entity::Draw()
 {
 	if (Enabled)
 	{
-		DrawModel(model, Position, 0.250f, LIGHTGRAY);	// Draw 3D model
+		DrawModel(model, Position, Scale, LIGHTGRAY);	// Draw 3D model
 	}
 
+}
+
+void Entity::CheckScreenEdge()
+{
+	PositionedObject::CheckScreenEdge();
 }

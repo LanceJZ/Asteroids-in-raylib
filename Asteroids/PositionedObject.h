@@ -7,6 +7,8 @@ public:
 	//bool Enabled= true;
 	float MaxSpeed{ 0 };
 	float RotationZ{ 0 };
+	float ScreenWidth{ 0 };
+	float ScreenHeight{ 0 };
 	Vector2 Acceleration2 = { 0 };
 	Vector2 Velocity2 = { 0 };
 	Vector2 Position2 = { 0 };
@@ -29,6 +31,7 @@ public:
 	PositionedObject();
 
 	virtual void Update(float deltaTime);
+	virtual void CheckScreenEdge();
 
 private:
 

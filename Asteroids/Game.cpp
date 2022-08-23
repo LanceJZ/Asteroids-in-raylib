@@ -28,7 +28,8 @@ bool Game::Initialise()
 
 	//SetCameraMode(camera, CAMERA_ORBITAL);
 
-	player = new Player({ 0 }, windowWidth,	windowWidth);
+	player = new Player(windowWidth, windowWidth);
+
 
 	return 0;
 }
@@ -36,9 +37,13 @@ bool Game::Initialise()
 bool Game::Load()
 {
 	Model playerShip = LoadModel("models/playership.obj");
-	playerShip.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = LoadTexture("models/playership.png");
+	playerShip.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
+		LoadTexture("models/playership.png");
+	Model shot = LoadModel("models/shot.obj");
+	shot.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
+		LoadTexture("models/shot.png");
 
-	player->LoadModel(playerShip);
+	player->LoadModel(playerShip, shot);
 
 
 	return 0;
@@ -64,7 +69,10 @@ void Game::Update(float deltaTime)
 {
 	UpdateCamera(&camera);
 
-	player->Update(deltaTime);
+	if (player->Enabled)
+	{
+		player->Update(deltaTime);
+	}
 }
 
 void Game::Draw()

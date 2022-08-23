@@ -1,27 +1,19 @@
 #include "Player.h"
-#include "Game.h"
 #include "raymath.h"
 
-Player::Player(Vector2 pos, float windowWidth, float windowHeight)
+Player::Player(float windowWidth, float windowHeight)
 {
 	Player::windowWidth = windowWidth;
 	Player::windowHeight = windowHeight;
 	MaxSpeed = 50;
+
+	shot = new Shot({ 0 }, windowWidth, windowHeight);
 }
 
-void Player::LoadModel(Model ship)
+void Player::LoadModel(Model model, Model shotmodel)
 {
-	Player::ship = ship;
-}
-
-void Player::SetPosition(Vector2 pos)
-{
-	Position2 = pos;
-}
-
-Vector2 Player::GetPosition()
-{
-	return Position2;
+	Entity::model = model;
+	shotModel = shotmodel;
 }
 
 void Player::Input()
@@ -48,9 +40,9 @@ void Player::Input()
 
 void Player::Update(float deltaTime)
 {
-	PositionedObject::Update(deltaTime);
+	Entity::Update(deltaTime);
 
-	ship.transform = MatrixRotateZ(RotationZ);      // Rotate 3D model
+	model.transform = MatrixRotateZ(RotationZ);      // Rotate 3D model
 
 	if (thrustOff)
 	{
@@ -85,8 +77,7 @@ void Player::Update(float deltaTime)
 
 void Player::Draw()
 {
-	DrawModel(ship, Position, 0.250f, LIGHTGRAY);        // Draw 3D model
-
+	Entity::Draw();
 
 }
 

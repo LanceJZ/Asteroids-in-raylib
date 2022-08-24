@@ -19,16 +19,13 @@ public:
 
 private:
 	float radius{ 5 };
-	float windowWidth;
-	float windowHeight;
 	bool thrustOff = true;
 	Color color{ RAYWHITE };
-	Model shotModel;
 	void ThrustOn();
 	void ThrustOff(float deltaTime);
 	void Fire();
 
-	Shot* shot;
+	//Shot* shot;
 	Shot* shots[4];
 };
 

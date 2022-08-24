@@ -57,24 +57,24 @@ void PositionedObject::Update(float deltaTime)
 
 void PositionedObject::CheckScreenEdge()
 {
-	if (X() > ScreenWidth)
+	if (X() > WindowWidth)
 	{
-		X(-ScreenWidth);
+		X(-WindowWidth);
 	}
 
-	if (Y() > ScreenHeight)
+	if (Y() > WindowHeight)
 	{
-		Y(-ScreenHeight);
+		Y(-WindowHeight);
 	}
 
-	if (X() < -ScreenWidth)
+	if (X() < -WindowWidth)
 	{
-		X(ScreenWidth);
+		X(WindowWidth);
 	}
 
-	if (Y() < -ScreenHeight)
+	if (Y() < -WindowHeight)
 	{
-		Y(ScreenHeight);
+		Y(WindowHeight);
 	}
 }
 

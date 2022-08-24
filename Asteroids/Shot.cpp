@@ -2,13 +2,9 @@
 
 Shot::Shot(float windowWidth, float windowHeight)
 {
-	Shot::windowWidth = windowWidth;
-	Shot::windowHeight = windowHeight;
 	Enabled = false;
-	float perH = 60;
-	float perW = 44;
-	ScreenWidth = windowWidth / perW;
-	ScreenHeight = windowHeight / perH;
+	WindowWidth = windowWidth;
+	WindowHeight = windowHeight;
 
 	Scale = 0.15f;
 

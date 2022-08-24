@@ -28,8 +28,13 @@ bool Game::Initialise()
 
 	//SetCameraMode(camera, CAMERA_ORBITAL);
 
-	player = new Player(windowWidth, windowWidth);
+	float perH = 60;
+	float perW = 44;
+	float windowH = windowWidth / perW;
+	float windowW = windowHeight / perH;
 
+
+	player = new Player(windowW, windowH);
 
 	return 0;
 }

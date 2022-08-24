@@ -5,7 +5,7 @@ Player::Player(float windowWidth, float windowHeight)
 {
 	Player::windowWidth = windowWidth;
 	Player::windowHeight = windowHeight;
-	MaxSpeed = 50;
+	MaxSpeed = 20;
 
 	shot = new Shot({ 0 }, windowWidth, windowHeight);
 
@@ -87,7 +87,7 @@ void Player::ThrustOff(float deltaTime)
 
 void Player::Fire()
 {
-	float vel = 15.5f;
+	float vel = 25.5f;
 	Vector3 velocity = {((float)cos(RotationZ) * vel), ((float)sin(RotationZ) * vel), 0};
 
 	shot->Spawn(Position, velocity);

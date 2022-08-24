@@ -11,6 +11,9 @@ Shot::Shot(Vector2 pos, float windowWidth, float windowHeight)
 	ScreenHeight = windowHeight / perH;
 
 	Scale = 0.15f;
+
+	timer = new Timer();
+	timer->Set(1.25f);
 }
 
 void Shot::LoadModel(Model model)
@@ -27,7 +30,12 @@ void Shot::Update(float deltaTime)
 {
 	Entity::Update(deltaTime);
 	Entity::CheckScreenEdge();
+	timer->Update(deltaTime);
 
+	if (timer->Elapsed())
+	{
+		Enabled = false;
+	}
 }
 
 void Shot::Spawn(Vector3 pos, Vector3 vel)
@@ -35,4 +43,6 @@ void Shot::Spawn(Vector3 pos, Vector3 vel)
 	Position = pos;
 	Velocity = vel;
 	Enabled = true;
+
+	timer->Reset();
 }

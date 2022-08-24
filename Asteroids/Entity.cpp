@@ -49,7 +49,7 @@ void Entity::Draw()
 {
 	if (Enabled)
 	{
-		DrawModel(model, Position, Scale, LIGHTGRAY);	// Draw 3D model
+		DrawModel(model, Position, Scale, RAYWHITE);	// Draw 3D model
 	}
 
 }

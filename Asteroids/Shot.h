@@ -1,7 +1,7 @@
 #pragma once
 #include "raylib.h"
 #include "Entity.h"
-#include "PositionedObject.h"
+#include "Timer.h"
 
 class Shot : Entity
 {
@@ -20,5 +20,5 @@ private:
 	float windowWidth;
 	float windowHeight;
 	Color color{ LIGHTGRAY };
-
+	Timer* timer;
 };

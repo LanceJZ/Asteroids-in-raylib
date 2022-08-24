@@ -3,11 +3,11 @@
 #include "Entity.h"
 #include "Shot.h"
 
-class Player : Entity
+class Player : public Entity
 {
 public:
-	using Entity::Enabled;
-	using Entity::Position;
+	//using Entity::Enabled;
+	//using Entity::Position;
 
 	virtual void Input();
 	virtual void Update(float deltaTime);
@@ -22,12 +22,13 @@ private:
 	float windowWidth;
 	float windowHeight;
 	bool thrustOff = true;
-	Color color{ LIGHTGRAY };
+	Color color{ RAYWHITE };
 	Model shotModel;
 	void ThrustOn();
 	void ThrustOff(float deltaTime);
 	void Fire();
 
 	Shot* shot;
+	Shot* shots[4];
 };
 

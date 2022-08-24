@@ -2,20 +2,20 @@
 #include "raylib.h"
 #include "PositionedObject.h"
 
-class Entity : PositionedObject
+class Entity : public PositionedObject
 {
 public:
-	using PositionedObject::MaxSpeed;
-	using PositionedObject::Position;
-	using PositionedObject::RotationZ;
-	using PositionedObject::Rotation;
-	using PositionedObject::Velocity;
-	using PositionedObject::Acceleration;
-	using PositionedObject::Velocity2;
-	using PositionedObject::Acceleration2;
-	using PositionedObject::Position2;
-	using PositionedObject::ScreenWidth;
-	using PositionedObject::ScreenHeight;
+	//using PositionedObject::MaxSpeed;
+	//using PositionedObject::Position;
+	//using PositionedObject::RotationZ;
+	//using PositionedObject::Rotation;
+	//using PositionedObject::Velocity;
+	//using PositionedObject::Acceleration;
+	//using PositionedObject::Velocity2;
+	//using PositionedObject::Acceleration2;
+	//using PositionedObject::Position2;
+	//using PositionedObject::ScreenWidth;
+	//using PositionedObject::ScreenHeight;
 
 	bool Enabled = true;
 	float Scale = 0.25f;

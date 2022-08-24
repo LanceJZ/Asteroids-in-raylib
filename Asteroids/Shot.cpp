@@ -1,6 +1,6 @@
 #include "Shot.h"
 
-Shot::Shot(Vector2 pos, float windowWidth, float windowHeight)
+Shot::Shot(float windowWidth, float windowHeight)
 {
 	Shot::windowWidth = windowWidth;
 	Shot::windowHeight = windowHeight;

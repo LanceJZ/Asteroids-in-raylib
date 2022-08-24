@@ -1,26 +1,35 @@
 #include "Player.h"
 #include "raymath.h"
 
-Player::Player(float windowWidth, float windowHeight)
+Player::Player(float windowWidth, float windowHeight) : Entity()
 {
 	Player::windowWidth = windowWidth;
 	Player::windowHeight = windowHeight;
 	MaxSpeed = 20;
 
-	shot = new Shot({ 0 }, windowWidth, windowHeight);
+	shot = new Shot(windowWidth, windowHeight);
 
 	float perH = 60;
 	float perW = 44;
 	ScreenWidth = windowWidth / perW;
 	ScreenHeight = windowHeight / perH;
+
+	for (int i = 0; i < 4; i++)
+	{
+		shots[i] = new Shot(windowWidth, windowHeight);
+	}
 }
 
 void Player::LoadModel(Model model, Model shotmodel)
 {
 	Entity::model = model;
-	shotModel = shotmodel;
 
-	shot->LoadModel(shotModel);
+	shot->LoadModel(shotmodel);
+
+	for (int i = 0; i < 4; i++)
+	{
+		shots[i]->LoadModel(shotmodel);
+	}
 }
 
 void Player::Input()
@@ -57,6 +66,12 @@ void Player::Update(float deltaTime)
 
 	shot->Update(deltaTime);
 
+	for (int i = 0; i < 4; i++)
+	{
+		shots[i]->Update(deltaTime);
+	}
+
+
 	model.transform = MatrixRotateZ(RotationZ);      // Rotate 3D model
 
 	if (thrustOff)
@@ -70,6 +85,11 @@ void Player::Draw()
 {
 	Entity::Draw();
 	shot->Draw();
+
+	for (int i = 0; i < 4; i++)
+	{
+		shots[i]->Draw();
+	}
 }
 
 void Player::ThrustOn()
@@ -91,4 +111,13 @@ void Player::Fire()
 	Vector3 velocity = {((float)cos(RotationZ) * vel), ((float)sin(RotationZ) * vel), 0};
 
 	shot->Spawn(Position, velocity);
+
+	for (int i = 0; i < 4; i++)
+	{
+		if (!shots[i]->Enabled)
+		{
+			shot->Spawn(Position, velocity);
+		}
+	}
+
 }

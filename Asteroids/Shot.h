@@ -3,22 +3,22 @@
 #include "Entity.h"
 #include "Timer.h"
 
-class Shot : Entity
+class Shot : public Entity
 {
 public:
-	using Entity::Enabled;
+	//using Entity::Enabled;
 
 	virtual void Update(float deltaTime);
 	virtual void Draw();
 	virtual void LoadModel(Model model);
 	void Spawn(Vector3 pos, Vector3 vel);
 
-	Shot(Vector2 pos, float windowWidth, float windowHeight);
+	Shot(float windowWidth, float windowHeight);
 
 private:
 	Model shot;
 	float windowWidth;
 	float windowHeight;
-	Color color{ LIGHTGRAY };
+	Color color{ RAYWHITE };
 	Timer* timer;
 };

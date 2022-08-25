@@ -2,6 +2,16 @@
 #include "raylib.h"
 #include "Player.h"
 
+enum GameState
+{
+	PlayerHit,
+	Over,
+	InPlay,
+	Pause,
+	HighScore,
+	MainMenu
+};
+
 class Game
 {
 public:

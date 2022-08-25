@@ -47,6 +47,9 @@ bool Game::Load()
 	Model shot = LoadModel("models/shot.obj");
 	shot.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
 		LoadTexture("models/shot.png");
+	Model rockOne = LoadModel("models/rockone.obj");
+	rockOne.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
+		LoadTexture("models/rockone.png");
 
 	player->LoadModel(playerShip, shot);
 

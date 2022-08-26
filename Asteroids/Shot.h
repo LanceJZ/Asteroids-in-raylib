@@ -9,13 +9,12 @@ public:
 
 	virtual void Update(float deltaTime);
 	virtual void Draw();
-	virtual void LoadModel(Model model);
+	virtual void LoadModel(Model* model);
 	void Spawn(Vector3 pos, Vector3 vel);
 
 	Shot(float windowWidth, float windowHeight);
 
 private:
-	Model shot;
 	float windowWidth;
 	float windowHeight;
 	Color color{ RAYWHITE };

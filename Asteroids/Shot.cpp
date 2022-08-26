@@ -12,9 +12,9 @@ Shot::Shot(float windowWidth, float windowHeight)
 	timer->Set(1.25f);
 }
 
-void Shot::LoadModel(Model model)
+void Shot::LoadModel(Model* model)
 {
-	Entity::model = model;
+	Entity::TheModel = model;
 }
 
 void Shot::Draw()

@@ -27,14 +27,12 @@ public:
 	virtual void Y(float y);
 	virtual void Z(float z);
 
-	Model model;
+	Model* TheModel;
 
-	virtual void LoadModel(Model model);
+	virtual void LoadModel(Model* model);
 	virtual void Update(float deltaTime);
 	virtual void Draw();
 	virtual void CheckScreenEdge();
-
-	Entity();
 
 private:
 

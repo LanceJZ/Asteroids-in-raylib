@@ -1,9 +1,5 @@
 #include "Entity.h"
-
-Entity::Entity() : PositionedObject()
-{
-
-}
+#include "raymath.h"
 
 float Entity::X()
 {
@@ -35,21 +31,23 @@ void Entity::Z(float z)
 	Position.z = z;
 }
 
-void Entity::LoadModel(Model model)
+void Entity::LoadModel(Model* model)
 {
-	Entity::model = model;
+	Entity::TheModel = model;
 }
 
 void Entity::Update(float deltaTime)
 {
 	PositionedObject::Update(deltaTime);
+	TheModel->transform = MatrixRotateZ(RotationZ);      // Rotate 3D model
+
 }
 
 void Entity::Draw()
 {
 	if (Enabled)
 	{
-		DrawModel(model, Position, Scale, RAYWHITE);	// Draw 3D model
+		DrawModel(*TheModel, Position, Scale, RAYWHITE);	// Draw 3D model
 	}
 
 }

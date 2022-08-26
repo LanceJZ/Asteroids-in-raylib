@@ -7,17 +7,18 @@ using namespace std;
 class RockControl
 {
 public:
-	Rock* rock;
-
 	void NewGame(void);
 	bool CheckEndOfWave(void);
 	void NewWave(void);
 
+	virtual void LoadModel(Model* modelOne, Model* modelTwo, Model* modelThree, Model* modelFour);
 	virtual void Update(float deltaTime);
 	virtual void Draw();
 
 	RockControl(float screenWidth, float screenheight);
 
+
+private:
 	enum RockSize
 	{
 		Small,
@@ -25,16 +26,22 @@ public:
 		Large
 	};
 
+	float screenWidth;
+	float screenHeight;
 
-private:
 	vector<Rock*> rocks;
+
+	Model* modelOne;
+	Model* modelTwo;
+	Model* modelThree;
+	Model* modelFour;
 
 	void CreateRocks(void);
 	void ClearAllRocks(void);
 	void SpawnNewWave(int NumberOfRocks);
-	void SpawnMedRocks(Vector2 location);
-	void SpawnSmallRocks(Vector2 location);
-
+	void SpawnMedRocks(Vector3 pos);
+	void SpawnSmallRocks(Vector3 pos);
+	float GetRandomY();
 
 };
 

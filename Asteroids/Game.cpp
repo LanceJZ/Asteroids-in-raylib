@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "raymath.h"
 
 Game::Game()
 {
@@ -41,18 +40,34 @@ bool Game::Initialise()
 
 bool Game::Load()
 {
-	Model playerShip = LoadModel("models/playership.obj");
-	playerShip.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
+	Model modelPS = LoadModel("models/playership.obj");
+	Model modelS = LoadModel("models/shot.obj");
+	Model modelRO = LoadModel("models/rockone.obj");
+	Model modelRT = LoadModel("models/rocktwo.obj");
+	Model modelRTh = LoadModel("models/rockthree.obj");
+	Model modelF = LoadModel("models/rockfour.obj");
+
+	Model* playerShip = &modelPS;
+	playerShip->materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
 		LoadTexture("models/playership.png");
-	Model shot = LoadModel("models/shot.obj");
-	shot.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
+	Model* shot = &modelS;
+	shot->materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
 		LoadTexture("models/shot.png");
-	Model rockOne = LoadModel("models/rockone.obj");
-	rockOne.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
+	Model* rockOne = &modelRO;
+	rockOne->materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
 		LoadTexture("models/rockone.png");
+	Model* rockTwo = &modelRT;
+	rockOne->materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
+		LoadTexture("models/rocktwo.png");
+	Model* rockThree = &modelRTh;
+	rockOne->materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
+		LoadTexture("models/rockthree.png");
+	Model* rockFour = &modelF;
+	rockOne->materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
+		LoadTexture("models/rockfour.png");
 
 	player->LoadModel(playerShip, shot);
-
+	rockControl->LoadModel(rockOne, rockTwo, rockThree, rockFour);
 
 	return 0;
 }

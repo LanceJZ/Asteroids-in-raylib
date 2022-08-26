@@ -13,9 +13,9 @@ Player::Player(float windowWidth, float windowHeight) : Entity()
 	}
 }
 
-void Player::LoadModel(Model model, Model shotmodel)
+void Player::LoadModel(Model* model, Model* shotmodel)
 {
-	Entity::model = model;
+	Entity::TheModel = model;
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -61,8 +61,6 @@ void Player::Update(float deltaTime)
 			shots[i]->Update(deltaTime);
 	}
 
-
-	model.transform = MatrixRotateZ(RotationZ);      // Rotate 3D model
 
 	if (thrustOff)
 	{

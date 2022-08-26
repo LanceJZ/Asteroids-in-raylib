@@ -11,7 +11,7 @@ public:
 	bool CheckEndOfWave(void);
 	void NewWave(void);
 
-	virtual void LoadModel(Model* modelOne, Model* modelTwo, Model* modelThree, Model* modelFour);
+	virtual void LoadModel(Model modelOne, Model modelTwo, Model modelThree, Model modelFour);
 	virtual void Update(float deltaTime);
 	virtual void Draw();
 
@@ -31,10 +31,10 @@ private:
 
 	vector<Rock*> rocks;
 
-	Model* modelOne;
-	Model* modelTwo;
-	Model* modelThree;
-	Model* modelFour;
+	Model modelOne;
+	Model modelTwo;
+	Model modelThree;
+	Model modelFour;
 
 	void CreateRocks(void);
 	void ClearAllRocks(void);

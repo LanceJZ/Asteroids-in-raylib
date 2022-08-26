@@ -13,7 +13,7 @@ void Rock::Spawn(Vector3 pos, Vector3 vel)
 
 }
 
-void Rock::LoadModel(Model* model)
+void Rock::LoadModel(Model model)
 {
 	TheModel = model;
 }

@@ -31,15 +31,15 @@ void Entity::Z(float z)
 	Position.z = z;
 }
 
-void Entity::LoadModel(Model* model)
+void Entity::LoadModel(Model model)
 {
-	Entity::TheModel = model;
+	TheModel = model;
 }
 
 void Entity::Update(float deltaTime)
 {
 	PositionedObject::Update(deltaTime);
-	TheModel->transform = MatrixRotateZ(RotationZ);      // Rotate 3D model
+	TheModel.transform = MatrixRotateZ(RotationZ);      // Rotate 3D model
 
 }
 
@@ -47,7 +47,7 @@ void Entity::Draw()
 {
 	if (Enabled)
 	{
-		DrawModel(*TheModel, Position, Scale, RAYWHITE);	// Draw 3D model
+		DrawModel(TheModel, Position, Scale, RAYWHITE);	// Draw 3D model
 	}
 
 }

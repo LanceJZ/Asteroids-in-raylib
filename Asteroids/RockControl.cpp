@@ -12,11 +12,11 @@ bool RockControl::CheckEndOfWave(void)
 
 void RockControl::NewWave(void)
 {
-
+	SpawnNewWave(4);
 }
 
 
-void RockControl::LoadModel(Model* modelOne, Model* modelTwo, Model* modelThree, Model* modelFour)
+void RockControl::LoadModel(Model modelOne, Model modelTwo, Model modelThree, Model modelFour)
 {
 	RockControl::modelOne = modelOne;
 	RockControl::modelTwo = modelTwo;

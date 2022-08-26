@@ -8,7 +8,7 @@ public:
 	virtual void Draw();
 
 	void Spawn(Vector3 pos, Vector3 vel);
-	void LoadModel(Model* model);
+	void LoadModel(Model model);
 
 
 private:

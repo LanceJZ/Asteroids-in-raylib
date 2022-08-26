@@ -13,9 +13,9 @@ Player::Player(float windowWidth, float windowHeight) : Entity()
 	}
 }
 
-void Player::LoadModel(Model* model, Model* shotmodel)
+void Player::LoadModel(Model model, Model shotmodel)
 {
-	Entity::TheModel = model;
+	TheModel = model;
 
 	for (int i = 0; i < 4; i++)
 	{

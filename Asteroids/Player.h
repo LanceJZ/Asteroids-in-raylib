@@ -12,7 +12,7 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void Draw();
 
-	void LoadModel(Model* model, Model* shotmodel);
+	void LoadModel(Model model, Model shotmodel);
 
 	Player(float windowWidth, float windowHeight);
 

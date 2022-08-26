@@ -27,9 +27,9 @@ public:
 	virtual void Y(float y);
 	virtual void Z(float z);
 
-	Model* TheModel;
+	Model TheModel;
 
-	virtual void LoadModel(Model* model);
+	virtual void LoadModel(Model model);
 	virtual void Update(float deltaTime);
 	virtual void Draw();
 	virtual void CheckScreenEdge();

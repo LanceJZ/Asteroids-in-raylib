@@ -2,7 +2,7 @@
 
 void RockControl::NewGame(void)
 {
-
+	NewWave();
 }
 
 bool RockControl::CheckEndOfWave(void)
@@ -66,12 +66,12 @@ void RockControl::SpawnNewWave(int numberOfRocks)
 		{
 			rocks.push_back(new Rock());
 			rocks[rocks.size() - 1]->LoadModel(modelOne);
-			rocks[rocks.size() - 1]->Spawn({ 0, GetRandomY(), 0 }, {0, 0, 0});
+			rocks[rocks.size() - 1]->Spawn({ screenWidth, GetRandomY(), 0 }, {0, 0, 0});
 		}
 	}
 }
 
 float RockControl::GetRandomY()
 {
-	return GetRandomValue(-screenHeight / 2, screenHeight / 2);
+	return GetRandomValue(-screenHeight, screenHeight);
 }

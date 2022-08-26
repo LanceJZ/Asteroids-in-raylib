@@ -27,10 +27,10 @@ bool Game::Initialise()
 
 	//SetCameraMode(camera, CAMERA_ORBITAL);
 
-	float perH = 60;
-	float perW = 44;
-	float windowH = windowWidth / perW;
-	float windowW = windowHeight / perH;
+	float perH = 43;
+	float perW = 43;
+	float windowW = windowWidth / perW;
+	float windowH = windowHeight / perH;
 
 
 	player = new Player(windowW, windowH);
@@ -46,7 +46,7 @@ bool Game::Load()
 	Model modelRO = LoadModel("models/rockone.obj");
 	Model modelRT = LoadModel("models/rocktwo.obj");
 	Model modelRTh = LoadModel("models/rockthree.obj");
-	Model modelF = LoadModel("models/rockfour.obj");
+	Model modelF = LoadModel("models/RockFour.obj");
 
 	Model playerShip = modelPS;
 	playerShip.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
@@ -65,7 +65,7 @@ bool Game::Load()
 		LoadTexture("models/rockthree.png");
 	Model rockFour = modelF;
 	rockOne.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
-		LoadTexture("models/rockfour.png");
+		LoadTexture("models/RockFour.png");
 
 	player->LoadModel(playerShip, shot);
 	rockControl->LoadModel(rockOne, rockTwo, rockThree, rockFour);

@@ -11,7 +11,8 @@ public:
 	bool CheckEndOfWave(void);
 	void NewWave(void);
 
-	virtual void LoadModel(Model modelOne, Model modelTwo, Model modelThree, Model modelFour);
+	virtual void LoadModel(Model modelOne, Model modelTwo, Model modelThree,
+		Model modelFour);
 	virtual void Update(float deltaTime);
 	virtual void Draw();
 
@@ -41,6 +42,8 @@ private:
 	void SpawnNewWave(int NumberOfRocks);
 	void SpawnMedRocks(Vector3 pos);
 	void SpawnSmallRocks(Vector3 pos);
+	void SpawnRock(int rock, float scale, int points, Vector3 position,
+		float speed, RockSize size);
 	float GetRandomY();
 
 };

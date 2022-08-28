@@ -33,8 +33,7 @@ void RockControl::Draw()
 
 RockControl::RockControl(float screenWidth, float screenheight)
 {
-	ScreenWidth = screenWidth;
-	Screenheight = screenheight;
+
 }
 
 void RockControl::SpawnNewWave(int NumberOfRocks)

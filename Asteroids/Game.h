@@ -1,6 +1,7 @@
 #pragma once
 #include "raylib.h"
 #include "Player.h"
+#include "RockControl.h"
 
 enum GameState
 {
@@ -36,5 +37,6 @@ private:
 	void Draw();
 
 	Player* player;
+	RockControl* rockControl;
 };
 

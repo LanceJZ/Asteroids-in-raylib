@@ -14,7 +14,7 @@ Shot::Shot(float windowWidth, float windowHeight)
 
 void Shot::LoadModel(Model model)
 {
-	Entity::model = model;
+	TheModel = model;
 }
 
 void Shot::Draw()
@@ -25,7 +25,7 @@ void Shot::Draw()
 void Shot::Update(float deltaTime)
 {
 	Entity::Update(deltaTime);
-	Entity::CheckScreenEdge();
+	CheckScreenEdge();
 	timer->Update(deltaTime);
 
 	if (timer->Elapsed())

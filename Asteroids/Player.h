@@ -24,7 +24,6 @@ private:
 	void ThrustOff(float deltaTime);
 	void Fire();
 
-	//Shot* shot;
 	Shot* shots[4];
 };
 

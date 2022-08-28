@@ -15,7 +15,6 @@ public:
 	Shot(float windowWidth, float windowHeight);
 
 private:
-	Model shot;
 	float windowWidth;
 	float windowHeight;
 	Color color{ RAYWHITE };

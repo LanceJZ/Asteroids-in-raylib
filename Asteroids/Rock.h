@@ -9,6 +9,7 @@ public:
 
 	void Spawn(Vector3 pos, Vector3 vel);
 	void LoadModel(Model model);
+	Rock(float windowWidth, float windowHeight);
 
 
 private:

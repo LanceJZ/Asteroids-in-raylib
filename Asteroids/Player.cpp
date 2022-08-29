@@ -25,14 +25,16 @@ void Player::LoadModel(Model model, Model shotmodel)
 
 void Player::Input()
 {
+	float rots = 0.07666f;
+
 	if (IsKeyDown(KEY_RIGHT))
 	{
-		RotationZ += 0.1f;
+		RotationZ += rots;
 	}
 
 	if (IsKeyDown(KEY_LEFT))
 	{
-		RotationZ -= 0.1;
+		RotationZ -= rots;
 	}
 
 	if (IsKeyDown(KEY_UP))
@@ -44,7 +46,7 @@ void Player::Input()
 		thrustOff = true;
 	}
 
-	if (IsKeyPressed(KEY_RIGHT_CONTROL))
+	if (IsKeyPressed(KEY_RIGHT_CONTROL) || IsKeyPressed(KEY_LEFT_CONTROL))
 	{
 		Fire();
 	}

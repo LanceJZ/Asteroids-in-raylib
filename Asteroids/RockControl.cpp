@@ -51,22 +51,25 @@ void RockControl::SpawnNewWave(int numberOfRocks)
 	for (int rock = 0; rock < numberOfRocks; rock++)
 	{
 		bool spawnnewrock = true;
+		float magnitude = GetRandomValue(1.1f, 5.1f);
+		float angle = GetRandomValue(0, PI * 2);
+		Vector3 dir = {cos(angle) * magnitude, sin(angle) * magnitude};
 
 		for (int rockcheck = 0; rockcheck < rocks.size(); rockcheck++)
 		{
 			if (!rocks[rockcheck]->Enabled)
 			{
 				spawnnewrock = false;
-				rocks[rockcheck]->Spawn({0, GetRandomY(), 0}, {0, 0, 0});
+				rocks[rockcheck]->Spawn({0, GetRandomY(), 0}, dir);
 				break;
 			}
 		}
 
 		if (spawnnewrock)
 		{
-			rocks.push_back(new Rock());
+			rocks.push_back(new Rock(screenWidth, screenHeight));
 			rocks[rocks.size() - 1]->LoadModel(modelOne);
-			rocks[rocks.size() - 1]->Spawn({ screenWidth, GetRandomY(), 0 }, {0, 0, 0});
+			rocks[rocks.size() - 1]->Spawn({ screenWidth, GetRandomY(), 0 }, dir);
 		}
 	}
 }

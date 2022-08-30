@@ -40,10 +40,11 @@ void RockControl::Draw()
 	}
 }
 
-RockControl::RockControl(float screenWidth, float screenHeight)
+RockControl::RockControl(float screenWidth, float screenHeight, Player* player)
 {
 	RockControl::screenWidth = screenWidth;
 	RockControl::screenHeight = screenHeight;
+	RockControl::player = player;
 }
 
 void RockControl::SpawnNewWave(int numberOfRocks)
@@ -67,7 +68,7 @@ void RockControl::SpawnNewWave(int numberOfRocks)
 
 		if (spawnnewrock)
 		{
-			rocks.push_back(new Rock(screenWidth, screenHeight));
+			rocks.push_back(new Rock(screenWidth, screenHeight, player));
 			rocks[rocks.size() - 1]->LoadModel(modelOne);
 			rocks[rocks.size() - 1]->Spawn({ screenWidth, GetRandomY(), 0 }, dir);
 		}

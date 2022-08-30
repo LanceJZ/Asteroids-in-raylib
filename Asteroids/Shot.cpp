@@ -1,5 +1,9 @@
 #include "Shot.h"
 
+Shot::Shot()
+{
+}
+
 Shot::Shot(float windowWidth, float windowHeight)
 {
 	Enabled = false;

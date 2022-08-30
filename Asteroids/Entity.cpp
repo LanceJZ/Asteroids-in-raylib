@@ -56,3 +56,25 @@ void Entity::CheckScreenEdge()
 {
 	PositionedObject::CheckScreenEdge();
 }
+
+/// <summary>
+/// Circle collusion detection. Target circle will be compared to this class's.
+/// Will return true of they intersect. Only for use with 2D Z plane.
+/// </summary>
+/// <param name="target">Target Positioned Object.</param>
+/// <returns></returns>
+bool Entity::CirclesIntersect(Entity* target)
+{
+	if (!Enabled || !target->Enabled)
+		return false;
+
+	Vector3 posT = target->Position;
+	float distanceX = posT.x - X();
+	float distanceY = posT.y - Y();
+	float radius = Radius + target->Radius;
+
+	if ((distanceX * distanceX) + (distanceY * distanceY) < radius * radius)
+		return true;
+
+	return false;
+}

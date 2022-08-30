@@ -23,6 +23,12 @@ void Player::LoadModel(Model model, Model shotmodel)
 	}
 }
 
+Shot* Player::CheckShots()
+{
+
+	return *shots;
+}
+
 void Player::Input()
 {
 	float rots = 0.07666f;

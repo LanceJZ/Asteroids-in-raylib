@@ -13,6 +13,7 @@ public:
 	virtual void Draw();
 
 	void LoadModel(Model model, Model shotmodel);
+	Shot* CheckShots();
 
 	Player(float windowWidth, float windowHeight);
 

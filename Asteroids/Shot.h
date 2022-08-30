@@ -12,6 +12,7 @@ public:
 	virtual void LoadModel(Model model);
 	void Spawn(Vector3 pos, Vector3 vel);
 
+	Shot();
 	Shot(float windowWidth, float windowHeight);
 
 private:

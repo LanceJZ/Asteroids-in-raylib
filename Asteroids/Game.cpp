@@ -34,7 +34,7 @@ bool Game::Initialise()
 
 
 	player = new Player(windowW, windowH);
-	rockControl = new RockControl(windowW, windowH);
+	rockControl = new RockControl(windowW, windowH, player);
 
 	return 0;
 }

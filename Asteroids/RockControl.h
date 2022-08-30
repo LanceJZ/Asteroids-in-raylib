@@ -16,7 +16,7 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void Draw();
 
-	RockControl(float screenWidth, float screenheight);
+	RockControl(float screenWidth, float screenheight, Player* player);
 
 
 private:
@@ -45,6 +45,6 @@ private:
 	void SpawnRock(int rock, float scale, int points, Vector3 position,
 		float speed, RockSize size);
 	float GetRandomY();
-
+	Player* player;
 };
 

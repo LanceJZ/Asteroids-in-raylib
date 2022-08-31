@@ -2,6 +2,7 @@
 
 void RockControl::NewGame(void)
 {
+	rockCount = 4;
 	NewWave();
 }
 
@@ -12,7 +13,10 @@ bool RockControl::CheckEndOfWave(void)
 
 void RockControl::NewWave(void)
 {
-	SpawnNewWave(4);
+	SpawnNewWave(rockCount);
+
+	if (rockCount < 12)
+		rockCount++;
 }
 
 
@@ -26,13 +30,24 @@ void RockControl::LoadModel(Model modelOne, Model modelTwo, Model modelThree, Mo
 
 void RockControl::Update(float deltaTime)
 {
+	int rockC = 0;
+
 	for (int rock = 0; rock < rocks.size(); rock++)
 	{
-		rocks[rock]->Update(deltaTime);
+		if (rocks[rock]->Enabled)
+		{
+			rockC++;
+			rocks[rock]->Update(deltaTime);
+		}
+	}
+
+	if (rockC < 1)
+	{
+		NewWave();
 	}
 }
 
-void RockControl::Draw()
+void RockControl::Draw(void)
 {
 	for (int rock = 0; rock < rocks.size(); rock++)
 	{
@@ -61,7 +76,7 @@ void RockControl::SpawnNewWave(int numberOfRocks)
 			if (!rocks[rockcheck]->Enabled)
 			{
 				spawnnewrock = false;
-				rocks[rockcheck]->Spawn({0, GetRandomY(), 0}, dir);
+				rocks[rockcheck]->Spawn({ screenWidth, GetRandomY(), 0}, dir);
 				break;
 			}
 		}
@@ -75,7 +90,7 @@ void RockControl::SpawnNewWave(int numberOfRocks)
 	}
 }
 
-float RockControl::GetRandomY()
+float RockControl::GetRandomY(void)
 {
 	return GetRandomValue(-screenHeight, screenHeight);
 }

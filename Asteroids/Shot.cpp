@@ -11,6 +11,7 @@ Shot::Shot(float windowWidth, float windowHeight)
 	WindowHeight = windowHeight;
 
 	Scale = 0.15f;
+	Radius = 0.05f;
 
 	timer = new Timer();
 	timer->Set(1.25f);

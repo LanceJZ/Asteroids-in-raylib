@@ -38,9 +38,11 @@ void Entity::LoadModel(Model model)
 
 void Entity::Update(float deltaTime)
 {
-	PositionedObject::Update(deltaTime);
-	TheModel.transform = MatrixRotateZ(RotationZ);      // Rotate 3D model
-
+	if (Enabled)
+	{
+		PositionedObject::Update(deltaTime);
+		TheModel.transform = MatrixRotateZ(RotationZ);	// Rotate 3D model
+	}
 }
 
 void Entity::Draw()
@@ -49,7 +51,6 @@ void Entity::Draw()
 	{
 		DrawModel(TheModel, Position, Scale, RAYWHITE);	// Draw 3D model
 	}
-
 }
 
 void Entity::CheckScreenEdge()

@@ -22,7 +22,8 @@ void Rock::Spawn(Vector3 pos, Vector3 vel)
 	Velocity = vel;
 
 	Scale = 0.0666;
-	Radius = 10;
+	Radius = 3.0f;
+	Enabled = true;
 }
 
 void Rock::LoadModel(Model model)
@@ -39,14 +40,13 @@ Rock::Rock(float windowWidth, float windowHeight, Player* player)
 
 bool Rock::CheckCollision()
 {
-
 	for (int i = 0; i < 4; i++)
 	{
-		Shot* shot = &player->CheckShots()[i];
+		Entity* shot = (Entity*)player->shots[i];
 
-		if (CirclesIntersect((Entity*)shot))
+		if (CirclesIntersect(shot))
 		{
-			shot->Enabled = false;
+			player->shots[i]->Enabled = false;
 			return true;
 		}
 	}

@@ -10,6 +10,7 @@ public:
 	void NewGame(void);
 	bool CheckEndOfWave(void);
 	void NewWave(void);
+	vector<Rock*> rocks;
 
 	virtual void LoadModel(Model modelOne, Model modelTwo, Model modelThree,
 		Model modelFour);
@@ -27,10 +28,9 @@ private:
 		Large
 	};
 
+	int rockCount;
 	float screenWidth;
 	float screenHeight;
-
-	vector<Rock*> rocks;
 
 	Model modelOne;
 	Model modelTwo;

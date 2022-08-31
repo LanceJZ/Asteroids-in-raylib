@@ -23,12 +23,6 @@ void Player::LoadModel(Model model, Model shotmodel)
 	}
 }
 
-Shot* Player::CheckShots()
-{
-
-	return *shots;
-}
-
 void Player::Input()
 {
 	float rots = 0.07666f;
@@ -83,8 +77,7 @@ void Player::Draw()
 
 	for (int i = 0; i < 4; i++)
 	{
-		if (shots[i]->Enabled)
-			shots[i]->Draw();
+		shots[i]->Draw();
 	}
 }
 
@@ -115,4 +108,14 @@ void Player::Fire()
 		}
 	}
 
+}
+
+void Player::CheckCollision()
+{
+
+}
+
+void Player::Reset()
+{
+	Position = { 0, 0, 0 };
 }

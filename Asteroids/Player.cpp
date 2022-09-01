@@ -6,11 +6,18 @@ Player::Player(float windowWidth, float windowHeight) : Entity()
 	WindowWidth = windowWidth;
 	WindowHeight = windowHeight;
 	MaxSpeed = 20;
+	Radius = 0.8f;
 
 	for (int i = 0; i < 4; i++)
 	{
 		shots[i] = new Shot(windowWidth, windowHeight);
 	}
+}
+
+void Player::Hit()
+{
+	Reset();
+	Entity::Hit = true;
 }
 
 void Player::LoadModel(Model model, Model shotmodel)
@@ -68,12 +75,12 @@ void Player::Update(float deltaTime)
 	{
 		ThrustOff(deltaTime);
 	}
-
 }
 
 void Player::Draw()
 {
-	Entity::Draw();
+	if (!Entity::Hit)
+		Entity::Draw();
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -110,12 +117,9 @@ void Player::Fire()
 
 }
 
-void Player::CheckCollision()
-{
-
-}
-
 void Player::Reset()
 {
 	Position = { 0, 0, 0 };
+	Velocity = { 0, 0, 0 };
+	Entity::Hit = false;
 }

@@ -32,6 +32,8 @@ bool Game::Initialise()
 	float windowW = windowWidth / perW;
 	float windowH = windowHeight / perH;
 
+	playerClear.Enabled = false;
+	playerClear.Radius = 3.0f;
 
 	player = new Player(windowW, windowH);
 	rockControl = new RockControl(windowW, windowH, player);
@@ -99,6 +101,11 @@ void Game::Update(float deltaTime)
 	{
 		player->Update(deltaTime);
 	}
+	else if (player->Entity::Hit) //When explosion is done, turn Hit on.
+	{
+		playerClear.Enabled = true;
+		CheckPlayerClear();
+	}
 
 	rockControl->Update(deltaTime);
 }
@@ -116,6 +123,20 @@ void Game::Draw()
 	EndMode3D();
 
 	EndDrawing();
+}
+
+void Game::CheckPlayerClear()
+{
+	bool clear = false;
+
+	for (int rock = 0; rock < rockControl->rocks.size(); rock++)
+	{
+		if (playerClear.CirclesIntersect(rockControl->rocks[rock]))
+		{
+			player->Reset();
+			playerClear.Enabled = false;
+		}
+	}
 }
 
 void Game::Shutdown()

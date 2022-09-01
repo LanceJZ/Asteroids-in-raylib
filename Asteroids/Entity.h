@@ -18,6 +18,7 @@ public:
 	//using PositionedObject::ScreenHeight;
 
 	bool Enabled = true;
+	bool Hit = false;
 	float Scale = 0.25f;
 
 	virtual float X();

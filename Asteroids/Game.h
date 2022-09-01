@@ -31,10 +31,12 @@ public:
 private:
 	float windowWidth;
 	float windowHeight;
+	Entity playerClear;
 
 	void ProcessInput();
 	void Update(float deltaTime);
 	void Draw();
+	void CheckPlayerClear();
 
 	Player* player;
 	RockControl* rockControl;

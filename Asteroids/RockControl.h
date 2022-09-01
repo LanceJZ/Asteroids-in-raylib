@@ -7,8 +7,9 @@ using namespace std;
 class RockControl
 {
 public:
-	void NewGame(void);
 	bool CheckEndOfWave(void);
+	bool CheckPlayerClear(void);
+	void NewGame(void);
 	void NewWave(void);
 	vector<Rock*> rocks;
 

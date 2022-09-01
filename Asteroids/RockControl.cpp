@@ -11,6 +11,13 @@ bool RockControl::CheckEndOfWave(void)
 	return false;
 }
 
+bool RockControl::CheckPlayerClear(void)
+{
+
+
+	return false;
+}
+
 void RockControl::NewWave(void)
 {
 	SpawnNewWave(rockCount);

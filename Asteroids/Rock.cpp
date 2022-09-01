@@ -51,5 +51,11 @@ bool Rock::CheckCollision()
 		}
 	}
 
+	if (CirclesIntersect(player))
+	{
+		if (!player->Entity::Hit)
+			player->Hit();
+	}
+
 	return false;
 }

@@ -13,6 +13,8 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void Draw();
 
+	void Reset();
+	void Hit();
 	void LoadModel(Model model, Model shotmodel);
 	//void SetRockControl(RockControl* rockControl);
 	Player(float windowWidth, float windowHeight);
@@ -26,6 +28,5 @@ private:
 	void ThrustOff(float deltaTime);
 	void Fire();
 	void CheckCollision();
-	void Reset();
 };
 

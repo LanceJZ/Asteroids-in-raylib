@@ -16,7 +16,6 @@ Player::Player(float windowWidth, float windowHeight) : Entity()
 
 void Player::Hit()
 {
-	Reset();
 	Entity::Hit = true;
 }
 
@@ -24,9 +23,9 @@ void Player::LoadModel(Model model, Model shotmodel)
 {
 	TheModel = model;
 
-	for (int i = 0; i < 4; i++)
+	for (auto shot : shots)
 	{
-		shots[i]->LoadModel(shotmodel);
+		shot->LoadModel(shotmodel);
 	}
 }
 
@@ -64,12 +63,10 @@ void Player::Update(float deltaTime)
 	Entity::Update(deltaTime);
 	Entity::CheckScreenEdge();
 
-	for (int i = 0; i < 4; i++)
+	for (auto shot : shots)
 	{
-		if (shots[i]->Enabled)
-			shots[i]->Update(deltaTime);
+		shot->Update(deltaTime);
 	}
-
 
 	if (thrustOff)
 	{
@@ -82,9 +79,9 @@ void Player::Draw()
 	if (!Entity::Hit)
 		Entity::Draw();
 
-	for (int i = 0; i < 4; i++)
+	for (auto shot : shots)
 	{
-		shots[i]->Draw();
+		shot->Draw();
 	}
 }
 
@@ -103,14 +100,14 @@ void Player::ThrustOff(float deltaTime)
 
 void Player::Fire()
 {
-	float vel = 25.5f;
-	Vector3 velocity = {((float)cos(RotationZ) * vel), ((float)sin(RotationZ) * vel), 0};
+	float speed = 25.5f;
+	Vector3 velocity = {((float)cos(RotationZ) * speed), ((float)sin(RotationZ) * speed), 0};
 
-	for (int i = 0; i < 4; i++)
+	for (auto shot : shots)
 	{
-		if (!shots[i]->Enabled)
+		if (!shot->Enabled)
 		{
-			shots[i]->Spawn(Position, velocity);
+			shot->Spawn(Position, velocity);
 			break;
 		}
 	}

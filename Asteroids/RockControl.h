@@ -18,33 +18,24 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void Draw();
 
+	void RockHit(Rock* rockHit);
+
 	RockControl(float screenWidth, float screenheight, Player* player);
 
 
 private:
-	enum RockSize
-	{
-		Small,
-		Medium,
-		Large
-	};
-
 	int rockCount;
 	float screenWidth;
 	float screenHeight;
 
-	Model modelOne;
-	Model modelTwo;
-	Model modelThree;
-	Model modelFour;
+	Model rockModels[4];
 
 	void CreateRocks(void);
 	void ClearAllRocks(void);
 	void SpawnNewWave(int NumberOfRocks);
-	void SpawnMedRocks(Vector3 pos);
-	void SpawnSmallRocks(Vector3 pos);
+	void SpawnRocks(Vector3 pos, int count, Rock::RockSize size);
 	void SpawnRock(int rock, float scale, int points, Vector3 position,
-		float speed, RockSize size);
+		float speed, Rock::RockSize size);
 	float GetRandomY();
 	Player* player;
 };

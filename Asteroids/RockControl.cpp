@@ -1,4 +1,5 @@
 #include "RockControl.h"
+#include <vector>
 
 void RockControl::NewGame(void)
 {
@@ -29,36 +30,73 @@ void RockControl::NewWave(void)
 
 void RockControl::LoadModel(Model modelOne, Model modelTwo, Model modelThree, Model modelFour)
 {
-	RockControl::modelOne = modelOne;
-	RockControl::modelTwo = modelTwo;
-	RockControl::modelThree = modelThree;
-	RockControl::modelFour = modelFour;
+	rockModels[0] = modelOne;
+	rockModels[1] = modelTwo;
+	rockModels[2] = modelThree;
+	rockModels[3] = modelFour;
 }
 
 void RockControl::Update(float deltaTime)
 {
-	int rockC = 0;
+	bool rockHit = false;
+	Rock* rockWasHit = NULL;
 
-	for (int rock = 0; rock < rocks.size(); rock++)
+	for (auto rock : rocks)
 	{
-		if (rocks[rock]->Enabled)
+		if (rock->Hit)
 		{
-			rockC++;
-			rocks[rock]->Update(deltaTime);
+			rockHit = true;
+			rockWasHit = rock;
+			rockWasHit->Hit = false;
 		}
+		else if (rock->Enabled)
+		{
+			rock->Update(deltaTime);
+		}
+
 	}
 
-	if (rockC < 1)
+	if (rockHit)
 	{
-		NewWave();
+		RockHit(rockWasHit);
 	}
 }
 
 void RockControl::Draw(void)
 {
-	for (int rock = 0; rock < rocks.size(); rock++)
+	for (auto rock : rocks)
 	{
-		rocks[rock]->Draw();
+		if (rock->Enabled)
+		{
+			rock->Draw();
+		}
+	}
+}
+
+void RockControl::RockHit(Rock* rockHit)
+{
+	switch (rockHit->Size)
+	{
+	case Rock::Large:
+		SpawnRocks(rockHit->Position, 2, Rock::Medium);
+		break;
+
+	case Rock::Medium:
+		SpawnRocks(rockHit->Position, 2, Rock::Small);
+		break;
+
+	case Rock::Small:
+		bool spawnWave = true;
+
+		for (auto rock: rocks)
+		{
+			if (rock->Enabled)
+				spawnWave = false;
+		}
+
+		if (spawnWave)
+			NewWave();
+		break;
 	}
 }
 
@@ -71,19 +109,23 @@ RockControl::RockControl(float screenWidth, float screenHeight, Player* player)
 
 void RockControl::SpawnNewWave(int numberOfRocks)
 {
-	for (int rock = 0; rock < numberOfRocks; rock++)
+	SpawnRocks({ 0, 0, 0 }, numberOfRocks, Rock::Large);
+}
+
+void RockControl::SpawnRocks(Vector3 pos, int count, Rock::RockSize size)
+{
+	for (int rock = 0; rock < count; rock++)
 	{
 		bool spawnnewrock = true;
-		float magnitude = GetRandomValue(1.1f, 5.1f);
-		float angle = GetRandomValue(0, PI * 2);
-		Vector3 dir = {cos(angle) * magnitude, sin(angle) * magnitude};
+		int rockN = rocks.size();
+		float maxSpeed = 10.666f;
 
 		for (int rockcheck = 0; rockcheck < rocks.size(); rockcheck++)
 		{
 			if (!rocks[rockcheck]->Enabled)
 			{
 				spawnnewrock = false;
-				rocks[rockcheck]->Spawn({ screenWidth, GetRandomY(), 0}, dir);
+				rockN = rockcheck;
 				break;
 			}
 		}
@@ -91,8 +133,27 @@ void RockControl::SpawnNewWave(int numberOfRocks)
 		if (spawnnewrock)
 		{
 			rocks.push_back(new Rock(screenWidth, screenHeight, player));
-			rocks[rocks.size() - 1]->LoadModel(modelOne);
-			rocks[rocks.size() - 1]->Spawn({ screenWidth, GetRandomY(), 0 }, dir);
+			rocks[rockN]->LoadModel(rockModels[GetRandomValue(0, 3)]);
+		}
+
+		switch (size)
+		{
+			float speed;
+
+		case Rock::Large:
+			speed = GetRandomValue(maxSpeed / 10, maxSpeed / 3);
+			rocks[rockN]->Spawn({ screenWidth, GetRandomY(), 0 }, speed, size);
+			break;
+
+		case Rock::Medium:
+			speed = GetRandomValue(maxSpeed / 10, maxSpeed / 2);
+			rocks[rockN]->Spawn(pos, speed, size);
+			break;
+
+		case Rock::Small:
+			speed = GetRandomValue(maxSpeed / 10, maxSpeed);
+			rocks[rockN]->Spawn(pos, speed, size);
+			break;
 		}
 	}
 }

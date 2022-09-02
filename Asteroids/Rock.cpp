@@ -1,4 +1,5 @@
 #include "Rock.h"
+#include "raymath.h"
 
 void Rock::Update(float deltaTime)
 {
@@ -7,6 +8,7 @@ void Rock::Update(float deltaTime)
 
 	if (CheckCollision())
 	{
+		Hit = true;
 		Enabled = false;
 	}
 }
@@ -16,14 +18,34 @@ void Rock::Draw()
 	Entity::Draw();
 }
 
-void Rock::Spawn(Vector3 pos, Vector3 vel)
+void Rock::Spawn(Vector3 pos, float speed, RockSize size)
 {
-	Position = pos;
-	Velocity = vel;
+	float magnitude = GetRandomValue(1.1f, 5.1f);
+	float angle = GetRandomValue(0, PI * 2);
+	Vector3 dir = {cos(angle) * magnitude, sin(angle) * magnitude};
 
-	Scale = 0.0666;
-	Radius = 3.0f;
+	Position = pos;
+	Velocity = dir;
+	Size = size;
+
+	switch (size)
+	{
+	case Rock::Small:
+		Scale = 0.0666f / 4;
+		Radius = 3.0f / 4;
+		break;
+	case Rock::Medium:
+		Scale = 0.0666f / 2;
+		Radius = 3.0f / 2;
+		break;
+	case Rock::Large:
+		Scale = 0.0666f;
+		Radius = 3.0f;
+		break;
+	}
+
 	Enabled = true;
+	Hit = false;
 }
 
 void Rock::LoadModel(Model model)
@@ -55,6 +77,8 @@ bool Rock::CheckCollision()
 	{
 		if (!player->Entity::Hit)
 			player->Hit();
+
+		return true;
 	}
 
 	return false;

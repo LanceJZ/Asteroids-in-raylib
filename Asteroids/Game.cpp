@@ -12,65 +12,60 @@ Game::~Game()
 
 bool Game::Initialise()
 {
-	windowHeight = 960; //height
-	windowWidth = 1280;
+	int windowHeight = 960; //height
+	int windowWidth = 1280; //width
 
 	InitWindow(windowWidth, windowHeight, "Asteroids");
 	SetTargetFPS(60);
 
 	// Define the camera to look into our 3D world
-	camera.position = { 0.0f, 0.0f, -50.0f };   // Camera position
+	camera.position = { 0.0f, 0.0f, -50.0f };  // Camera position
 	camera.target = { 0.0f, 0.0f, 0.0f };      // Camera looking at point
 	camera.up = { 0.0f, 1.0f, 0.0f };          // Camera up vector (rotation towards target)
 	camera.fovy = 45.0f;                       // Camera field-of-view Y
 	camera.projection = CAMERA_ORTHOGRAPHIC;   // Camera mode type
 
-	//SetCameraMode(camera, CAMERA_ORBITAL);
-
 	float perH = 43;
 	float perW = 43;
-	float windowW = windowWidth / perW;
-	float windowH = windowHeight / perH;
+	float playScreenW = windowWidth / perW;
+	float playScreenH = windowHeight / perH;
 
 	playerClear.Radius = 10.0f;
 
-	player = new Player(windowW, windowH);
-	rockControl = new RockControl(windowW, windowH, player);
+	player = new Player(playScreenW, playScreenH);
+	rockControl = new RockControl(playScreenW, playScreenH, player);
+	theUFOControl = new UFOControl(playScreenW, playScreenH, player);
 
 	return 0;
 }
 
 bool Game::Load()
 {
-	Model modelPS = LoadModel("models/playership.obj");
-	Model modelS = LoadModel("models/shot.obj");
-	Model modelRO = LoadModel("models/rockone.obj");
-	Model modelRT = LoadModel("models/rocktwo.obj");
-	Model modelRTh = LoadModel("models/rockthree.obj");
-	Model modelF = LoadModel("models/RockFour.obj");
-
-	Model playerShip = modelPS;
+	Model playerShip = LoadModel("models/playership.obj");
 	playerShip.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
 		LoadTexture("models/playership.png");
-	Model shot = modelS;
+	Model shot = LoadModel("models/shot.obj");
 	shot.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
 		LoadTexture("models/shot.png");
-	Model rockOne = modelRO;
+	Model rockOne = LoadModel("models/rockone.obj");
 	rockOne.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
 		LoadTexture("models/rockone.png");
-	Model rockTwo = modelRT;
+	Model rockTwo = LoadModel("models/rocktwo.obj");
 	rockOne.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
 		LoadTexture("models/rocktwo.png");
-	Model rockThree = modelRTh;
+	Model rockThree = LoadModel("models/rockthree.obj");
 	rockOne.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
 		LoadTexture("models/rockthree.png");
-	Model rockFour = modelF;
+	Model rockFour = LoadModel("models/RockFour.obj");
 	rockOne.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
 		LoadTexture("models/RockFour.png");
+	Model modelUFO = LoadModel("models/UFO.obj");
+	modelUFO.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
+		LoadTexture("models/UFO.png");
 
 	player->LoadModel(playerShip, shot);
 	rockControl->LoadModel(rockOne, rockTwo, rockThree, rockFour);
-
+	theUFOControl->LoadModel(modelUFO, shot);
 	rockControl->NewGame();
 
 	return 0;
@@ -107,6 +102,7 @@ void Game::Update(float deltaTime)
 	}
 
 	rockControl->Update(deltaTime);
+	theUFOControl->Update(deltaTime);
 }
 
 void Game::Draw()
@@ -116,6 +112,7 @@ void Game::Draw()
 	ClearBackground({10, 10, 10, 100});
 	BeginMode3D(camera);
 
+	theUFOControl->Draw();
 	rockControl->Draw();
 	player->Draw();
 

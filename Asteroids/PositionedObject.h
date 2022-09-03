@@ -4,7 +4,6 @@
 class PositionedObject
 {
 public:
-	//bool Enabled= true;
 	float MaxSpeed{ 0 };
 	float RotationZ{ 0 };
 	float Radius{ 0 };

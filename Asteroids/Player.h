@@ -16,7 +16,6 @@ public:
 	void Reset();
 	void Hit();
 	void LoadModel(Model model, Model shotmodel);
-	//void SetRockControl(RockControl* rockControl);
 	Player(float windowWidth, float windowHeight);
 
 private:

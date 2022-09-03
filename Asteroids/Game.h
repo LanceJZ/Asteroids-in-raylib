@@ -2,6 +2,7 @@
 #include "raylib.h"
 #include "Player.h"
 #include "RockControl.h"
+#include "UFOControl.h"
 
 enum GameState
 {
@@ -29,16 +30,15 @@ public:
 
 
 private:
-	float windowWidth;
-	float windowHeight;
-	Entity playerClear;
 
 	void ProcessInput();
 	void Update(float deltaTime);
 	void Draw();
 	void CheckPlayerClear();
 
+	Entity playerClear;
 	Player* player;
 	RockControl* rockControl;
+	UFOControl* theUFOControl;
 };
 

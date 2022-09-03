@@ -102,8 +102,8 @@ void RockControl::RockHit(Rock* rockHit)
 
 RockControl::RockControl(float screenWidth, float screenHeight, Player* player)
 {
-	RockControl::screenWidth = screenWidth;
-	RockControl::screenHeight = screenHeight;
+	GameScreenWidth = screenWidth;
+	GameScreenWidth = screenHeight;
 	RockControl::player = player;
 }
 
@@ -120,7 +120,7 @@ void RockControl::SpawnRocks(Vector3 pos, int count, Rock::RockSize size)
 		int rockN = rocks.size();
 		float maxSpeed = 10.666f;
 
-		for (int rockcheck = 0; rockcheck < rocks.size(); rockcheck++)
+		for (int rockcheck = 0; rockcheck < rockN; rockcheck++)
 		{
 			if (!rocks[rockcheck]->Enabled)
 			{
@@ -132,7 +132,7 @@ void RockControl::SpawnRocks(Vector3 pos, int count, Rock::RockSize size)
 
 		if (spawnnewrock)
 		{
-			rocks.push_back(new Rock(screenWidth, screenHeight, player));
+			rocks.push_back(new Rock(GameScreenWidth, GameScreenWidth, player));
 			rocks[rockN]->LoadModel(rockModels[GetRandomValue(0, 3)]);
 		}
 
@@ -142,7 +142,7 @@ void RockControl::SpawnRocks(Vector3 pos, int count, Rock::RockSize size)
 
 		case Rock::Large:
 			speed = GetRandomValue(maxSpeed / 10, maxSpeed / 3);
-			rocks[rockN]->Spawn({ screenWidth, GetRandomY(), 0 }, speed, size);
+			rocks[rockN]->Spawn({ GameScreenWidth, GetRandomScreenY(), 0 }, speed, size);
 			break;
 
 		case Rock::Medium:
@@ -156,9 +156,4 @@ void RockControl::SpawnRocks(Vector3 pos, int count, Rock::RockSize size)
 			break;
 		}
 	}
-}
-
-float RockControl::GetRandomY(void)
-{
-	return GetRandomValue(-screenHeight, screenHeight);
 }

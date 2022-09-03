@@ -6,6 +6,7 @@ public:
 
 	void Set(float amountInSeconds);
 	void Reset();
+	void Reset(float amoutInSeconds);
 	bool Elapsed();
 
 private:

@@ -1,10 +1,11 @@
 #pragma once
 #include <vector>
 #include "raylib.h"
+#include "Common.h"
 #include "Rock.h"
 using namespace std;
 
-class RockControl
+class RockControl : public Common
 {
 public:
 	bool CheckEndOfWave(void);
@@ -25,8 +26,6 @@ public:
 
 private:
 	int rockCount;
-	float screenWidth;
-	float screenHeight;
 
 	Model rockModels[4];
 
@@ -36,7 +35,6 @@ private:
 	void SpawnRocks(Vector3 pos, int count, Rock::RockSize size);
 	void SpawnRock(int rock, float scale, int points, Vector3 position,
 		float speed, Rock::RockSize size);
-	float GetRandomY();
 	Player* player;
 };
 

@@ -14,7 +14,6 @@ Shot::Shot(float windowWidth, float windowHeight)
 	Radius = 0.05f;
 
 	timer = new Timer();
-	timer->Set(1.25f);
 }
 
 void Shot::LoadModel(Model model)
@@ -39,11 +38,11 @@ void Shot::Update(float deltaTime)
 	}
 }
 
-void Shot::Spawn(Vector3 pos, Vector3 vel)
+void Shot::Spawn(Vector3 pos, Vector3 vel, float timer)
 {
 	Position = pos;
 	Velocity = vel;
 	Enabled = true;
 
-	timer->Reset();
+	Shot::timer->Reset(timer);
 }

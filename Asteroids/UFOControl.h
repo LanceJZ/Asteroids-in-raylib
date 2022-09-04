@@ -12,10 +12,13 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void Draw();
 
+	void Reset();
+
 	UFOControl(float playScreenW, float playScreenH, Player* player);
 
 private:
-	Player* player;
+	int spawnCount = {0};
+
 	Timer* timer;
 	UFO* ufo;
 

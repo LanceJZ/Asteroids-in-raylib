@@ -10,7 +10,7 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void Draw();
 	virtual void LoadModel(Model model);
-	void Spawn(Vector3 pos, Vector3 vel);
+	void Spawn(Vector3 pos, Vector3 vel, float timer);
 
 	Shot();
 	Shot(float windowWidth, float windowHeight);

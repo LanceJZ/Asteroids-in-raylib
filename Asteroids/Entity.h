@@ -19,7 +19,7 @@ public:
 
 	bool Enabled = true;
 	bool Hit = false;
-	float Scale = 0.25f;
+	float Scale = 1.0f;
 
 	virtual float X();
 	virtual float Y();

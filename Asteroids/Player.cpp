@@ -7,6 +7,7 @@ Player::Player(float windowWidth, float windowHeight) : Entity()
 	WindowHeight = windowHeight;
 	MaxSpeed = 20;
 	Radius = 0.8f;
+	Scale = 0.25f;
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -107,7 +108,7 @@ void Player::Fire()
 	{
 		if (!shot->Enabled)
 		{
-			shot->Spawn(Position, velocity);
+			shot->Spawn(Position, velocity, 1.5f);
 			break;
 		}
 	}

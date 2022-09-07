@@ -86,4 +86,3 @@ void PositionedObject::CheckScreenEdgeY()
 		Y(WindowHeight);
 	}
 }
-

@@ -39,7 +39,7 @@ UFOControl::UFOControl(float playScreenW, float playScreenH, Player* player)
 	GameScreenWidth = playScreenW;
 	GameScreenHeight = playScreenH;
 
-	ufo = new UFO(playScreenW, playScreenW, player);
+	ufo = new UFO(playScreenW, playScreenH, player);
 
 	timer = new Timer();
 	Reset();

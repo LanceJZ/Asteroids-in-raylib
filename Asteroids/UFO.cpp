@@ -43,7 +43,7 @@ void UFO::Spawn(Vector3 pos, Vector3 vel)
 	Enabled = true;
 	Hit = false;
 
-	Scale = 0.05f;
+	Scale = 0.5f;
 	speed = 5;
 
 	ResetVectorTimer();

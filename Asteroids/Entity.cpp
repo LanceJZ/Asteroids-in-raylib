@@ -53,11 +53,6 @@ void Entity::Draw()
 	}
 }
 
-void Entity::CheckScreenEdge()
-{
-	PositionedObject::CheckScreenEdge();
-}
-
 /// <summary>
 /// Circle collusion detection. Target circle will be compared to this class's.
 /// Will return true of they intersect. Only for use with 2D Z plane.

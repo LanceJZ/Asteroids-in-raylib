@@ -33,7 +33,6 @@ public:
 	virtual void LoadModel(Model model);
 	virtual void Update(float deltaTime);
 	virtual void Draw();
-	virtual void CheckScreenEdge();
 	bool CirclesIntersect(Entity* target);
 
 private:

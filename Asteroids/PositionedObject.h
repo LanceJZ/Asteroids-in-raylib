@@ -31,7 +31,9 @@ public:
 	PositionedObject();
 
 	virtual void Update(float deltaTime);
-	virtual void CheckScreenEdge();
+	void CheckScreenEdge();
+	void CheckScreenEdgeX();
+	void CheckScreenEdgeY();
 
 private:
 

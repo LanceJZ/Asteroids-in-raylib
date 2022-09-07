@@ -28,5 +28,6 @@ private:
 		void ResetFireTimer();
 		void ResetVectorTimer();
 		void ChangeVector();
+		bool CheckReachedSide();
 };
 

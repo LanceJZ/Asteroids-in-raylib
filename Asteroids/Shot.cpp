@@ -29,8 +29,8 @@ void Shot::Draw()
 void Shot::Update(float deltaTime)
 {
 	Entity::Update(deltaTime);
-	CheckScreenEdge();
 	timer->Update(deltaTime);
+	CheckScreenEdge();
 
 	if (timer->Elapsed())
 	{

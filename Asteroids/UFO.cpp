@@ -14,6 +14,12 @@ void UFO::Update(float deltaTime)
 	shot->Update(deltaTime);
 	fireTimer->Update(deltaTime);
 	vectorTimer->Update(deltaTime);
+	CheckScreenEdgeY(); //TODO: Does not seem to work.
+
+	if (CheckReachedSide())
+	{
+		Enabled = false;
+	}
 
 	if (vectorTimer->Elapsed())
 	{
@@ -37,11 +43,11 @@ void UFO::Spawn(Vector3 pos, Vector3 vel)
 	Enabled = true;
 	Hit = false;
 
-	fireTimer->Reset();
-	vectorTimer->Reset();
-
-	Scale = 0.5f;
+	Scale = 0.05f;
 	speed = 5;
+
+	ResetVectorTimer();
+	ResetFireTimer();
 }
 
 UFO::UFO(float windowWidth, float windowHeight, Player* player)
@@ -66,7 +72,7 @@ void UFO::ResetVectorTimer()
 
 void UFO::ChangeVector()
 {
-	if (GetRandomValue(1, 10) < 5)
+	if (GetRandomValue(1, 10) < 7)
 	{
 		if ((int)Velocity.y == 0)
 		{
@@ -84,4 +90,18 @@ void UFO::ChangeVector()
 			Velocity.y = 0;
 		}
 	}
+}
+
+bool UFO::CheckReachedSide()
+{
+	if (X() < -WindowWidth)
+	{
+		return true;
+	}
+	if (X() > WindowWidth)
+	{
+		return true;
+	}
+
+	return false;
 }

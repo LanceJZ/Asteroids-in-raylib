@@ -55,7 +55,8 @@ void Player::Input()
 
 	if (IsKeyPressed(KEY_RIGHT_CONTROL) || IsKeyPressed(KEY_LEFT_CONTROL))
 	{
-		Fire();
+		if (!Entity::Hit)
+			Fire();
 	}
 }
 
@@ -63,11 +64,6 @@ void Player::Update(float deltaTime)
 {
 	Entity::Update(deltaTime);
 	Entity::CheckScreenEdge();
-
-	for (auto shot : shots)
-	{
-		shot->Update(deltaTime);
-	}
 
 	if (thrustOff)
 	{
@@ -79,11 +75,6 @@ void Player::Draw()
 {
 	if (!Entity::Hit)
 		Entity::Draw();
-
-	for (auto shot : shots)
-	{
-		shot->Draw();
-	}
 }
 
 void Player::ThrustOn()

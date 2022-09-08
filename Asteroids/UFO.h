@@ -7,6 +7,14 @@
 class UFO : public Entity
 {
 public:
+	enum Size
+	{
+		Small,
+		Large
+	};
+
+	Size size;
+
 	Shot* shot;
 	Timer* fireTimer;
 	Timer* vectorTimer;
@@ -20,14 +28,13 @@ public:
 	UFO(float windowWidth, float windowHeight, Player* player);
 
 private:
-		float radius{ 5 };
-		float speed{ 0 };
+	float radius{ 5 };
 
-		Player* player;
+	Player* player;
 
-		void ResetFireTimer();
-		void ResetVectorTimer();
-		void ChangeVector();
-		bool CheckReachedSide();
+	void ResetFireTimer();
+	void ResetVectorTimer();
+	void ChangeVector();
+	bool CheckReachedSide();
 };
 

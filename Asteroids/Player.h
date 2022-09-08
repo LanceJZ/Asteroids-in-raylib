@@ -7,6 +7,8 @@ class Player : public Entity
 public:
 	//using Entity::Enabled;
 	//using Entity::Position;
+	int wave;
+	int score;
 	Shot* shots[4];
 
 	virtual void Input();

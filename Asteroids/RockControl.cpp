@@ -21,6 +21,7 @@ bool RockControl::CheckPlayerClear(void)
 
 void RockControl::NewWave(void)
 {
+	player->wave++;
 	SpawnNewWave(rockCount);
 
 	if (rockCount < 12)

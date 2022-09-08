@@ -43,9 +43,6 @@ void UFO::Spawn(Vector3 pos, Vector3 vel)
 	Enabled = true;
 	Hit = false;
 
-	Scale = 0.5f;
-	speed = 5;
-
 	ResetVectorTimer();
 	ResetFireTimer();
 }
@@ -78,11 +75,11 @@ void UFO::ChangeVector()
 		{
 			if (GetRandomValue(1, 10) < 5)
 			{
-				Velocity.y = speed;
+				Velocity.y = MaxSpeed;
 			}
 			else
 			{
-				Velocity.y = -speed;
+				Velocity.y = -MaxSpeed;
 			}
 		}
 		else

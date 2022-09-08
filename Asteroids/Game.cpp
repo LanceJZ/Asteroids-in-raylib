@@ -95,10 +95,15 @@ void Game::Update(float deltaTime)
 	{
 		player->Update(deltaTime);
 
-		if (player->Entity::Hit) //When explosion is done, turn Hit on.
+		if (player->Entity::Hit) //When explosion is done, turn Hit off.
 		{
 			CheckPlayerClear();
 		}
+	}
+
+	for (auto shot : player->shots)
+	{
+		shot->Update(deltaTime);
 	}
 
 	rockControl->Update(deltaTime);
@@ -116,8 +121,12 @@ void Game::Draw()
 	rockControl->Draw();
 	player->Draw();
 
-	EndMode3D();
+	for (auto shot : player->shots)
+	{
+		shot->Draw();
+	}
 
+	EndMode3D();
 	EndDrawing();
 }
 

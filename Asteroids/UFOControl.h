@@ -8,6 +8,7 @@
 class UFOControl : public Common
 {
 public:
+
 	virtual void LoadModel(Model theModel, Model shot);
 	virtual void Update(float deltaTime);
 	virtual void Draw();
@@ -21,6 +22,7 @@ private:
 
 	Timer* timer;
 	UFO* ufo;
+	Player* player;
 
 	void SpawnUFO();
 	void ResetTimer();

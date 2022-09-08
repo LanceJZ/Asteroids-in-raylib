@@ -9,14 +9,17 @@ void UFOControl::LoadModel(Model theModel, Model shot)
 
 void UFOControl::Update(float deltaTime) //add Y edge loop, and disable of off X edge.
 {
-	ufo->Update(deltaTime);
-	timer->Update(deltaTime);
+	if (ufo->Enabled)
+		ufo->Update(deltaTime);
 
-	if (timer->Elapsed() && !ufo->Enabled && player->Enabled && !player->Entity::Hit)
+	timer->Update(deltaTime);
+	ufo->shot->Update(deltaTime);
+
+	if (timer->Elapsed() && !ufo->Enabled && player->Enabled)
 	{
 		SpawnUFO();
 	}
-	else
+	else if (!player->Enabled || ufo->Enabled)
 	{
 		ResetTimer();
 	}
@@ -87,6 +90,7 @@ void UFOControl::SpawnUFO()
 
 void UFOControl::ResetTimer()
 {
-	float amt = GetRandomValue(10.0f, 11.0f); //10-wave * 0.1, 10.15 + wave * 0.1
-	timer->Reset(amt);
+	float min = 10 - (player->wave * 0.1f);
+	float max = 11 + (player->wave * 0.1f);
+	timer->Reset(GetRandomValue(min, max));
 }

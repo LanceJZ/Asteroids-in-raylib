@@ -8,7 +8,7 @@ void Rock::Update(float deltaTime)
 
 	if (CheckCollision())
 	{
-		Hit = true;
+		BeenHit = true;
 		Enabled = false;
 	}
 }
@@ -45,7 +45,7 @@ void Rock::Spawn(Vector3 pos, float speed, RockSize size)
 	}
 
 	Enabled = true;
-	Hit = false;
+	BeenHit = false;
 }
 
 void Rock::LoadModel(Model model)
@@ -75,7 +75,7 @@ bool Rock::CheckCollision()
 
 	if (CirclesIntersect(player))
 	{
-		if (!player->Entity::Hit)
+		if (player->Enabled)
 			player->Hit();
 
 		return true;

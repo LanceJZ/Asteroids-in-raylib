@@ -17,7 +17,9 @@ Player::Player(float windowWidth, float windowHeight) : Entity()
 
 void Player::Hit()
 {
-	Entity::Hit = true;
+	BeenHit = true;
+	Enabled = false;
+	thrustOff = true;
 }
 
 void Player::LoadModel(Model model, Model shotmodel)
@@ -55,8 +57,7 @@ void Player::Input()
 
 	if (IsKeyPressed(KEY_RIGHT_CONTROL) || IsKeyPressed(KEY_LEFT_CONTROL))
 	{
-		if (!Entity::Hit)
-			Fire();
+		Fire();
 	}
 }
 
@@ -73,8 +74,7 @@ void Player::Update(float deltaTime)
 
 void Player::Draw()
 {
-	if (!Entity::Hit)
-		Entity::Draw();
+	Entity::Draw();
 }
 
 void Player::ThrustOn()
@@ -110,5 +110,6 @@ void Player::Reset()
 {
 	Position = { 0, 0, 0 };
 	Velocity = { 0, 0, 0 };
-	Entity::Hit = false;
+	BeenHit = false;
+	Enabled = true;
 }

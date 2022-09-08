@@ -44,11 +44,11 @@ void RockControl::Update(float deltaTime)
 
 	for (auto rock : rocks)
 	{
-		if (rock->Hit)
+		if (rock->BeenHit)
 		{
 			rockHit = true;
 			rockWasHit = rock;
-			rockWasHit->Hit = false;
+			rockWasHit->BeenHit = false;
 		}
 		else if (rock->Enabled)
 		{

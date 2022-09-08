@@ -5,13 +5,12 @@ void UFO::LoadModel(Model model, Model shotmodel)
 	TheModel = model;
 	shot->LoadModel(shotmodel);
 	Enabled = false;
-	Hit = false;
+	BeenHit = false;
 }
 
 void UFO::Update(float deltaTime)
 {
 	Entity::Update(deltaTime);
-	shot->Update(deltaTime);
 	fireTimer->Update(deltaTime);
 	vectorTimer->Update(deltaTime);
 	CheckScreenEdgeY(); //TODO: Does not seem to work.
@@ -30,7 +29,7 @@ void UFO::Update(float deltaTime)
 
 void UFO::Draw()
 {
-	if (!Hit)
+	if (!BeenHit)
 		Entity::Draw();
 
 	shot->Draw();
@@ -41,7 +40,7 @@ void UFO::Spawn(Vector3 pos, Vector3 vel)
 	Position = pos;
 	Velocity = vel;
 	Enabled = true;
-	Hit = false;
+	BeenHit = false;
 
 	ResetVectorTimer();
 	ResetFireTimer();

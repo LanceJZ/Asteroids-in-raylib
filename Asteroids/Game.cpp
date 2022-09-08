@@ -83,7 +83,8 @@ void Game::GameLoop()
 
 void Game::ProcessInput()
 {
-	player->Input();
+	if (player->Enabled)
+		player->Input();
 }
 
 
@@ -91,14 +92,16 @@ void Game::Update(float deltaTime)
 {
 	UpdateCamera(&camera);
 
+	rockControl->Update(deltaTime);
+	theUFOControl->Update(deltaTime);
+
 	if (player->Enabled)
 	{
 		player->Update(deltaTime);
-
-		if (player->Entity::Hit) //When explosion is done, turn Hit off.
-		{
-			CheckPlayerClear();
-		}
+	}
+	else
+	{
+		CheckPlayerClear();
 	}
 
 	for (auto shot : player->shots)
@@ -106,14 +109,11 @@ void Game::Update(float deltaTime)
 		shot->Update(deltaTime);
 	}
 
-	rockControl->Update(deltaTime);
-	theUFOControl->Update(deltaTime);
 }
 
 void Game::Draw()
 {
 	BeginDrawing();
-
 	ClearBackground({10, 10, 10, 100});
 	BeginMode3D(camera);
 
@@ -127,6 +127,7 @@ void Game::Draw()
 	}
 
 	EndMode3D();
+	//2D drawing/fonts go here.
 	EndDrawing();
 }
 
@@ -134,9 +135,9 @@ void Game::CheckPlayerClear()
 {
 	bool clear = true;
 
-	for (int rock = 0; rock < rockControl->rocks.size(); rock++)
+	for (auto rock : rockControl->rocks)
 	{
-		if (playerClear.CirclesIntersect(rockControl->rocks[rock]))
+		if (playerClear.CirclesIntersect(rock))
 		{
 			clear = false;
 		}
@@ -144,7 +145,7 @@ void Game::CheckPlayerClear()
 
 	if (clear)
 	{
-			player->Reset();
+		player->Reset();
 	}
 }
 

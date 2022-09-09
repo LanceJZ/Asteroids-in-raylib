@@ -35,6 +35,11 @@ private:
 	void ResetFireTimer();
 	void ResetVectorTimer();
 	void ChangeVector();
+	void FireShot();
+	float AimedShot();
+	float AngleFromVectorZ(Vector3 target);
+	Vector3 VelocityFromAngleZ(float rotation, float magnitude);
+	Vector3 VelocityFromAngleZ(float magnitude);
 	bool CheckReachedSide();
 };
 

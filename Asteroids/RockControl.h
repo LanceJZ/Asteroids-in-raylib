@@ -22,7 +22,7 @@ public:
 
 	void RockHit(Rock* rockHit);
 
-	RockControl(float screenWidth, float screenheight, Player* player);
+	RockControl(float screenWidth, float screenheight, Player* player, UFO* ufo);
 
 
 private:
@@ -37,5 +37,6 @@ private:
 	void SpawnRock(int rock, float scale, int points, Vector3 position,
 		float speed, Rock::RockSize size);
 	Player* player;
+	UFO* ufo;
 };
 

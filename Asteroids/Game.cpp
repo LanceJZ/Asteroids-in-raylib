@@ -25,16 +25,16 @@ bool Game::Initialise()
 	camera.fovy = 45.0f;                       // Camera field-of-view Y
 	camera.projection = CAMERA_ORTHOGRAPHIC;   // Camera mode type
 
-	float perH = 43;
-	float perW = 43;
+	float perH = 42.75f;
+	float perW = 42.75f;
 	float playScreenW = windowWidth / perW;
 	float playScreenH = windowHeight / perH;
 
 	playerClear.Radius = 10.0f;
 
 	player = new Player(playScreenW, playScreenH);
-	rockControl = new RockControl(playScreenW, playScreenH, player);
 	theUFOControl = new UFOControl(playScreenW, playScreenH, player);
+	rockControl = new RockControl(playScreenW, playScreenH, player, theUFOControl->ufo);
 
 	return 0;
 }
@@ -114,7 +114,7 @@ void Game::Update(float deltaTime)
 void Game::Draw()
 {
 	BeginDrawing();
-	ClearBackground({10, 10, 10, 100});
+	ClearBackground({ 10, 10, 10, 100 });
 	BeginMode3D(camera);
 
 	theUFOControl->Draw();
@@ -125,6 +125,19 @@ void Game::Draw()
 	{
 		shot->Draw();
 	}
+
+	DrawLine3D({ -player->WindowWidth, player->WindowHeight,0 },
+		{ player->WindowWidth, player->WindowHeight, 0 },
+		{ 250,100,250,100 });
+	DrawLine3D({ -player->WindowWidth, -player->WindowHeight,0 },
+		{ player->WindowWidth, -player->WindowHeight, 0 },
+		{ 250,100,250,100 });
+	DrawLine3D({ -player->WindowWidth, -player->WindowHeight,0 },
+		{ -player->WindowWidth, player->WindowHeight, 0 },
+		{ 250,100,250,100 });
+	DrawLine3D({ player->WindowWidth, -player->WindowHeight,0 },
+		{ player->WindowWidth, player->WindowHeight, 0 },
+		{ 250,100,250,100 });
 
 	EndMode3D();
 	//2D drawing/fonts go here.

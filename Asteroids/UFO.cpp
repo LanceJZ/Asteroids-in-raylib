@@ -1,4 +1,5 @@
 #include "UFO.h"
+#include "raymath.h"
 
 void UFO::LoadModel(Model model, Model shotmodel)
 {
@@ -24,6 +25,12 @@ void UFO::Update(float deltaTime)
 	{
 		ChangeVector();
 		ResetVectorTimer();
+	}
+
+	if (fireTimer->Elapsed())
+	{
+		FireShot();
+		ResetFireTimer();
 	}
 }
 
@@ -86,6 +93,67 @@ void UFO::ChangeVector()
 			Velocity.y = 0;
 		}
 	}
+}
+
+void UFO::FireShot()
+{
+	float ang = 0;
+	float shotSpeed = 15;
+
+	switch (size)
+	{
+	case UFO::Large:
+		ang = GetRandomValue(0, PI * 2);
+		break;
+	case UFO::Small:
+		ang = AimedShot();
+		break;
+	}
+
+	if (!shot->Enabled)
+	{
+		Vector3 offset = VelocityFromAngleZ(ang, Radius);
+		offset.x += Position.x;
+		offset.y += Position.y;
+
+		Vector3;
+
+		shot->Spawn(offset,	VelocityFromAngleZ(ang, shotSpeed), 1.45f);
+	}
+}
+
+float UFO::AimedShot()
+{
+	float percentChance = 0.2f - (player->score * 0.00001f);
+
+	if (percentChance < 0)
+	{
+		percentChance = 0;
+	}
+
+	percentChance += GetRandomValue(0.0, 0.05f);
+
+	return AngleFromVectorZ(player->Position) +
+		GetRandomValue(-percentChance, percentChance);
+
+}
+
+float UFO::AngleFromVectorZ(Vector3 target)
+{
+	return atan2(target.y - Y(), target.x - X());
+}
+
+Vector3 UFO::VelocityFromAngleZ(float rotation, float magnitude)
+{
+	return { (float)cos(rotation) * magnitude,
+				(float)sin(rotation) * magnitude, 0 };
+}
+
+Vector3 UFO::VelocityFromAngleZ(float magnitude)
+{
+	float ang = GetRandomValue(0, PI * 2);
+
+	return VelocityFromAngleZ(ang, magnitude);
 }
 
 bool UFO::CheckReachedSide()

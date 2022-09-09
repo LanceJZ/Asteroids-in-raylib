@@ -16,12 +16,12 @@ public:
 	void Reset();
 
 	UFOControl(float playScreenW, float playScreenH, Player* player);
+	UFO* ufo;
 
 private:
 	int spawnCount = {0};
 
 	Timer* timer;
-	UFO* ufo;
 	Player* player;
 
 	void SpawnUFO();

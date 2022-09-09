@@ -7,7 +7,7 @@ void UFOControl::LoadModel(Model theModel, Model shot)
 	Reset();
 }
 
-void UFOControl::Update(float deltaTime) //add Y edge loop, and disable of off X edge.
+void UFOControl::Update(float deltaTime)
 {
 	if (ufo->Enabled)
 		ufo->Update(deltaTime);

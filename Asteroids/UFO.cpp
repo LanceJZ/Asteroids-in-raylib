@@ -61,6 +61,7 @@ UFO::UFO(float windowWidth, float windowHeight, Player* player)
 	WindowHeight = windowHeight;
 	fireTimer = new Timer();
 	vectorTimer = new Timer();
+	Radius = 1.0f;
 }
 
 void UFO::ResetFireTimer()

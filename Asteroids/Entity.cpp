@@ -50,6 +50,7 @@ void Entity::Draw()
 	if (Enabled)
 	{
 		DrawModel(TheModel, Position, Scale, RAYWHITE);	// Draw 3D model
+		DrawCircle3D(Position, Radius, { 0 }, 0, { 150, 50, 200, 200 });
 	}
 }
 

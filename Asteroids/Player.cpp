@@ -6,7 +6,7 @@ Player::Player(float windowWidth, float windowHeight) : Entity()
 	WindowWidth = windowWidth;
 	WindowHeight = windowHeight;
 	MaxSpeed = 20;
-	Radius = 0.8f;
+	Radius = 0.75f;
 	Scale = 0.25f;
 
 	for (int i = 0; i < 4; i++)

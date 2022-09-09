@@ -114,7 +114,7 @@ void Game::Update(float deltaTime)
 void Game::Draw()
 {
 	BeginDrawing();
-	ClearBackground({ 10, 10, 10, 100 });
+	ClearBackground({ 8, 2, 16, 100 });
 	BeginMode3D(camera);
 
 	theUFOControl->Draw();
@@ -128,16 +128,16 @@ void Game::Draw()
 
 	DrawLine3D({ -player->WindowWidth, player->WindowHeight,0 },
 		{ player->WindowWidth, player->WindowHeight, 0 },
-		{ 250,100,250,100 });
+		{ 200,100,250,250 });
 	DrawLine3D({ -player->WindowWidth, -player->WindowHeight,0 },
 		{ player->WindowWidth, -player->WindowHeight, 0 },
-		{ 250,100,250,100 });
+		{ 200,100,250,250 });
 	DrawLine3D({ -player->WindowWidth, -player->WindowHeight,0 },
 		{ -player->WindowWidth, player->WindowHeight, 0 },
-		{ 250,100,250,100 });
+		{ 200,100,250,250 });
 	DrawLine3D({ player->WindowWidth, -player->WindowHeight,0 },
 		{ player->WindowWidth, player->WindowHeight, 0 },
-		{ 250,100,250,100 });
+		{ 200,100,250,250 });
 
 	EndMode3D();
 	//2D drawing/fonts go here.

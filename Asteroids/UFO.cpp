@@ -14,7 +14,7 @@ void UFO::Update(float deltaTime)
 	Entity::Update(deltaTime);
 	fireTimer->Update(deltaTime);
 	vectorTimer->Update(deltaTime);
-	CheckScreenEdgeY(); //TODO: Does not seem to work.
+	CheckScreenEdgeY();
 
 	if (CheckReachedSide())
 	{

@@ -72,21 +72,24 @@ bool Rock::CheckCollision()
 		}
 	}
 
-	//for (int i = 0; i < 4; i++)
-	//{
-	//	Entity* shot = (Entity*)player->shots[i];
-
-	//	if (CirclesIntersect(shot))
-	//	{
-	//		player->shots[i]->Enabled = false;
-	//		return true;
-	//	}
-	//}
-
 	if (CirclesIntersect(player))
 	{
-		if (player->Enabled)
+		//if (player->Enabled)
 			player->Hit();
+
+		return true;
+	}
+
+	if (CirclesIntersect(ufo))
+	{
+		ufo->Enabled = false;
+
+		return true;
+	}
+
+	if (CirclesIntersect(ufo->shot))
+	{
+		ufo->shot->Enabled = false;
 
 		return true;
 	}

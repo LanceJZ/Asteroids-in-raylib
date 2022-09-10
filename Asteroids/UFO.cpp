@@ -32,6 +32,12 @@ void UFO::Update(float deltaTime)
 		FireShot();
 		ResetFireTimer();
 	}
+
+	if (CheckCollision())
+	{
+		Enabled = false;
+		BeenHit = true;
+	}
 }
 
 void UFO::Draw()
@@ -121,6 +127,26 @@ void UFO::FireShot()
 
 		shot->Spawn(offset,	VelocityFromAngleZ(ang, shotSpeed), 1.45f);
 	}
+}
+
+bool UFO::CheckCollision()
+{
+	if (CirclesIntersect(player))
+	{
+		player->Hit();
+		return true;
+	}
+
+	for (auto shot : player->shots)
+	{
+		if (CirclesIntersect(shot))
+		{
+			shot->Enabled = false;
+			return true;
+		}
+	}
+
+	return false;
 }
 
 float UFO::AimedShot()

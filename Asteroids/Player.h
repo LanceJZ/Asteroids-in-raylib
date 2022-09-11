@@ -1,6 +1,7 @@
 #pragma once
 #include "Entity.h"
 #include "Shot.h"
+#include "VectorModel.h"
 
 class Player : public Entity
 {

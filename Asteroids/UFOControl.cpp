@@ -57,17 +57,19 @@ void UFOControl::SpawnUFO()
 	float spawnPercent = (float)(pow(0.915, spawnCount /
 		(player->wave + 1)) * 100);
 
-	if (GetRandomValue(0, 99) < spawnPercent - player->score)
+	if (GetRandomValue(0, 99) < spawnPercent - player->score / 400)
 	{
 		ufo->size = UFO::Large;
 		ufo->Scale = 0.5f;
-		ufo->MaxSpeed = 5;
+		ufo->MaxSpeed = 5.0f;
+		ufo->Radius = 0.9f;
 	}
 	else
 	{
 		ufo->size = UFO::Small;
 		ufo->Scale = 0.25f;
-		ufo->MaxSpeed = 7;
+		ufo->MaxSpeed = 7.0f;
+		ufo->Radius = 0.4f;
 	}
 
 	float speed = 0;

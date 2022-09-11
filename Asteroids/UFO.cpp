@@ -67,7 +67,7 @@ UFO::UFO(float windowWidth, float windowHeight, Player* player)
 	WindowHeight = windowHeight;
 	fireTimer = new Timer();
 	vectorTimer = new Timer();
-	Radius = 1.0f;
+	Radius = 0.9f;
 }
 
 void UFO::ResetFireTimer()
@@ -129,12 +129,32 @@ void UFO::FireShot()
 	}
 }
 
+void UFO::GiveScore()
+{
+	switch (size)
+	{
+	case Large:
+		player->score += 200;
+		break;
+	case Small:
+		player->score += 1000;
+		break;
+	}
+}
+
 bool UFO::CheckCollision()
 {
 	if (CirclesIntersect(player))
 	{
 		player->Hit();
+		GiveScore();
 		return true;
+	}
+
+	if (shot->CirclesIntersect(player))
+	{
+		player->Hit();
+		shot->Enabled = false;
 	}
 
 	for (auto shot : player->shots)
@@ -142,6 +162,7 @@ bool UFO::CheckCollision()
 		if (CirclesIntersect(shot))
 		{
 			shot->Enabled = false;
+			GiveScore();
 			return true;
 		}
 	}

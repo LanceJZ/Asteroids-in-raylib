@@ -13,7 +13,7 @@ public:
 		Large
 	};
 
-	RockSize Size = Large;
+	RockSize size = Large;
 
 	virtual void Update(float deltaTime);
 	virtual void Draw();
@@ -24,7 +24,7 @@ public:
 
 
 private:
-
+	void GiveScore();
 	bool CheckCollision();
 	Player* player;
 	UFO* ufo;

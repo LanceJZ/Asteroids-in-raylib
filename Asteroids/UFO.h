@@ -28,10 +28,11 @@ public:
 	UFO(float windowWidth, float windowHeight, Player* player);
 
 private:
-	float radius{ 5 };
+	float radius{ 0.9f };
 
 	Player* player;
 
+	void GiveScore();
 	void ResetFireTimer();
 	void ResetVectorTimer();
 	void ChangeVector();

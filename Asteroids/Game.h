@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "RockControl.h"
 #include "UFOControl.h"
+#include "VectorModel.h"
 
 enum GameState
 {
@@ -40,5 +41,7 @@ private:
 	Player* player;
 	RockControl* rockControl;
 	UFOControl* theUFOControl;
+
+	VectorModel* testVectorModel;
 };
 

@@ -26,19 +26,19 @@ void Rock::Spawn(Vector3 pos, float speed, RockSize size)
 
 	Position = pos;
 	Velocity = dir;
-	Size = size;
+	Rock::size = size;
 
 	switch (size)
 	{
-	case Rock::Small:
+	case Small:
 		Scale = 0.0666f / 4;
 		Radius = 3.0f / 4;
 		break;
-	case Rock::Medium:
+	case Medium:
 		Scale = 0.0666f / 2;
 		Radius = 3.0f / 2;
 		break;
-	case Rock::Large:
+	case Large:
 		Scale = 0.0666f;
 		Radius = 3.0f;
 		break;
@@ -61,6 +61,22 @@ Rock::Rock(float windowWidth, float windowHeight, Player* player, UFO* ufo)
 	Rock::ufo = ufo;
 }
 
+void Rock::GiveScore()
+{
+	switch (size)
+	{
+	case Large:
+		player->score += 20;
+		break;
+	case Medium:
+		player->score += 50;
+		break;
+	case Small:
+		player->score += 100;
+		break;
+	}
+}
+
 bool Rock::CheckCollision()
 {
 	for (auto shot : player->shots)
@@ -68,14 +84,16 @@ bool Rock::CheckCollision()
 		if (CirclesIntersect(shot))
 		{
 			shot->Enabled = false;
+			GiveScore();
+
 			return true;
 		}
 	}
 
 	if (CirclesIntersect(player))
 	{
-		//if (player->Enabled)
-			player->Hit();
+		player->Hit();
+		GiveScore();
 
 		return true;
 	}

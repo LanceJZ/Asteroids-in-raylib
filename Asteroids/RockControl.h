@@ -22,7 +22,7 @@ public:
 
 	void RockHit(Rock* rockHit);
 
-	RockControl(float screenWidth, float screenheight, Player* player, UFO* ufo);
+	RockControl(float screenWidth, float screenHeight, Player* player, UFO* ufo);
 
 
 private:

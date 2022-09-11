@@ -76,7 +76,7 @@ void RockControl::Draw(void)
 
 void RockControl::RockHit(Rock* rockHit)
 {
-	switch (rockHit->Size)
+	switch (rockHit->size)
 	{
 	case Rock::Large:
 		SpawnRocks(rockHit->Position, 2, Rock::Medium);
@@ -104,7 +104,7 @@ void RockControl::RockHit(Rock* rockHit)
 RockControl::RockControl(float screenWidth, float screenHeight, Player* player, UFO* ufo)
 {
 	GameScreenWidth = screenWidth;
-	GameScreenWidth = screenHeight;
+	GameScreenHeight = screenHeight;
 	RockControl::player = player;
 	RockControl::ufo = ufo;
 }
@@ -134,7 +134,7 @@ void RockControl::SpawnRocks(Vector3 pos, int count, Rock::RockSize size)
 
 		if (spawnnewrock)
 		{
-			rocks.push_back(new Rock(GameScreenWidth, GameScreenWidth, player, ufo));
+			rocks.push_back(new Rock(GameScreenWidth, GameScreenHeight, player, ufo));
 			rocks[rockN]->LoadModel(rockModels[GetRandomValue(0, 3)]);
 		}
 

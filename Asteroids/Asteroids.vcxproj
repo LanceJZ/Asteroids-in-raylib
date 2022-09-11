@@ -142,6 +142,10 @@
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="UFO.cpp" />
     <ClCompile Include="UFOControl.cpp" />
+    <ClCompile Include="VectorModel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h" />
@@ -155,6 +159,10 @@
     <ClInclude Include="Timer.h" />
     <ClInclude Include="UFO.h" />
     <ClInclude Include="UFOControl.h" />
+    <ClInclude Include="VectorModel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

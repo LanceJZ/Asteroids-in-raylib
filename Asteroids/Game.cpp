@@ -1,4 +1,7 @@
 #include "Game.h"
+#include <vector>
+#include <string>
+using namespace std;
 
 Game::Game()
 {
@@ -36,6 +39,8 @@ bool Game::Initialise()
 	theUFOControl = new UFOControl(playScreenW, playScreenH, player);
 	rockControl = new RockControl(playScreenW, playScreenH, player, theUFOControl->ufo);
 
+	testVectorModel = new VectorModel();
+
 	return 0;
 }
 
@@ -67,6 +72,31 @@ bool Game::Load()
 	rockControl->LoadModel(rockOne, rockTwo, rockThree, rockFour);
 	theUFOControl->LoadModel(modelUFO, shot);
 	rockControl->NewGame();
+
+
+	Vector3 one = { 0 };
+	one.x = -1;
+	one.y = 1;
+
+	Vector3 two = { 0 };
+	two.x = 1;
+	two.y = 1;
+
+	Vector3 three = { 0 };
+	three.x = -1;
+	three.y = -1;
+
+	Vector3 four = { 0 };
+	four.x = 1;
+	four.y = -1;
+
+
+	testVectorModel->verts.push_back(one);
+	testVectorModel->verts.push_back(two);
+	testVectorModel->verts.push_back(three);
+	testVectorModel->verts.push_back(four);
+
+	testVectorModel->Velocity.x = 1;
 
 	return 0;
 }
@@ -109,6 +139,10 @@ void Game::Update(float deltaTime)
 		shot->Update(deltaTime);
 	}
 
+	testVectorModel->Update(deltaTime);
+
+	if (testVectorModel->Position.x > 3)
+		testVectorModel->Position.x = -3;
 }
 
 void Game::Draw()
@@ -120,6 +154,9 @@ void Game::Draw()
 	theUFOControl->Draw();
 	rockControl->Draw();
 	player->Draw();
+	playerClear.Draw();
+
+	//testVectorModel->Draw();
 
 	for (auto shot : player->shots)
 	{
@@ -141,6 +178,10 @@ void Game::Draw()
 
 	EndMode3D();
 	//2D drawing/fonts go here.
+	int scoreint = player->score;
+	string scorest = to_string(scoreint);
+	char* scorechar = const_cast<char*>(scorest.c_str());
+	DrawText(scorechar, 200, 5, 40, {255, 255, 255, 255});
 	EndDrawing();
 }
 

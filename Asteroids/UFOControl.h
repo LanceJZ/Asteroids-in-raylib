@@ -13,7 +13,7 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void Draw();
 
-	void Reset();
+	void NewGame();
 
 	UFOControl(float playScreenW, float playScreenH, Player* player);
 	UFO* ufo;

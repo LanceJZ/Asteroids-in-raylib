@@ -34,6 +34,9 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void Draw();
 	bool CirclesIntersect(Entity* target);
+	float AngleFromVectorZ(Vector3 target);
+	Vector3 VelocityFromAngleZ(float rotation, float magnitude);
+	Vector3 VelocityFromAngleZ(float magnitude);
 
 private:
 

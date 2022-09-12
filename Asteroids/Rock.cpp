@@ -31,16 +31,16 @@ void Rock::Spawn(Vector3 pos, float speed, RockSize size)
 	switch (size)
 	{
 	case Small:
-		Scale = 0.0666f / 4;
-		Radius = 3.0f / 4;
+		Scale = 0.04666f / 4;
+		Radius = 2.10f / 4;
 		break;
 	case Medium:
-		Scale = 0.0666f / 2;
-		Radius = 3.0f / 2;
+		Scale = 0.04666f / 2;
+		Radius = 2.10f / 2;
 		break;
 	case Large:
-		Scale = 0.0666f;
-		Radius = 3.0f;
+		Scale = 0.04666f;
+		Radius = 2.10f;
 		break;
 	}
 
@@ -66,13 +66,13 @@ void Rock::GiveScore()
 	switch (size)
 	{
 	case Large:
-		player->score += 20;
+		player->ScoreUpdate(20);
 		break;
 	case Medium:
-		player->score += 50;
+		player->ScoreUpdate(50);
 		break;
 	case Small:
-		player->score += 100;
+		player->ScoreUpdate(100);
 		break;
 	}
 }

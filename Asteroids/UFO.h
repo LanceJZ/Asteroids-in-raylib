@@ -39,9 +39,6 @@ private:
 	void FireShot();
 	bool CheckCollision();
 	float AimedShot();
-	float AngleFromVectorZ(Vector3 target);
-	Vector3 VelocityFromAngleZ(float rotation, float magnitude);
-	Vector3 VelocityFromAngleZ(float magnitude);
 	bool CheckReachedSide();
 };
 

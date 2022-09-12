@@ -5,14 +5,11 @@
 class Shot : public Entity
 {
 public:
-	//using Entity::Enabled;
-
 	virtual void Update(float deltaTime);
 	virtual void Draw();
 	virtual void LoadModel(Model model);
-	void Spawn(Vector3 pos, Vector3 vel, float timer);
+	void Spawn(Vector3 pos, Vector3 vel, float timerAmount);
 
-	Shot();
 	Shot(float windowWidth, float windowHeight);
 
 private:

@@ -4,22 +4,19 @@
 void UFOControl::LoadModel(Model theModel, Model shot)
 {
 	ufo->LoadModel(theModel, shot);
-	Reset();
 }
 
 void UFOControl::Update(float deltaTime)
 {
-	if (ufo->Enabled)
-		ufo->Update(deltaTime);
-
+	ufo->Update(deltaTime);
 	timer->Update(deltaTime);
 	ufo->shot->Update(deltaTime);
 
-	if (timer->Elapsed() && !ufo->Enabled && player->Enabled)
+	if (timer->Elapsed() && !ufo->Enabled)
 	{
 		SpawnUFO();
 	}
-	else if (!player->Enabled || ufo->Enabled)
+	else if (ufo->Enabled)
 	{
 		ResetTimer();
 	}
@@ -28,9 +25,10 @@ void UFOControl::Update(float deltaTime)
 void UFOControl::Draw()
 {
 	ufo->Draw();
+	ufo->shot->Draw();
 }
 
-void UFOControl::Reset()
+void UFOControl::NewGame()
 {
 	ResetTimer();
 	spawnCount = 0;
@@ -47,7 +45,6 @@ UFOControl::UFOControl(float playScreenW, float playScreenH, Player* player)
 	ufo = new UFO(playScreenW, playScreenH, player);
 
 	timer = new Timer();
-	Reset();
 }
 
 void UFOControl::SpawnUFO()
@@ -57,17 +54,17 @@ void UFOControl::SpawnUFO()
 	float spawnPercent = (float)(pow(0.915, spawnCount /
 		(player->wave + 1)) * 100);
 
-	if (GetRandomValue(0, 99) < spawnPercent - player->score / 400)
+	if (GetRandomValue(0, 99) < spawnPercent - player->score / 500)
 	{
 		ufo->size = UFO::Large;
-		ufo->Scale = 0.5f;
+		ufo->Scale = 0.4f;
 		ufo->MaxSpeed = 5.0f;
-		ufo->Radius = 0.9f;
+		ufo->Radius = 0.75f;
 	}
 	else
 	{
 		ufo->size = UFO::Small;
-		ufo->Scale = 0.25f;
+		ufo->Scale = 0.2f;
 		ufo->MaxSpeed = 7.0f;
 		ufo->Radius = 0.4f;
 	}

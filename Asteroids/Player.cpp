@@ -6,8 +6,12 @@ Player::Player(float windowWidth, float windowHeight) : Entity()
 	WindowWidth = windowWidth;
 	WindowHeight = windowHeight;
 	MaxSpeed = 20;
-	Radius = 0.75f;
-	Scale = 0.25f;
+	Radius = 0.6f;
+	Scale = 0.2f;
+	Enabled = false;
+
+	flame = new Entity();
+	flame->Scale = Scale;
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -20,11 +24,13 @@ void Player::Hit()
 	BeenHit = true;
 	Enabled = false;
 	thrustOff = true;
+	lives--;
 }
 
-void Player::LoadModel(Model model, Model shotmodel)
+void Player::LoadModel(Model model, Model shotmodel, Model flamemodel)
 {
 	TheModel = model;
+	flame->LoadModel(flamemodel);
 
 	for (auto shot : shots)
 	{
@@ -34,16 +40,16 @@ void Player::LoadModel(Model model, Model shotmodel)
 
 void Player::Input()
 {
-	float rots = 0.07666f;
+	float velocityRotZ = 0.07666f;
 
 	if (IsKeyDown(KEY_RIGHT))
 	{
-		RotationZ += rots;
+		RotationZ += velocityRotZ;
 	}
 
 	if (IsKeyDown(KEY_LEFT))
 	{
-		RotationZ -= rots;
+		RotationZ -= velocityRotZ;
 	}
 
 	if (IsKeyDown(KEY_UP))
@@ -66,6 +72,12 @@ void Player::Update(float deltaTime)
 	Entity::Update(deltaTime);
 	Entity::CheckScreenEdge();
 
+	Vector3 offset = VelocityFromAngleZ(RotationZ, Radius);
+
+	flame->Position = Vector3Add(offset, Position);
+	flame->RotationZ = RotationZ;
+	flame->Update(deltaTime);
+
 	if (thrustOff)
 	{
 		ThrustOff(deltaTime);
@@ -75,6 +87,7 @@ void Player::Update(float deltaTime)
 void Player::Draw()
 {
 	Entity::Draw();
+	flame->Draw();
 }
 
 void Player::ThrustOn()
@@ -82,12 +95,14 @@ void Player::ThrustOn()
 	Acceleration.x = (cos(RotationZ) * 0.1f);
 	Acceleration.y = (sin(RotationZ) * 0.1f);
 	thrustOff = false;
+	flame->Enabled = true;
 }
 
 void Player::ThrustOff(float deltaTime)
 {
 	Acceleration.x = (-Velocity.x * 0.1f) * deltaTime;
 	Acceleration.y = (-Velocity.y * 0.1f) * deltaTime;
+	flame->Enabled = false;
 }
 
 void Player::Fire()
@@ -104,6 +119,27 @@ void Player::Fire()
 		}
 	}
 
+}
+
+void Player::ScoreUpdate(int addToScore)
+{
+	score += addToScore;
+
+	if (score > nextNewLifeScore)
+	{
+		nextNewLifeScore += 10000;
+		lives++;
+		newLife = true;
+	}
+}
+
+void Player::NewGame()
+{
+	lives = 4;
+	nextNewLifeScore = 10000;
+	score = 0;
+	wave = 0;
+	Reset();
 }
 
 void Player::Reset()

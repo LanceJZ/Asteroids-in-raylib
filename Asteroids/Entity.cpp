@@ -65,13 +65,29 @@ bool Entity::CirclesIntersect(Entity* target)
 	if (!Enabled || !target->Enabled)
 		return false;
 
-	Vector3 posT = target->Position;
-	float distanceX = posT.x - X();
-	float distanceY = posT.y - Y();
+	Vector2 distance = { target->Position.x - X(), target->Position.y - Y() };
 	float radius = Radius + target->Radius;
 
-	if ((distanceX * distanceX) + (distanceY * distanceY) < radius * radius)
+	if ((distance.x * distance.x) + (distance.y * distance.y) < radius * radius)
 		return true;
 
 	return false;
+}
+
+float Entity::AngleFromVectorZ(Vector3 target)
+{
+	return atan2(target.y - Y(), target.x - X());
+}
+
+Vector3 Entity::VelocityFromAngleZ(float rotation, float magnitude)
+{
+	return { (float)cos(rotation) * magnitude,
+				(float)sin(rotation) * magnitude, 0 };
+}
+
+Vector3 Entity::VelocityFromAngleZ(float magnitude)
+{
+	float ang = GetRandomValue(0, PI * 2);
+
+	return VelocityFromAngleZ(ang, magnitude);
 }

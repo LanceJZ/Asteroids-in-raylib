@@ -1,9 +1,5 @@
 #include "Shot.h"
 
-Shot::Shot()
-{
-}
-
 Shot::Shot(float windowWidth, float windowHeight)
 {
 	Enabled = false;
@@ -38,11 +34,11 @@ void Shot::Update(float deltaTime)
 	}
 }
 
-void Shot::Spawn(Vector3 pos, Vector3 vel, float timer)
+void Shot::Spawn(Vector3 pos, Vector3 vel, float timerAmount)
 {
 	Position = pos;
 	Velocity = vel;
 	Enabled = true;
 
-	Shot::timer->Reset(timer);
+	timer->Reset(timerAmount);
 }

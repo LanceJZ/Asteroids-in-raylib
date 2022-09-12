@@ -23,6 +23,7 @@ public:
 
 	bool Initialise();
 	bool Load();
+	bool BeginRun();
 
 	void GameLoop();
 	void Shutdown();
@@ -31,16 +32,18 @@ public:
 
 
 private:
-
+	Model playerShipModel;
 	void ProcessInput();
 	void Update(float deltaTime);
 	void Draw();
+	void PlayerShipDisplay();
 	void CheckPlayerClear();
 
 	Entity playerClear;
 	Player* player;
 	RockControl* rockControl;
 	UFOControl* theUFOControl;
+	vector<Entity> playerShips;
 
 	VectorModel* testVectorModel;
 };

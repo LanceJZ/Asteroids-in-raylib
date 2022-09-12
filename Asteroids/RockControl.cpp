@@ -3,20 +3,13 @@
 
 void RockControl::NewGame(void)
 {
+	for (auto rock : rocks)
+	{
+		rock->Enabled = false;
+	}
+
 	rockCount = 4;
 	NewWave();
-}
-
-bool RockControl::CheckEndOfWave(void)
-{
-	return false;
-}
-
-bool RockControl::CheckPlayerClear(void)
-{
-
-
-	return false;
 }
 
 void RockControl::NewWave(void)

@@ -12,25 +12,29 @@ void UFO::LoadModel(Model model, Model shotmodel)
 void UFO::Update(float deltaTime)
 {
 	Entity::Update(deltaTime);
-	fireTimer->Update(deltaTime);
-	vectorTimer->Update(deltaTime);
-	CheckScreenEdgeY();
 
-	if (CheckReachedSide())
+	if (Enabled)
 	{
-		Enabled = false;
-	}
+		fireTimer->Update(deltaTime);
+		vectorTimer->Update(deltaTime);
+		CheckScreenEdgeY();
 
-	if (vectorTimer->Elapsed())
-	{
-		ChangeVector();
-		ResetVectorTimer();
-	}
+		if (CheckReachedSide())
+		{
+			Enabled = false;
+		}
 
-	if (fireTimer->Elapsed())
-	{
-		FireShot();
-		ResetFireTimer();
+		if (vectorTimer->Elapsed())
+		{
+			ChangeVector();
+			ResetVectorTimer();
+		}
+
+		if (fireTimer->Elapsed())
+		{
+			FireShot();
+			ResetFireTimer();
+		}
 	}
 
 	if (CheckCollision())
@@ -44,8 +48,6 @@ void UFO::Draw()
 {
 	if (!BeenHit)
 		Entity::Draw();
-
-	shot->Draw();
 }
 
 void UFO::Spawn(Vector3 pos, Vector3 vel)
@@ -57,6 +59,7 @@ void UFO::Spawn(Vector3 pos, Vector3 vel)
 
 	ResetVectorTimer();
 	ResetFireTimer();
+	ChangeVector();
 }
 
 UFO::UFO(float windowWidth, float windowHeight, Player* player)
@@ -123,8 +126,6 @@ void UFO::FireShot()
 		offset.x += Position.x;
 		offset.y += Position.y;
 
-		Vector3;
-
 		shot->Spawn(offset,	VelocityFromAngleZ(ang, shotSpeed), 1.45f);
 	}
 }
@@ -134,27 +135,27 @@ void UFO::GiveScore()
 	switch (size)
 	{
 	case Large:
-		player->score += 200;
+		player->ScoreUpdate(200);
 		break;
 	case Small:
-		player->score += 1000;
+		player->ScoreUpdate(1000);
 		break;
 	}
 }
 
 bool UFO::CheckCollision()
 {
+	if (shot->CirclesIntersect(player))
+	{
+		player->Hit();
+		shot->Enabled = false;
+	}
+
 	if (CirclesIntersect(player))
 	{
 		player->Hit();
 		GiveScore();
 		return true;
-	}
-
-	if (shot->CirclesIntersect(player))
-	{
-		player->Hit();
-		shot->Enabled = false;
 	}
 
 	for (auto shot : player->shots)
@@ -184,24 +185,6 @@ float UFO::AimedShot()
 	return AngleFromVectorZ(player->Position) +
 		GetRandomValue(-percentChance, percentChance);
 
-}
-
-float UFO::AngleFromVectorZ(Vector3 target)
-{
-	return atan2(target.y - Y(), target.x - X());
-}
-
-Vector3 UFO::VelocityFromAngleZ(float rotation, float magnitude)
-{
-	return { (float)cos(rotation) * magnitude,
-				(float)sin(rotation) * magnitude, 0 };
-}
-
-Vector3 UFO::VelocityFromAngleZ(float magnitude)
-{
-	float ang = GetRandomValue(0, PI * 2);
-
-	return VelocityFromAngleZ(ang, magnitude);
 }
 
 bool UFO::CheckReachedSide()

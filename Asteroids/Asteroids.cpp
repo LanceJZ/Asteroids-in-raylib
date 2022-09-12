@@ -7,7 +7,7 @@ int main()
 
     game.Initialise();
     game.Load();
+    game.BeginRun();
     game.GameLoop();
     game.Shutdown();
-
 }

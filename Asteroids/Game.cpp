@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "raymath.h"
 #include <vector>
 #include <string>
 using namespace std;
@@ -38,17 +39,26 @@ bool Game::Initialise()
 	player = new Player(playScreenW, playScreenH);
 	theUFOControl = new UFOControl(playScreenW, playScreenH, player);
 	rockControl = new RockControl(playScreenW, playScreenH, player, theUFOControl->ufo);
+	playerClear.Enabled = false;
+
+	for (int i = 0; i < 4; i++)
+	{
+		playerShips.push_back(Entity());
+	}
 
 	testVectorModel = new VectorModel();
 
-	return 0;
+	return false;
 }
 
 bool Game::Load()
 {
-	Model playerShip = LoadModel("models/playership.obj");
-	playerShip.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
+	playerShipModel = LoadModel("models/playership.obj");
+	playerShipModel.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
 		LoadTexture("models/playership.png");
+	Model playerFlame = LoadModel("models/playerflame.obj");
+	playerFlame.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
+		LoadTexture("models/playerfire.png");
 	Model shot = LoadModel("models/shot.obj");
 	shot.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
 		LoadTexture("models/shot.png");
@@ -68,11 +78,24 @@ bool Game::Load()
 	modelUFO.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
 		LoadTexture("models/UFO.png");
 
-	player->LoadModel(playerShip, shot);
+	player->LoadModel(playerShipModel, shot, playerFlame);
 	rockControl->LoadModel(rockOne, rockTwo, rockThree, rockFour);
 	theUFOControl->LoadModel(modelUFO, shot);
-	rockControl->NewGame();
 
+	for (int i = 0; i < 4; i++)
+	{
+		playerShips[i].LoadModel(playerShipModel);
+		playerShips[i].Scale = player->Scale;
+		playerShips[i].Enabled = false;
+	}
+
+	return 0;
+}
+
+bool Game::BeginRun()
+{
+	rockControl->NewGame();
+	theUFOControl->NewGame();
 
 	Vector3 one = { 0 };
 	one.x = -1;
@@ -98,7 +121,7 @@ bool Game::Load()
 
 	testVectorModel->Velocity.x = 1;
 
-	return 0;
+	return false;
 }
 
 void Game::GameLoop()
@@ -114,7 +137,16 @@ void Game::GameLoop()
 void Game::ProcessInput()
 {
 	if (player->Enabled)
+	{
 		player->Input();
+	}
+	else if (IsKeyPressed(KEY_N))
+	{
+		player->NewGame();
+		rockControl->NewGame();
+		theUFOControl->NewGame();
+		PlayerShipDisplay();
+	}
 }
 
 
@@ -128,10 +160,24 @@ void Game::Update(float deltaTime)
 	if (player->Enabled)
 	{
 		player->Update(deltaTime);
+		playerClear.Enabled = false;
+
+		if (player->newLife)
+		{
+			player->newLife = false;
+			PlayerShipDisplay();
+		}
+	}
+	else if (player->lives > 0)
+	{
+		playerClear.Enabled = true;
+		rockControl->Update(deltaTime);
+		CheckPlayerClear();
+		PlayerShipDisplay();
 	}
 	else
 	{
-		CheckPlayerClear();
+		PlayerShipDisplay();
 	}
 
 	for (auto shot : player->shots)
@@ -163,6 +209,11 @@ void Game::Draw()
 		shot->Draw();
 	}
 
+	for (auto ship : playerShips)
+	{
+		ship.Draw();
+	}
+
 	DrawLine3D({ -player->WindowWidth, player->WindowHeight,0 },
 		{ player->WindowWidth, player->WindowHeight, 0 },
 		{ 200,100,250,250 });
@@ -176,13 +227,36 @@ void Game::Draw()
 		{ player->WindowWidth, player->WindowHeight, 0 },
 		{ 200,100,250,250 });
 
+
 	EndMode3D();
 	//2D drawing/fonts go here.
-	int scoreint = player->score;
-	string scorest = to_string(scoreint);
-	char* scorechar = const_cast<char*>(scorest.c_str());
-	DrawText(scorechar, 200, 5, 40, {255, 255, 255, 255});
+	DrawText(const_cast<char*>(to_string(player->score).c_str()), 200, 5, 45, {255, 255, 255, 255});
 	EndDrawing();
+}
+
+void Game::PlayerShipDisplay()
+{
+	float line = player->WindowHeight - player->Radius - 2.5f;
+	float column = 20.0f;
+
+	if (player->lives > playerShips.size())
+	{
+		playerShips.push_back(Entity());
+	}
+
+	for (int i = 0; i < playerShips.size(); i++)
+	{
+		playerShips[i].Y(line);
+		playerShips[i].X(column);
+		playerShips[i].TheModel.transform = MatrixRotateZ(PI / 2);
+		playerShips[i].Enabled = false;
+		column += 1.125f;
+	}
+
+	for (int i = 0; i < player->lives; i++)
+	{
+		playerShips[i].Enabled = true;
+	}
 }
 
 void Game::CheckPlayerClear()

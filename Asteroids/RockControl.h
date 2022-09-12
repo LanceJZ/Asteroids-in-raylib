@@ -8,9 +8,6 @@ using namespace std;
 class RockControl : public Common
 {
 public:
-	bool CheckEndOfWave(void);
-	bool CheckPlayerClear(void);
-
 	void NewGame(void);
 	void NewWave(void);
 	vector<Rock*> rocks;
@@ -26,7 +23,7 @@ public:
 
 
 private:
-	int rockCount;
+	int rockCount = { 4 };
 
 	Model rockModels[4];
 

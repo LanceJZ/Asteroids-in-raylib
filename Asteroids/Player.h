@@ -22,12 +22,15 @@ public:
 	void Reset();
 	void Hit();
 	void LoadModel(Model model, Model shotmodel, Model flamemodel);
+	void LoadSound(Sound fireS, Sound thrustS);
 	Player(float windowWidth, float windowHeight);
 
 private:
 	int nextNewLifeScore{ 10000 };
 	bool thrustOff = true;
 	Color color{ RAYWHITE };
+	Sound fireSound;
+	Sound thrustSound;
 
 	Entity* flame;
 

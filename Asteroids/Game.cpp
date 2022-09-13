@@ -58,7 +58,7 @@ bool Game::Load()
 		LoadTexture("models/playership.png");
 	Model playerFlame = LoadModel("models/playerflame.obj");
 	playerFlame.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
-		LoadTexture("models/playerfire.png");
+		LoadTexture("models/playerflame.png");
 	Model shot = LoadModel("models/shot.obj");
 	shot.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
 		LoadTexture("models/shot.png");
@@ -78,7 +78,11 @@ bool Game::Load()
 	modelUFO.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
 		LoadTexture("models/UFO.png");
 
+	Sound fireS = LoadSound("sounds/playerfire.wav");
+	Sound thrustS = LoadSound("sounds/thrust2.wav");
+
 	player->LoadModel(playerShipModel, shot, playerFlame);
+	player->LoadSound(fireS, thrustS);
 	rockControl->LoadModel(rockOne, rockTwo, rockThree, rockFour);
 	theUFOControl->LoadModel(modelUFO, shot);
 
@@ -226,7 +230,6 @@ void Game::Draw()
 	DrawLine3D({ player->WindowWidth, -player->WindowHeight,0 },
 		{ player->WindowWidth, player->WindowHeight, 0 },
 		{ 200,100,250,250 });
-
 
 	EndMode3D();
 	//2D drawing/fonts go here.

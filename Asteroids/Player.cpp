@@ -12,6 +12,8 @@ Player::Player(float windowWidth, float windowHeight) : Entity()
 
 	flame = new Entity();
 	flame->Scale = Scale;
+	flame->Radius = 0.1f;
+	flame->Enabled = false;
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -36,6 +38,12 @@ void Player::LoadModel(Model model, Model shotmodel, Model flamemodel)
 	{
 		shot->LoadModel(shotmodel);
 	}
+}
+
+void Player::LoadSound(Sound fireS, Sound thrustS)
+{
+	fireSound = fireS;
+	thrustSound = thrustS;
 }
 
 void Player::Input()
@@ -72,7 +80,7 @@ void Player::Update(float deltaTime)
 	Entity::Update(deltaTime);
 	Entity::CheckScreenEdge();
 
-	Vector3 offset = VelocityFromAngleZ(RotationZ, Radius);
+	Vector3 offset = VelocityFromAngleZ(RotationZ, -Radius * 1.25f);
 
 	flame->Position = Vector3Add(offset, Position);
 	flame->RotationZ = RotationZ;

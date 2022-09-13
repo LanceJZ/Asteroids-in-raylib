@@ -122,11 +122,9 @@ void UFO::FireShot()
 
 	if (!shot->Enabled)
 	{
-		Vector3 offset = VelocityFromAngleZ(ang, Radius);
-		offset.x += Position.x;
-		offset.y += Position.y;
+		Vector3 offset = Vector3Add(VelocityFromAngleZ(ang, Radius), Position);
 
-		shot->Spawn(offset,	VelocityFromAngleZ(ang, shotSpeed), 1.45f);
+		shot->Spawn(offset,	VelocityFromAngleZ(ang, shotSpeed), 1.55f);
 	}
 }
 

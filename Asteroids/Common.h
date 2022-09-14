@@ -9,6 +9,7 @@ public:
 	float GameScreenHeight;
 
 	float GetRandomScreenY();
+	float GetRandomFloat(float min, float max);
 
 
 private:

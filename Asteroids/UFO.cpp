@@ -85,11 +85,11 @@ void UFO::ResetVectorTimer()
 
 void UFO::ChangeVector()
 {
-	if (GetRandomValue(1, 10) < 7)
+	if (GetRandomFloat(1, 10) < 7)
 	{
 		if ((int)Velocity.y == 0)
 		{
-			if (GetRandomValue(1, 10) < 5)
+			if (GetRandomFloat(1, 10) < 5)
 			{
 				Velocity.y = MaxSpeed;
 			}
@@ -113,7 +113,7 @@ void UFO::FireShot()
 	switch (size)
 	{
 	case UFO::Large:
-		ang = GetRandomValue(0, PI * 2);
+		ang = GetRandomFloat(0, PI * 2);
 		break;
 	case UFO::Small:
 		ang = AimedShot();
@@ -178,10 +178,10 @@ float UFO::AimedShot()
 		percentChance = 0;
 	}
 
-	percentChance += GetRandomValue(0.0, 0.05f);
+	percentChance += GetRandomFloat(0.0, 0.05f);
 
 	return AngleFromVectorZ(player->Position) +
-		GetRandomValue(-percentChance, percentChance);
+		GetRandomFloat(-percentChance, percentChance);
 
 }
 

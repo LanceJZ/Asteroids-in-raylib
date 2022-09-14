@@ -54,7 +54,7 @@ void UFOControl::SpawnUFO()
 	float spawnPercent = (float)(pow(0.915, spawnCount /
 		(player->wave + 1)) * 100);
 
-	if (GetRandomValue(0, 99) < spawnPercent - player->score / 500)
+	if (GetRandomFloat(0, 99) < spawnPercent - player->score / 500)
 	{
 		ufo->size = UFO::Large;
 		ufo->Scale = 0.4f;
@@ -70,10 +70,10 @@ void UFOControl::SpawnUFO()
 	}
 
 	float speed = 0;
-	float height = GetRandomValue(GameScreenHeight / 4, GameScreenHeight / 1.25f);
+	float height = GetRandomFloat(GameScreenHeight / 4, GameScreenHeight / 1.25f);
 	float side = 0;
 
-	if (GetRandomValue(0, 10) < 5)
+	if (GetRandomFloat(0, 10) < 5)
 	{
 		speed = 5;
 		side = -GameScreenWidth;
@@ -91,5 +91,5 @@ void UFOControl::ResetTimer()
 {
 	float min = 10 - (player->wave * 0.1f);
 	float max = 11 + (player->wave * 0.1f);
-	timer->Reset(GetRandomValue(min, max));
+	timer->Reset(GetRandomFloat(min, max));
 }

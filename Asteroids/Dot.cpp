@@ -26,8 +26,8 @@ bool Dot::Initialise()
 void Dot::Spawn(Vector3 position, float time)
 {
 	Position = position;
-	Velocity = { GetRandomValue(-10.0f, 10.0f), GetRandomValue(-10.0f, 10.0f),
-		GetRandomValue(-10.0f, 10.0f) };
+	Velocity = { GetRandomFloat(-10.0f, 10.0f), GetRandomFloat(-10.0f, 10.0f),
+		GetRandomFloat(-10.0f, 10.0f) };
 	timer->Set(time);
 	Enabled = true;
 }

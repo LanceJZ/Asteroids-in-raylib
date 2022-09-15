@@ -28,6 +28,11 @@ void UFOControl::Draw()
 	ufo->shot->Draw();
 }
 
+bool UFOControl::Initialise()
+{
+	return false;
+}
+
 void UFOControl::NewGame()
 {
 	ResetTimer();

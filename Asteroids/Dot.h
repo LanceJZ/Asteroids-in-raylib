@@ -12,7 +12,7 @@ public:
 
 	bool Initialise();
 
-	void Spawn(Vector3 position, float time);
+	void Spawn(Vector3 position, float time, float size);
 	void Clear();
 
 private:

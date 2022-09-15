@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Entity.h"
 #include "Shot.h"
+#include "Exploder.h"
 #include "Timer.h"
 #include "Common.h"
 
@@ -19,10 +20,12 @@ public:
 	Shot* shot;
 	Timer* fireTimer;
 	Timer* vectorTimer;
+	Exploder* exploder;
 
 	void LoadModel(Model model, Model shotmodel);
 	virtual void Update(float deltaTime);
 	virtual void Draw();
+	bool Initialise();
 
 	void Spawn(Vector3 pos, Vector3 vel);
 

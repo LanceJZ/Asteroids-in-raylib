@@ -12,6 +12,7 @@ void UFO::LoadModel(Model model, Model shotmodel)
 void UFO::Update(float deltaTime)
 {
 	Entity::Update(deltaTime);
+	exploder->Update(deltaTime);
 
 	if (Enabled)
 	{
@@ -41,6 +42,7 @@ void UFO::Update(float deltaTime)
 	{
 		Enabled = false;
 		BeenHit = true;
+		exploder->Spawn(Position, 15, radius / 2.0f);
 	}
 }
 
@@ -48,6 +50,13 @@ void UFO::Draw()
 {
 	if (!BeenHit)
 		Entity::Draw();
+
+	exploder->Draw();
+}
+
+bool UFO::Initialise()
+{
+	return false;
 }
 
 void UFO::Spawn(Vector3 pos, Vector3 vel)
@@ -70,6 +79,7 @@ UFO::UFO(float windowWidth, float windowHeight, Player* player)
 	WindowHeight = windowHeight;
 	fireTimer = new Timer();
 	vectorTimer = new Timer();
+	exploder = new Exploder();
 	Radius = 0.9f;
 }
 
@@ -124,7 +134,7 @@ void UFO::FireShot()
 	{
 		Vector3 offset = Vector3Add(VelocityFromAngleZ(ang, Radius), Position);
 
-		shot->Spawn(offset,	VelocityFromAngleZ(ang, shotSpeed), 1.55f);
+		shot->Spawn(offset,	VelocityFromAngleZ(ang, shotSpeed), 1.75f);
 	}
 }
 

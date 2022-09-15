@@ -6,9 +6,8 @@ bool Common::Initialise()
 	return false;
 }
 
-float Common::GetRandomScreenY() //Fix so it is float.
+float Common::GetRandomScreenY()
 {
-	//return GetRandomValue(-GameScreenHeight, GameScreenHeight);
 	return GetRandomFloat(-GameScreenHeight, GameScreenHeight);
 }
 

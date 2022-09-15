@@ -37,6 +37,8 @@ void RockControl::Update(float deltaTime)
 
 	for (auto rock : rocks)
 	{
+		rock->exploder->Update(deltaTime);
+
 		if (rock->BeenHit)
 		{
 			rockHit = true;
@@ -47,7 +49,6 @@ void RockControl::Update(float deltaTime)
 		{
 			rock->Update(deltaTime);
 		}
-
 	}
 
 	if (rockHit)
@@ -60,6 +61,8 @@ void RockControl::Draw(void)
 {
 	for (auto rock : rocks)
 	{
+		rock->exploder->Draw();
+
 		if (rock->Enabled)
 		{
 			rock->Draw();
@@ -67,8 +70,16 @@ void RockControl::Draw(void)
 	}
 }
 
+bool RockControl::Initialise()
+{
+
+	return false;
+}
+
 void RockControl::RockHit(Rock* rockHit)
 {
+	rockHit->exploder->Spawn(rockHit->Position, 15, rockHit->Radius);
+
 	switch (rockHit->size)
 	{
 	case Rock::Large:
@@ -129,6 +140,7 @@ void RockControl::SpawnRocks(Vector3 pos, int count, Rock::RockSize size)
 		{
 			rocks.push_back(new Rock(GameScreenWidth, GameScreenHeight, player, ufo));
 			rocks[rockN]->LoadModel(rockModels[GetRandomValue(0, 3)]);
+			rocks[rockN]->Initialise();
 		}
 
 		switch (size)

@@ -4,18 +4,28 @@
 void Rock::Update(float deltaTime)
 {
 	Entity::Update(deltaTime);
+	//exploder->Update(deltaTime);
 	CheckScreenEdge();
 
 	if (CheckCollision())
 	{
 		BeenHit = true;
 		Enabled = false;
+		//exploder->Spawn(Position, 15, Radius);
 	}
 }
 
 void Rock::Draw()
 {
 	Entity::Draw();
+	//exploder->Draw();
+}
+
+bool Rock::Initialise()
+{
+	exploder = new Exploder();
+
+	return false;
 }
 
 void Rock::Spawn(Vector3 pos, float speed, RockSize size)
@@ -31,8 +41,8 @@ void Rock::Spawn(Vector3 pos, float speed, RockSize size)
 	switch (size)
 	{
 	case Small:
-		Scale = 0.04666f / 4;
-		Radius = 2.10f / 4;
+		Scale = 0.04666f / 3.5f;
+		Radius = 2.10f / 3.5f;
 		break;
 	case Medium:
 		Scale = 0.04666f / 2;

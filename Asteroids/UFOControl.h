@@ -12,6 +12,7 @@ public:
 	virtual void LoadModel(Model theModel, Model shot);
 	virtual void Update(float deltaTime);
 	virtual void Draw();
+	bool Initialise();
 
 	void NewGame();
 

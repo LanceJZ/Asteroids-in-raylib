@@ -16,6 +16,7 @@ public:
 		Model modelFour);
 	virtual void Update(float deltaTime);
 	virtual void Draw();
+	bool Initialise();
 
 	void RockHit(Rock* rockHit);
 

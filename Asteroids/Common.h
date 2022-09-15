@@ -7,8 +7,8 @@ using namespace std;
 class Common
 {
 public:
-	float GameScreenWidth;
-	float GameScreenHeight;
+	float GameScreenWidth = { 0 };
+	float GameScreenHeight = { 0 };
 
 	bool Initialise();
 	float GetRandomScreenY();

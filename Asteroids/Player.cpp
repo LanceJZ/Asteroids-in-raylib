@@ -19,6 +19,11 @@ Player::Player(float windowWidth, float windowHeight) : Entity()
 	{
 		shots[i] = new Shot(windowWidth, windowHeight);
 	}
+
+	for (int i = 0; i < 6; i++)
+	{
+		lines[i] = new Line();
+	}
 }
 
 void Player::Hit()
@@ -27,6 +32,11 @@ void Player::Hit()
 	Enabled = false;
 	thrustOff = true;
 	lives--;
+
+	for (auto line : lines)
+	{
+		line->Spawn(Position);
+	}
 }
 
 void Player::LoadModel(Model model, Model shotmodel, Model flamemodel)
@@ -80,6 +90,11 @@ void Player::Update(float deltaTime)
 	Entity::Update(deltaTime);
 	Entity::CheckScreenEdge();
 
+	for (auto line : lines)
+	{
+		line->Update(deltaTime);
+	}
+
 	Vector3 offset = VelocityFromAngleZ(RotationZ, -Radius * 1.25f);
 
 	flame->Position = Vector3Add(offset, Position);
@@ -96,6 +111,11 @@ void Player::Draw()
 {
 	Entity::Draw();
 	flame->Draw();
+
+	for (auto line : lines)
+	{
+		line->Draw();
+	}
 }
 
 void Player::ThrustOn()
@@ -156,4 +176,9 @@ void Player::Reset()
 	Velocity = { 0, 0, 0 };
 	BeenHit = false;
 	Enabled = true;
+
+	for (auto line : lines)
+	{
+		line->Clear();
+	}
 }

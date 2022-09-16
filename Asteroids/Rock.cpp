@@ -30,8 +30,8 @@ bool Rock::Initialise()
 
 void Rock::Spawn(Vector3 pos, float speed, RockSize size)
 {
-	float magnitude = GetRandomValue(1.1f, 5.1f);
-	float angle = GetRandomValue(0, PI * 2);
+	float magnitude = GetRandomFloat(1.1f, 5.1f);
+	float angle = GetRandomRadian();
 	Vector3 dir = {cos(angle) * magnitude, sin(angle) * magnitude};
 
 	Position = pos;

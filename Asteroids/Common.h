@@ -13,7 +13,7 @@ public:
 	bool Initialise();
 	float GetRandomScreenY();
 	float GetRandomFloat(float min, float max);
-
+	float GetRandomRadian();
 
 private:
 	random_device rd;

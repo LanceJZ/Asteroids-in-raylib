@@ -2,6 +2,8 @@
 #include "Entity.h"
 #include "Shot.h"
 #include "VectorModel.h"
+#include "Line.h"
+#include <vector>
 
 class Player : public Entity
 {
@@ -33,6 +35,7 @@ private:
 	Sound thrustSound;
 
 	Entity* flame;
+	vector<Line*> lines;
 
 	void ThrustOn();
 	void ThrustOff(float deltaTime);

@@ -136,6 +136,10 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Exploder.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Line.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PositionedObject.cpp" />
     <ClCompile Include="Rock.cpp" />
@@ -155,6 +159,10 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Exploder.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Line.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Player.h" />
     <ClInclude Include="PositionedObject.h" />
     <ClInclude Include="Rock.h" />

@@ -123,7 +123,7 @@ void UFO::FireShot()
 	switch (size)
 	{
 	case UFO::Large:
-		ang = GetRandomFloat(0, PI * 2);
+		ang = GetRandomRadian();
 		break;
 	case UFO::Small:
 		ang = AimedShot();

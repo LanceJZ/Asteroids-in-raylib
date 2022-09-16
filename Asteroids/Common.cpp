@@ -18,3 +18,8 @@ float Common::GetRandomFloat(float min, float max)
 
 	return distr(eng);
 }
+
+float Common::GetRandomRadian()
+{
+	return GetRandomFloat(0, PI * 2);
+}

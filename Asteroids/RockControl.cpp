@@ -148,17 +148,17 @@ void RockControl::SpawnRocks(Vector3 pos, int count, Rock::RockSize size)
 			float speed;
 
 		case Rock::Large:
-			speed = GetRandomValue(maxSpeed / 10, maxSpeed / 3);
+			speed = GetRandomFloat(maxSpeed / 10, maxSpeed / 3);
 			rocks[rockN]->Spawn({ GameScreenWidth, GetRandomScreenY(), 0 }, speed, size);
 			break;
 
 		case Rock::Medium:
-			speed = GetRandomValue(maxSpeed / 10, maxSpeed / 2);
+			speed = GetRandomFloat(maxSpeed / 10, maxSpeed / 2);
 			rocks[rockN]->Spawn(pos, speed, size);
 			break;
 
 		case Rock::Small:
-			speed = GetRandomValue(maxSpeed / 10, maxSpeed);
+			speed = GetRandomFloat(maxSpeed / 10, maxSpeed);
 			rocks[rockN]->Spawn(pos, speed, size);
 			break;
 		}

@@ -22,7 +22,7 @@ Player::Player(float windowWidth, float windowHeight) : Entity()
 
 	for (int i = 0; i < 6; i++)
 	{
-		lines[i] = new Line();
+		lines.push_back(new Line());
 	}
 }
 
@@ -32,6 +32,7 @@ void Player::Hit()
 	Enabled = false;
 	thrustOff = true;
 	lives--;
+	exploding = true;
 
 	for (auto line : lines)
 	{
@@ -89,11 +90,6 @@ void Player::Update(float deltaTime)
 {
 	Entity::Update(deltaTime);
 	Entity::CheckScreenEdge();
-
-	for (auto line : lines)
-	{
-		line->Update(deltaTime);
-	}
 
 	Vector3 offset = VelocityFromAngleZ(RotationZ, -Radius * 1.25f);
 

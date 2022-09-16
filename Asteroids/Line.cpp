@@ -11,13 +11,14 @@ void Line::Update(float deltaTime)
 
 	if (timer->Elapsed())
 	{
-		Enabled;
+		Enabled = false;
 	}
 }
 
 void Line::Draw()
 {
-	DrawLine3D(posStart, posEnd, WHITE);
+	if (Enabled)
+		DrawLine3D(posStart, posEnd, WHITE);
 }
 
 void Line::Load()
@@ -32,13 +33,14 @@ void Line::LoadModel(Model model, Model shotmodel)
 
 void Line::Spawn(Vector3 pos)
 {
+	float size = 0.75f;
 	Position = pos;
-	Velocity = { GetRandomFloat(-1.0f, 1.0f), GetRandomFloat(-1.0f, 1.0f) , 0 };
-	startPos = {GetRandomFloat(-1.0f, 1.0f), GetRandomFloat(-1.0f, 1.0f) , 0};
-	endPos = { GetRandomFloat(-1.0f, 1.0f), GetRandomFloat(-1.0f, 1.0f) , 0 };
+	Velocity = { GetRandomFloat(-size, size), GetRandomFloat(-size, size) , 0 };
+	startPos = {GetRandomFloat(-size, size), GetRandomFloat(-size, size) , 0};
+	endPos = { GetRandomFloat(-size, size), GetRandomFloat(-size, size) , 0 };
 
 	Enabled = true;
-	timer->Reset(GetRandomFloat(0.5f, 1));
+	timer->Reset(GetRandomFloat(0.75f, 1.0f));
 }
 
 void Line::Clear()
@@ -49,6 +51,7 @@ void Line::Clear()
 Line::Line()
 {
 	timer = new Timer();
+	Enabled = false;
 }
 
 Line::~Line()

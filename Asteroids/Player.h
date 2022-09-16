@@ -12,8 +12,10 @@ public:
 	int score { 0 };
 	int lives { 0 };
 	bool newLife = false;
+	bool exploding = false;
 
 	Shot* shots[4];
+	vector<Line*> lines;
 
 	virtual void Input();
 	virtual void Update(float deltaTime);
@@ -35,7 +37,6 @@ private:
 	Sound thrustSound;
 
 	Entity* flame;
-	vector<Line*> lines;
 
 	void ThrustOn();
 	void ThrustOff(float deltaTime);

@@ -161,6 +161,11 @@ void Game::Update(float deltaTime)
 	rockControl->Update(deltaTime);
 	theUFOControl->Update(deltaTime);
 
+	for (auto line : player->lines)
+	{
+		line->Update(deltaTime);
+	}
+
 	if (player->Enabled)
 	{
 		player->Update(deltaTime);
@@ -174,6 +179,19 @@ void Game::Update(float deltaTime)
 	}
 	else if (player->lives > 0)
 	{
+		if (player->exploding)
+		{
+			for (auto line : player->lines)
+			{
+				if (line->Enabled)
+				{
+					return;
+				}
+
+				player->exploding = false;
+			}
+		}
+
 		playerClear.Enabled = true;
 		rockControl->Update(deltaTime);
 		CheckPlayerClear();

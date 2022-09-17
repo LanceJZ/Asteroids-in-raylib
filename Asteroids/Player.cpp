@@ -53,8 +53,8 @@ void Player::LoadModel(Model model, Model shotmodel, Model flamemodel)
 
 void Player::LoadSound(Sound fireS, Sound thrustS)
 {
-	fireSound = fireS;
-	thrustSound = thrustS;
+	SoundMain = fireS;
+	SoundSecond = thrustS;
 }
 
 void Player::Input()
@@ -116,6 +116,11 @@ void Player::Draw()
 
 void Player::ThrustOn()
 {
+	if (!IsSoundPlaying(SoundSecond))
+	{
+		PlaySound(SoundSecond);
+	}
+
 	Acceleration.x = (cos(RotationZ) * 0.1f);
 	Acceleration.y = (sin(RotationZ) * 0.1f);
 	thrustOff = false;
@@ -131,6 +136,7 @@ void Player::ThrustOff(float deltaTime)
 
 void Player::Fire()
 {
+	PlaySound(SoundMain);
 	float speed = 25.5f;
 	Vector3 velocity = {((float)cos(RotationZ) * speed), ((float)sin(RotationZ) * speed), 0};
 

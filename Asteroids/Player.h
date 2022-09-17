@@ -32,9 +32,8 @@ public:
 private:
 	int nextNewLifeScore{ 10000 };
 	bool thrustOff = true;
+	float thrustSoundTime = { 0 };
 	Color color{ RAYWHITE };
-	Sound fireSound;
-	Sound thrustSound;
 
 	Entity* flame;
 

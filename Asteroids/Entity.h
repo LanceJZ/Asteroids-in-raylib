@@ -29,6 +29,10 @@ public:
 	virtual void Z(float z);
 
 	Model TheModel;
+	Sound SoundMain;
+	Sound SoundSecond;
+	Sound SoundThird;
+	Sound SoundForth;
 
 	virtual void LoadModel(Model model);
 	virtual void Update(float deltaTime);

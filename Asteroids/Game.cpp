@@ -80,6 +80,7 @@ bool Game::Load()
 
 	Sound fireS = LoadSound("sounds/playerfire.wav");
 	Sound thrustS = LoadSound("sounds/thrust2.wav");
+	Sound ExpS = LoadSound("sounds/PlayerExplode.wav");
 
 	player->LoadModel(playerShipModel, shot, playerFlame);
 	player->LoadSound(fireS, thrustS);
@@ -301,4 +302,5 @@ void Game::CheckPlayerClear()
 void Game::Shutdown()
 {
 	CloseWindow();
+	CloseAudioDevice();
 }

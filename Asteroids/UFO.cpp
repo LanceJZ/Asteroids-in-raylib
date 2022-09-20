@@ -47,6 +47,24 @@ void UFO::Update(float deltaTime)
 			FireShot();
 			ResetFireTimer();
 		}
+
+		switch (size)
+		{
+		case UFO::Small:
+			if (!IsSoundPlaying(SoundThird))
+			{
+				PlaySound(SoundThird);
+			}
+			break;
+		case UFO::Large:
+			if (!IsSoundPlaying(SoundSecond))
+			{
+				PlaySound(SoundSecond);
+			}
+			break;
+		default:
+			break;
+		}
 	}
 
 	if (CheckCollision())
@@ -57,24 +75,6 @@ void UFO::Update(float deltaTime)
 		PlaySound(SoundMain);
 		StopSound(SoundSecond);
 		StopSound(SoundThird);
-	}
-
-	switch (size)
-	{
-	case UFO::Small:
-		if (!IsSoundPlaying(SoundThird))
-		{
-			PlaySound(SoundThird);
-		}
-		break;
-	case UFO::Large:
-		if (!IsSoundPlaying(SoundSecond))
-		{
-			PlaySound(SoundSecond);
-		}
-		break;
-	default:
-		break;
 	}
 }
 

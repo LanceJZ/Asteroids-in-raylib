@@ -55,6 +55,26 @@ void UFO::Update(float deltaTime)
 		BeenHit = true;
 		exploder->Spawn(Position, 15, radius / 2.0f);
 		PlaySound(SoundMain);
+		StopSound(SoundSecond);
+		StopSound(SoundThird);
+	}
+
+	switch (size)
+	{
+	case UFO::Small:
+		if (!IsSoundPlaying(SoundThird))
+		{
+			PlaySound(SoundThird);
+		}
+		break;
+	case UFO::Large:
+		if (!IsSoundPlaying(SoundSecond))
+		{
+			PlaySound(SoundSecond);
+		}
+		break;
+	default:
+		break;
 	}
 }
 

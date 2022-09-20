@@ -29,6 +29,7 @@ Player::Player(float windowWidth, float windowHeight) : Entity()
 void Player::Hit()
 {
 	PlaySound(SoundThird);
+	StopSound(SoundSecond);
 
 	BeenHit = true;
 	Enabled = false;

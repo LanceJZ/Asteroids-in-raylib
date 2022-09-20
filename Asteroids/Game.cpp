@@ -84,13 +84,15 @@ bool Game::Load()
 	Sound playerExpS = LoadSound("sounds/PlayerExplode.wav");
 	Sound rockExpS = LoadSound("sounds/RockExplosion.wav");
 	Sound ufoExpS = LoadSound("sounds/UFOExplosion.wav");
+	Sound ufoBigS = LoadSound("sounds/UFOLarge.wav");
+	Sound ufoSmallS = LoadSound("sounds/UFOSmall.wav");
 
 	player->LoadModel(playerShipModel, shot, playerFlame);
 	player->LoadSound(fireS, thrustS, playerExpS);
 	rockControl->LoadModel(rockOne, rockTwo, rockThree, rockFour);
 	rockControl->LoadSound(rockExpS);
 	theUFOControl->LoadModel(modelUFO, shot);
-	theUFOControl->LoadSound(ufoExpS);
+	theUFOControl->LoadSound(ufoExpS, ufoBigS, ufoSmallS);
 
 	for (int i = 0; i < 4; i++)
 	{

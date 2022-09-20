@@ -9,6 +9,17 @@ void UFO::LoadModel(Model model, Model shotmodel)
 	BeenHit = false;
 }
 
+void UFO::LoadSound(Sound exp, Sound big, Sound small)
+{
+	SoundMain = exp;
+	SoundSecond = big;
+	SoundThird = small;
+
+	SetSoundVolume(SoundMain, 0.5f);
+	SetSoundVolume(SoundSecond, 0.5f);
+	SetSoundVolume(SoundThird, 0.5f);
+}
+
 void UFO::Update(float deltaTime)
 {
 	Entity::Update(deltaTime);
@@ -43,6 +54,7 @@ void UFO::Update(float deltaTime)
 		Enabled = false;
 		BeenHit = true;
 		exploder->Spawn(Position, 15, radius / 2.0f);
+		PlaySound(SoundMain);
 	}
 }
 

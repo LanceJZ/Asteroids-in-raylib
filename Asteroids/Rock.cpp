@@ -11,6 +11,7 @@ void Rock::Update(float deltaTime)
 	{
 		BeenHit = true;
 		Enabled = false;
+		PlaySound(SoundMain);
 		//exploder->Spawn(Position, 15, Radius);
 	}
 }
@@ -61,6 +62,12 @@ void Rock::Spawn(Vector3 pos, float speed, RockSize size)
 void Rock::LoadModel(Model model)
 {
 	TheModel = model;
+}
+
+void Rock::LoadSound(Sound exp)
+{
+	SoundMain = exp;
+	SetSoundVolume(SoundMain, 0.5f);
 }
 
 Rock::Rock(float windowWidth, float windowHeight, Player* player, UFO* ufo)

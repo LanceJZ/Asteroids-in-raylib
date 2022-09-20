@@ -20,6 +20,7 @@ bool Game::Initialise()
 	int windowWidth = 1280; //width
 
 	InitWindow(windowWidth, windowHeight, "Asteroids");
+	InitAudioDevice();
 	SetTargetFPS(60);
 
 	// Define the camera to look into our 3D world
@@ -80,12 +81,16 @@ bool Game::Load()
 
 	Sound fireS = LoadSound("sounds/playerfire.wav");
 	Sound thrustS = LoadSound("sounds/thrust2.wav");
-	Sound ExpS = LoadSound("sounds/PlayerExplode.wav");
+	Sound playerExpS = LoadSound("sounds/PlayerExplode.wav");
+	Sound rockExpS = LoadSound("sounds/RockExplosion.wav");
+	Sound ufoExpS = LoadSound("sounds/UFOExplosion.wav");
 
 	player->LoadModel(playerShipModel, shot, playerFlame);
-	player->LoadSound(fireS, thrustS);
+	player->LoadSound(fireS, thrustS, playerExpS);
 	rockControl->LoadModel(rockOne, rockTwo, rockThree, rockFour);
+	rockControl->LoadSound(rockExpS);
 	theUFOControl->LoadModel(modelUFO, shot);
+	theUFOControl->LoadSound(ufoExpS);
 
 	for (int i = 0; i < 4; i++)
 	{

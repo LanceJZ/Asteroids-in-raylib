@@ -30,6 +30,11 @@ void RockControl::LoadModel(Model modelOne, Model modelTwo, Model modelThree, Mo
 	rockModels[3] = modelFour;
 }
 
+void RockControl::LoadSound(Sound exp)
+{
+	Explode = exp;
+}
+
 void RockControl::Update(float deltaTime)
 {
 	bool rockHit = false;
@@ -140,6 +145,7 @@ void RockControl::SpawnRocks(Vector3 pos, int count, Rock::RockSize size)
 		{
 			rocks.push_back(new Rock(GameScreenWidth, GameScreenHeight, player, ufo));
 			rocks[rockN]->LoadModel(rockModels[GetRandomValue(0, 3)]);
+			rocks[rockN]->LoadSound(Explode);
 			rocks[rockN]->Initialise();
 		}
 

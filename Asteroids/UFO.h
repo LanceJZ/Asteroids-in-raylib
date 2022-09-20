@@ -23,6 +23,7 @@ public:
 	Exploder* exploder;
 
 	void LoadModel(Model model, Model shotmodel);
+	void LoadSound(Sound exp, Sound big, Sound small);
 	virtual void Update(float deltaTime);
 	virtual void Draw();
 	bool Initialise();

@@ -11,6 +11,7 @@ public:
 
 	virtual void LoadModel(Model theModel, Model shot);
 	virtual void Update(float deltaTime);
+	void LoadSound(Sound exp);
 	virtual void Draw();
 	bool Initialise();
 

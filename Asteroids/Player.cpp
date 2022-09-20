@@ -28,6 +28,8 @@ Player::Player(float windowWidth, float windowHeight) : Entity()
 
 void Player::Hit()
 {
+	PlaySound(SoundThird);
+
 	BeenHit = true;
 	Enabled = false;
 	thrustOff = true;
@@ -51,10 +53,15 @@ void Player::LoadModel(Model model, Model shotmodel, Model flamemodel)
 	}
 }
 
-void Player::LoadSound(Sound fireS, Sound thrustS)
+void Player::LoadSound(Sound fireS, Sound thrustS, Sound exp)
 {
 	SoundMain = fireS;
 	SoundSecond = thrustS;
+	SoundThird = exp;
+
+	SetSoundVolume(SoundMain, 0.25f);
+	SetSoundVolume(SoundSecond, 0.5f);
+	SetSoundVolume(SoundThird, 0.5f);
 }
 
 void Player::Input()

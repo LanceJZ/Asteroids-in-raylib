@@ -24,6 +24,7 @@ public:
 
 	void Spawn(Vector3 pos, float speed, RockSize size);
 	void LoadModel(Model model);
+	void LoadSound(Sound exp);
 	Rock(float windowWidth, float windowHeight, Player* player, UFO* ufo);
 
 

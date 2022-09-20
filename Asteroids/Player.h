@@ -26,7 +26,7 @@ public:
 	void Reset();
 	void Hit();
 	void LoadModel(Model model, Model shotmodel, Model flamemodel);
-	void LoadSound(Sound fireS, Sound thrustS);
+	void LoadSound(Sound fireS, Sound thrustS, Sound exp);
 	Player(float windowWidth, float windowHeight);
 
 private:

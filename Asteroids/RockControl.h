@@ -14,6 +14,7 @@ public:
 
 	virtual void LoadModel(Model modelOne, Model modelTwo, Model modelThree,
 		Model modelFour);
+	void LoadSound(Sound exp);
 	virtual void Update(float deltaTime);
 	virtual void Draw();
 	bool Initialise();
@@ -27,6 +28,7 @@ private:
 	int rockCount = { 4 };
 
 	Model rockModels[4];
+	Sound Explode;
 
 	void CreateRocks(void);
 	void ClearAllRocks(void);

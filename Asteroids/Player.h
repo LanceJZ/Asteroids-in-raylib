@@ -10,6 +10,7 @@ class Player : public Entity
 public:
 	int wave { 0 };
 	int score { 0 };
+	int highScore{ 0 };
 	int lives { 0 };
 	bool newLife = false;
 	bool exploding = false;

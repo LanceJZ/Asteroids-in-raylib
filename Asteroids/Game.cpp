@@ -174,6 +174,12 @@ void Game::Update(float deltaTime)
 		line->Update(deltaTime);
 	}
 
+
+	for (auto shot : player->shots)
+	{
+		shot->Update(deltaTime);
+	}
+
 	if (player->Enabled)
 	{
 		player->Update(deltaTime);
@@ -208,11 +214,6 @@ void Game::Update(float deltaTime)
 	else
 	{
 		PlayerShipDisplay();
-	}
-
-	for (auto shot : player->shots)
-	{
-		shot->Update(deltaTime);
 	}
 
 	testVectorModel->Update(deltaTime);
@@ -260,6 +261,7 @@ void Game::Draw()
 	EndMode3D();
 	//2D drawing/fonts go here.
 	DrawText(const_cast<char*>(to_string(player->score).c_str()), 200, 5, 45, {255, 255, 255, 255});
+	DrawText(const_cast<char*>(to_string(player->highScore).c_str()), GetScreenWidth() / 2, 4, 20, {255, 255, 255, 255});
 	EndDrawing();
 }
 

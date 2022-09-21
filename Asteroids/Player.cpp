@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "raymath.h"
+#include <string>
 
 Player::Player(float windowWidth, float windowHeight) : Entity()
 {
@@ -24,6 +25,8 @@ Player::Player(float windowWidth, float windowHeight) : Entity()
 	{
 		lines.push_back(new Line());
 	}
+
+	//LoadText highscore.
 }
 
 void Player::Hit()
@@ -37,9 +40,16 @@ void Player::Hit()
 	lives--;
 	exploding = true;
 
+	flame->Enabled = false;
+
 	for (auto line : lines)
 	{
 		line->Spawn(Position);
+	}
+
+	if (lives == 0)
+	{
+		SaveFileText("HighScore", const_cast<char*>(to_string(highScore).c_str()));
 	}
 }
 
@@ -162,6 +172,11 @@ void Player::Fire()
 void Player::ScoreUpdate(int addToScore)
 {
 	score += addToScore;
+
+	if (score > highScore)
+	{
+		highScore = score;
+	}
 
 	if (score > nextNewLifeScore)
 	{

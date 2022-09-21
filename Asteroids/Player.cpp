@@ -26,7 +26,9 @@ Player::Player(float windowWidth, float windowHeight) : Entity()
 		lines.push_back(new Line());
 	}
 
-	//LoadText highscore.
+	highScore = atoi(LoadFileText("HighScore")); //LoadText high score.
+
+
 }
 
 void Player::Hit()

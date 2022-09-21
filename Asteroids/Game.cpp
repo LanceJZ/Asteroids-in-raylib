@@ -195,13 +195,19 @@ void Game::Update(float deltaTime)
 	{
 		if (player->exploding)
 		{
+			bool done = true;
+
 			for (auto line : player->lines)
 			{
 				if (line->Enabled)
 				{
+					done = false;
 					return;
 				}
+			}
 
+			if (done)
+			{
 				player->exploding = false;
 			}
 		}

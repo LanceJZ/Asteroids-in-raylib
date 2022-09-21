@@ -40,7 +40,7 @@ void Line::Spawn(Vector3 pos)
 	endPos = { GetRandomFloat(-size, size), GetRandomFloat(-size, size) , 0 };
 
 	Enabled = true;
-	timer->Reset(GetRandomFloat(0.75f, 1.0f));
+	timer->Reset(GetRandomFloat(0.5f, 2.666f));
 }
 
 void Line::Clear()

@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 
-struct Score
+struct ScoreList
 {
 	string Name;
 	int Score;
@@ -12,14 +12,15 @@ struct Score
 class HighScore
 {
 public:
-	Score scores[10];
-	int highScore;
+	ScoreList scores[10];
+	int highScore = { 0 };
 	virtual void Input();
 	virtual void Update(float deltaTime);
 	virtual void Draw();
 
 	void Load();
 	void Save();
+	void MakeNewScoreList();
 	void ConvertScoreListToString();
 	void ConvertRawScoreListToArray();
 

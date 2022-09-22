@@ -40,7 +40,12 @@ bool Game::Initialise()
 	player = new Player(playScreenW, playScreenH);
 	theUFOControl = new UFOControl(playScreenW, playScreenH, player);
 	rockControl = new RockControl(playScreenW, playScreenH, player, theUFOControl->ufo);
+	highscores = new HighScore();
+
 	playerClear.Enabled = false;
+
+	highscores->Load();
+	player->highScore = highscores->highScore;
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -216,10 +221,14 @@ void Game::Update(float deltaTime)
 		rockControl->Update(deltaTime);
 		CheckPlayerClear();
 		PlayerShipDisplay();
-	}
-	else
-	{
-		PlayerShipDisplay();
+
+		if (player->lives == 0)
+		{
+			highscores->highScore = player->highScore;
+			highscores->Save();
+
+			PlayerShipDisplay();
+		}
 	}
 
 	testVectorModel->Update(deltaTime);

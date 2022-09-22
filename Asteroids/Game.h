@@ -4,6 +4,7 @@
 #include "RockControl.h"
 #include "UFOControl.h"
 #include "VectorModel.h"
+#include "HighScore.h"
 
 enum GameState
 {
@@ -11,7 +12,7 @@ enum GameState
 	Over,
 	InPlay,
 	Pause,
-	HighScore,
+	HighScores,
 	MainMenu
 };
 
@@ -43,6 +44,7 @@ private:
 	Player* player;
 	RockControl* rockControl;
 	UFOControl* theUFOControl;
+	HighScore* highscores;
 	vector<Entity> playerShips;
 
 	VectorModel* testVectorModel;

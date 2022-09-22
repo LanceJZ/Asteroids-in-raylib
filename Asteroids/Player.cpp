@@ -26,7 +26,7 @@ Player::Player(float windowWidth, float windowHeight) : Entity()
 		lines.push_back(new Line());
 	}
 
-	highScore = atoi(LoadFileText("HighScore")); //LoadText high score.
+	//highScore = atoi(LoadFileText("HighScore")); //LoadText high score.
 
 
 }
@@ -51,7 +51,7 @@ void Player::Hit()
 
 	if (lives == 0)
 	{
-		SaveFileText("HighScore", const_cast<char*>(to_string(highScore).c_str()));
+		//SaveFileText("HighScore", const_cast<char*>(to_string(highScore).c_str()));
 	}
 }
 

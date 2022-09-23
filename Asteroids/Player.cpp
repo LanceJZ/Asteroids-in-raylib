@@ -156,7 +156,6 @@ void Player::ThrustOff(float deltaTime)
 
 void Player::Fire()
 {
-	PlaySound(SoundMain);
 	float speed = 25.5f;
 	Vector3 velocity = {((float)cos(RotationZ) * speed), ((float)sin(RotationZ) * speed), 0};
 
@@ -164,11 +163,11 @@ void Player::Fire()
 	{
 		if (!shot->Enabled)
 		{
+			PlaySound(SoundMain);
 			shot->Spawn(Position, velocity, 1.5f);
 			break;
 		}
 	}
-
 }
 
 void Player::ScoreUpdate(int addToScore)
@@ -194,6 +193,7 @@ void Player::NewGame()
 	nextNewLifeScore = 10000;
 	score = 0;
 	wave = 0;
+	gameOver = false;
 	Reset();
 }
 

@@ -14,6 +14,7 @@ public:
 	int lives { 0 };
 	bool newLife = false;
 	bool exploding = false;
+	bool gameOver = true;
 
 	Shot* shots[4];
 	vector<Line*> lines;

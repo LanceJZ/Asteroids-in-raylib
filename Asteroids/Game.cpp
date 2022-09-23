@@ -196,7 +196,7 @@ void Game::Update(float deltaTime)
 			PlayerShipDisplay();
 		}
 	}
-	else if (player->lives > 0)
+	else
 	{
 		if (player->exploding)
 		{
@@ -217,17 +217,19 @@ void Game::Update(float deltaTime)
 			}
 		}
 
-		playerClear.Enabled = true;
-		rockControl->Update(deltaTime);
-		CheckPlayerClear();
-		PlayerShipDisplay();
-
-		if (player->lives == 0)
+		if (player->lives > 0)
 		{
-			highscores->highScore = player->highScore;
-			highscores->Save();
-
+			playerClear.Enabled = true;
+			rockControl->Update(deltaTime);
+			CheckPlayerClear();
 			PlayerShipDisplay();
+		}
+		else if (!player->gameOver)
+		{
+			PlayerShipDisplay();
+			highscores->highScore = player->highScore;
+			highscores->CheckForNewHighScore(player->score);
+			player->gameOver = true;
 		}
 	}
 

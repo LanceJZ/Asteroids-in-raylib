@@ -23,11 +23,14 @@ public:
 	void MakeNewScoreList();
 	void ConvertScoreListToString();
 	void ConvertRawScoreListToArray();
+	void CheckForNewHighScore(int score);
 
 	HighScore();
 	virtual ~HighScore();
 
 private:
 	string highScoreListRaw = "";
+	bool newHighScore = false;
+	int newHighScoreRank = 0;
 };
 

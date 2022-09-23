@@ -28,6 +28,6 @@ public:
 	virtual ~HighScore();
 
 private:
-	string highScoreListRaw;
+	string highScoreListRaw = "";
 };
 

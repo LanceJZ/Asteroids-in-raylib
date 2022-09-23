@@ -17,10 +17,10 @@ void HighScore::Draw()
 
 void HighScore::Load()
 {
-	if (FileExists("HighScoreList")) //Figure out how to convert char* to string.
+	if (FileExists("HighScoreList"))
 	{
-		//char* sl = LoadFileText("HighScoresList");
-		//highScoreListRaw = sl;
+		highScoreListRaw = LoadFileText("HighScoreList");
+		ConvertRawScoreListToArray();
 	}
 	else
 	{
@@ -70,7 +70,38 @@ void HighScore::ConvertScoreListToString()
 
 void HighScore::ConvertRawScoreListToArray()
 {
+	int listNumber = 0;
+	bool isLetter = true;
 
+	for (auto character : highScoreListRaw)
+	{
+		if (isLetter)
+		{
+			if (character !=  58) //58 for comma.
+			{
+				scores[listNumber].Name.append(1, character);
+			}
+			else
+			{
+				isLetter = false;
+			}
+		}
+		else
+		{
+			string number = "";
+
+			if (character != 44) //Need number for comma. Is it 44?
+			{
+				number += to_string(character);
+			}
+			else
+			{
+				scores[listNumber].Score = stoi(number);
+				isLetter = true;
+				listNumber++;
+			}
+		}
+	}
 }
 
 HighScore::HighScore()

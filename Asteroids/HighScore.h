@@ -1,5 +1,6 @@
 #pragma once
 #include "raylib.h"
+#include "Timer.h"
 #include <string>
 using namespace std;
 
@@ -12,8 +13,9 @@ struct ScoreList
 class HighScore
 {
 public:
-	ScoreList scores[10];
+	bool gameOver = false;
 	int highScore = { 0 };
+	ScoreList scores[10];
 	virtual void Input();
 	virtual void Update(float deltaTime);
 	virtual void Draw();
@@ -24,13 +26,17 @@ public:
 	void ConvertScoreListToString();
 	void ConvertRawScoreListToArray();
 	void CheckForNewHighScore(int score);
+	void NewHighScoreEntry();
 
 	HighScore();
 	virtual ~HighScore();
 
 private:
-	string highScoreListRaw = "";
 	bool newHighScore = false;
 	int newHighScoreRank = 0;
+	int highScoreSelectedLetter = 0;
+	string highScoreEntryText = "";
+	string highScoreListRaw = "";
+	Timer* timer;
 };
 

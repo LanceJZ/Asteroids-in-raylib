@@ -231,6 +231,10 @@ void Game::Update(float deltaTime)
 			highscores->CheckForNewHighScore(player->score);
 			player->gameOver = true;
 		}
+		else
+		{
+			highscores->Update(deltaTime);
+		}
 	}
 
 	testVectorModel->Update(deltaTime);
@@ -276,7 +280,8 @@ void Game::Draw()
 		{ 200,100,250,250 });
 
 	EndMode3D();
-	//2D drawing/fonts go here.
+	//2D drawing, fonts go here.
+	highscores->Draw();
 	DrawText(const_cast<char*>(to_string(player->score).c_str()), 200, 5, 45, {255, 255, 255, 255});
 	DrawText(const_cast<char*>(to_string(player->highScore).c_str()), GetScreenWidth() / 2, 4, 20, {255, 255, 255, 255});
 	EndDrawing();

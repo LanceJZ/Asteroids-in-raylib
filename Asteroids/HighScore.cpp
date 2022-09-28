@@ -7,12 +7,18 @@ void HighScore::Input()
 
 void HighScore::Update(float deltaTime)
 {
-
+	if (newHighScore)
+	{
+		NewHighScoreEntry();
+	}
 }
 
 void HighScore::Draw()
 {
-
+	if (newHighScore)
+	{
+		DrawText(const_cast<char*>(highScoreEntryText.c_str()), GetScreenWidth() / 2, 200, 60, WHITE);
+	}
 }
 
 void HighScore::Load()
@@ -27,20 +33,10 @@ void HighScore::Load()
 	{
 		MakeNewScoreList();
 	}
-
-	if (FileExists("HighScore"))
-	{
-		//highScore = atoi(LoadFileText("HighScore")); //Load Text high score as int.
-	}
 }
 
 void HighScore::Save()
 {
-	if (highScore > 0)
-	{
-		//SaveFileText("HighScore", const_cast<char*>(to_string(highScore).c_str()));
-	}
-
 	SaveFileText("HighScoreList", const_cast<char*>(highScoreListRaw.c_str()));
 }
 
@@ -128,15 +124,62 @@ void HighScore::CheckForNewHighScore(int score)
 
 			scores[rank].Name = "XXX";
 			scores[rank].Score = score;
+			highScoreEntryText = "___";
 			newHighScoreRank = rank;
 			newHighScore = true;
+
 			break;
+		}
+	}
+
+	while (IsKeyDown(KEY_DOWN || KEY_LEFT || KEY_RIGHT))
+	{
+		int i = 0;
+	}
+}
+
+void HighScore::NewHighScoreEntry()
+{
+	if (IsKeyPressed(KEY_DOWN))
+	{
+		highScoreSelectedLetter++;
+
+		if (highScoreSelectedLetter > 2)
+		{
+			scores[newHighScoreRank].Name = highScoreEntryText;
+			newHighScore = false;
+			ConvertScoreListToString();
+			Save();
+			return;
+		}
+		else
+		{
+			highScoreEntryText[highScoreSelectedLetter] = (char)65;
+		}
+	}
+	else if (IsKeyPressed(KEY_LEFT))
+	{
+		highScoreEntryText[highScoreSelectedLetter]--;
+
+		if (highScoreEntryText[highScoreSelectedLetter] < (char)65)
+		{
+			highScoreEntryText[highScoreSelectedLetter] = (char)90;
+		}
+	}
+	else if (IsKeyPressed(KEY_RIGHT))
+	{
+		highScoreEntryText[highScoreSelectedLetter]++;
+
+		if (highScoreEntryText[highScoreSelectedLetter] > (char)90)
+		{
+			highScoreEntryText[highScoreSelectedLetter] = (char)65;
 		}
 	}
 }
 
 HighScore::HighScore()
 {
+	timer = new Timer();
 }
 
 HighScore::~HighScore()

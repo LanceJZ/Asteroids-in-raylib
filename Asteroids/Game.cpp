@@ -163,6 +163,7 @@ void Game::ProcessInput()
 		rockControl->NewGame();
 		theUFOControl->NewGame();
 		PlayerShipDisplay();
+		highscores->gameOver = false;
 	}
 }
 
@@ -230,6 +231,7 @@ void Game::Update(float deltaTime)
 			highscores->highScore = player->highScore;
 			highscores->CheckForNewHighScore(player->score);
 			player->gameOver = true;
+			highscores->gameOver = true;
 		}
 		else
 		{

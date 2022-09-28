@@ -7,7 +7,7 @@ void HighScore::Input()
 
 void HighScore::Update(float deltaTime)
 {
-	if (newHighScore)
+	if (newHighScore && gameOver)
 	{
 		NewHighScoreEntry();
 	}
@@ -15,9 +15,14 @@ void HighScore::Update(float deltaTime)
 
 void HighScore::Draw()
 {
-	if (newHighScore)
+	if (newHighScore && gameOver)
 	{
 		DrawText(const_cast<char*>(highScoreEntryText.c_str()), GetScreenWidth() / 2, 200, 60, WHITE);
+	}
+
+	if (gameOver && !newHighScore)
+	{
+		DisplayHighScoreList();
 	}
 }
 
@@ -184,4 +189,24 @@ HighScore::HighScore()
 
 HighScore::~HighScore()
 {
+}
+
+void HighScore::DisplayHighScoreList()
+{
+	string name = "";
+	string score = "";
+	int space = 30;
+	int font = 30;
+	int start = 300;
+
+	DrawText("High Score List", GetScreenWidth() / 2 - 15, start - 50, font, WHITE);
+
+	for (int i = 0; i < 10; i++)
+	{
+		name = scores[i].Name;
+		score = to_string(scores[i].Score);
+
+		DrawText(const_cast<char*>(name.c_str()), GetScreenWidth() / 2 - (space + 10), start + (space * i), font, WHITE);
+		DrawText(const_cast<char*>(score.c_str()), GetScreenWidth() / 2 + (space + 10), start + (space * i), font, WHITE);
+	}
 }

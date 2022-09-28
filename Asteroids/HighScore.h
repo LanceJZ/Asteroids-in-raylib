@@ -13,7 +13,7 @@ struct ScoreList
 class HighScore
 {
 public:
-	bool gameOver = false;
+	bool gameOver = true;
 	int highScore = { 0 };
 	ScoreList scores[10];
 	virtual void Input();
@@ -38,5 +38,7 @@ private:
 	string highScoreEntryText = "";
 	string highScoreListRaw = "";
 	Timer* timer;
+
+	void DisplayHighScoreList();
 };
 

@@ -17,7 +17,18 @@ void HighScore::Draw()
 {
 	if (newHighScore && gameOver)
 	{
-		DrawText(const_cast<char*>(highScoreEntryText.c_str()), GetScreenWidth() / 2, 200, 60, WHITE);
+		DrawText("Left/Right",
+			(GetScreenWidth() / 2) - 80, (GetScreenHeight() / 2) - 250, 40, WHITE);
+		DrawText("arrow keys",
+			(GetScreenWidth() / 2) - 90, (GetScreenHeight() / 2) - 200, 40, WHITE);
+		DrawText("to change letter,",
+			(GetScreenWidth() / 2) - 130, (GetScreenHeight() / 2) - 150, 40, WHITE);
+		DrawText("down arrow key",
+			(GetScreenWidth() / 2) - 120, (GetScreenHeight() / 2) - 100, 40, WHITE);
+		DrawText("to chose letter.",
+			(GetScreenWidth() / 2) - 120, (GetScreenHeight() / 2) - 50, 40, WHITE);
+		DrawText(const_cast<char*>(highScoreEntryText.c_str()), (GetScreenWidth() / 2) - 30,
+			(GetScreenHeight() / 2) + 130, 60, WHITE);
 	}
 
 	if (gameOver && !newHighScore)
@@ -197,16 +208,21 @@ void HighScore::DisplayHighScoreList()
 	string score = "";
 	int space = 30;
 	int font = 30;
-	int start = 300;
+	int start = 350;
+	int center = GetScreenWidth() / 2;
 
-	DrawText("High Score List", GetScreenWidth() / 2 - 15, start - 50, font, WHITE);
+	DrawText("N to start new game.",
+		center - 180, (GetScreenHeight() / 2) + 250, 40, WHITE);
+
+
+	DrawText("High Scores", center - space * 2.25f, start - 50, font, WHITE);
 
 	for (int i = 0; i < 10; i++)
 	{
 		name = scores[i].Name;
 		score = to_string(scores[i].Score);
 
-		DrawText(const_cast<char*>(name.c_str()), GetScreenWidth() / 2 - (space + 10), start + (space * i), font, WHITE);
-		DrawText(const_cast<char*>(score.c_str()), GetScreenWidth() / 2 + (space + 10), start + (space * i), font, WHITE);
+		DrawText(const_cast<char*>(name.c_str()), center - (space + 10), start + (space * i), font, WHITE);
+		DrawText(const_cast<char*>(score.c_str()), center + (space + 10), start + (space * i), font, WHITE);
 	}
 }

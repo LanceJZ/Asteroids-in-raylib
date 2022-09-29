@@ -284,8 +284,9 @@ void Game::Draw()
 	EndMode3D();
 	//2D drawing, fonts go here.
 	highscores->Draw();
-	DrawText(const_cast<char*>(to_string(player->score).c_str()), 200, 5, 45, {255, 255, 255, 255});
-	DrawText(const_cast<char*>(to_string(player->highScore).c_str()), GetScreenWidth() / 2, 4, 20, {255, 255, 255, 255});
+	DrawText(const_cast<char*>(to_string(player->score).c_str()), 200, 5, 45, WHITE);
+	DrawText(const_cast<char*>(to_string(player->highScore).c_str()), GetScreenWidth() / 2, 4, 20, WHITE);
+	DrawText("(C) 1979 ATARI INC", (GetScreenWidth() / 2) - 15, GetScreenHeight() - 12, 8, WHITE);
 	EndDrawing();
 }
 
@@ -321,6 +322,16 @@ void Game::CheckPlayerClear()
 	for (auto rock : rockControl->rocks)
 	{
 		if (playerClear.CirclesIntersect(rock))
+		{
+			clear = false;
+		}
+
+		if (playerClear.CirclesIntersect(theUFOControl->ufo))
+		{
+			clear = false;
+		}
+
+		if (playerClear.CirclesIntersect(theUFOControl->ufo->shot))
 		{
 			clear = false;
 		}

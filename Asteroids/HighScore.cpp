@@ -11,29 +11,47 @@ void HighScore::Update(float deltaTime)
 	{
 		NewHighScoreEntry();
 	}
+
+	highScoretimer->Update(deltaTime);
 }
 
 void HighScore::Draw()
 {
-	if (newHighScore && gameOver)
+	if (gameOver)
 	{
-		DrawText("Left/Right",
-			(GetScreenWidth() / 2) - 80, (GetScreenHeight() / 2) - 250, 40, WHITE);
-		DrawText("arrow keys",
-			(GetScreenWidth() / 2) - 90, (GetScreenHeight() / 2) - 200, 40, WHITE);
-		DrawText("to change letter,",
-			(GetScreenWidth() / 2) - 130, (GetScreenHeight() / 2) - 150, 40, WHITE);
-		DrawText("down arrow key",
-			(GetScreenWidth() / 2) - 120, (GetScreenHeight() / 2) - 100, 40, WHITE);
-		DrawText("to chose letter.",
-			(GetScreenWidth() / 2) - 120, (GetScreenHeight() / 2) - 50, 40, WHITE);
-		DrawText(const_cast<char*>(highScoreEntryText.c_str()), (GetScreenWidth() / 2) - 30,
-			(GetScreenHeight() / 2) + 130, 60, WHITE);
-	}
+		if (newHighScore)
+		{
+			DrawText("Left/Right",
+				(GetScreenWidth() / 2) - 80, (GetScreenHeight() / 2) - 250, 40, WHITE);
+			DrawText("arrow keys",
+				(GetScreenWidth() / 2) - 90, (GetScreenHeight() / 2) - 200, 40, WHITE);
+			DrawText("to change letter,",
+				(GetScreenWidth() / 2) - 130, (GetScreenHeight() / 2) - 150, 40, WHITE);
+			DrawText("down arrow key",
+				(GetScreenWidth() / 2) - 120, (GetScreenHeight() / 2) - 100, 40, WHITE);
+			DrawText("to chose letter.",
+				(GetScreenWidth() / 2) - 120, (GetScreenHeight() / 2) - 50, 40, WHITE);
+			DrawText(const_cast<char*>(highScoreEntryText.c_str()), (GetScreenWidth() / 2) - 30,
+				(GetScreenHeight() / 2) + 130, 60, WHITE);
+		}
+		else
+		{
+			if (showHighScores)
+			{
+				DisplayHighScoreList();
+			}
+			else
+			{
+				DrawText("GAME OVER", GetScreenWidth() / 2 - 160, GetScreenHeight() / 2 - 60, 60, WHITE);
+				DrawText("ONE COIN ONE PLAY", GetScreenWidth() / 2 - 290, GetScreenHeight() / 2 + 60, 60, WHITE);
+			}
+		}
 
-	if (gameOver && !newHighScore)
-	{
-		DisplayHighScoreList();
+		if (highScoretimer->Elapsed())
+		{
+			showHighScores = !showHighScores;
+			highScoretimer->Reset();
+		}
 	}
 }
 
@@ -195,7 +213,8 @@ void HighScore::NewHighScoreEntry()
 
 HighScore::HighScore()
 {
-	timer = new Timer();
+	highScoretimer = new Timer();
+	highScoretimer->Set(7);
 }
 
 HighScore::~HighScore()

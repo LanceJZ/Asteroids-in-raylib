@@ -268,6 +268,7 @@ void Game::Draw()
 		ship.Draw();
 	}
 
+#ifdef DEBUG
 	DrawLine3D({ -player->WindowWidth, player->WindowHeight,0 },
 		{ player->WindowWidth, player->WindowHeight, 0 },
 		{ 200,100,250,250 });
@@ -280,6 +281,7 @@ void Game::Draw()
 	DrawLine3D({ player->WindowWidth, -player->WindowHeight,0 },
 		{ player->WindowWidth, player->WindowHeight, 0 },
 		{ 200,100,250,250 });
+#endif
 
 	EndMode3D();
 	//2D drawing, fonts go here.

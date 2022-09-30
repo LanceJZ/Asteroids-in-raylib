@@ -33,11 +33,12 @@ public:
 
 private:
 	bool newHighScore = false;
+	bool showHighScores = false;
 	int newHighScoreRank = 0;
 	int highScoreSelectedLetter = 0;
 	string highScoreEntryText = "";
 	string highScoreListRaw = "";
-	Timer* timer;
+	Timer* highScoretimer;
 
 	void DisplayHighScoreList();
 };

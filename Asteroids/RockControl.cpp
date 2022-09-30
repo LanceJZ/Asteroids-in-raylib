@@ -17,7 +17,7 @@ void RockControl::NewWave(void)
 	player->wave++;
 	SpawnNewWave(rockCount);
 
-	if (rockCount < 12)
+	if (rockCount < 12 && !player->gameOver) //TODO: Check at home, let run while in Game Over with this checked.
 		rockCount++;
 }
 

@@ -100,7 +100,7 @@ void Player::Input()
 		thrustOff = true;
 	}
 
-	if (IsKeyPressed(KEY_RIGHT_CONTROL) || IsKeyPressed(KEY_LEFT_CONTROL))
+	if (IsKeyPressed(KEY_RIGHT_CONTROL) || IsKeyPressed(KEY_LEFT_CONTROL) || IsKeyPressed(KEY_SPACE))
 	{
 		Fire();
 	}

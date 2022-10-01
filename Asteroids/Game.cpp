@@ -23,6 +23,9 @@ bool Game::Initialise()
 	InitAudioDevice();
 	SetTargetFPS(60);
 
+	Image icon = LoadImage("icon.png");
+	ImageFormat(&icon, PIXELFORMAT_UNCOMPRESSED_R8G8B8A8);
+	SetWindowIcon(icon);
 	// Define the camera to look into our 3D world
 	camera.position = { 0.0f, 0.0f, -50.0f };  // Camera position
 	camera.target = { 0.0f, 0.0f, 0.0f };      // Camera looking at point

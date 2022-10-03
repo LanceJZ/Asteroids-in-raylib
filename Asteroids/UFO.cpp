@@ -9,11 +9,12 @@ void UFO::LoadModel(Model model, Model shotmodel)
 	BeenHit = false;
 }
 
-void UFO::LoadSound(Sound exp, Sound big, Sound small)
+void UFO::LoadSound(Sound exp, Sound big, Sound small, Sound fire)
 {
 	SoundMain = exp;
 	SoundSecond = big;
 	SoundThird = small;
+	SoundForth = fire;
 
 	SetSoundVolume(SoundMain, 0.5f);
 	SetSoundVolume(SoundSecond, 0.5f);
@@ -48,22 +49,25 @@ void UFO::Update(float deltaTime)
 			ResetFireTimer();
 		}
 
-		switch (size)
+		if (!player->gameOver)
 		{
-		case UFO::Small:
-			if (!IsSoundPlaying(SoundThird))
+			switch (size)
 			{
-				PlaySound(SoundThird);
+			case UFO::Small:
+				if (!IsSoundPlaying(SoundThird))
+				{
+					PlaySound(SoundThird);
+				}
+				break;
+			case UFO::Large:
+				if (!IsSoundPlaying(SoundSecond))
+				{
+					PlaySound(SoundSecond);
+				}
+				break;
+			default:
+				break;
 			}
-			break;
-		case UFO::Large:
-			if (!IsSoundPlaying(SoundSecond))
-			{
-				PlaySound(SoundSecond);
-			}
-			break;
-		default:
-			break;
 		}
 	}
 

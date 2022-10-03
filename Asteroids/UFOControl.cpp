@@ -22,9 +22,9 @@ void UFOControl::Update(float deltaTime)
 	}
 }
 
-void UFOControl::LoadSound(Sound exp, Sound big, Sound small)
+void UFOControl::LoadSound(Sound exp, Sound big, Sound small, Sound fire)
 {
-	ufo->LoadSound(exp, big, small);
+	ufo->LoadSound(exp, big, small, fire);
 }
 
 void UFOControl::Draw()

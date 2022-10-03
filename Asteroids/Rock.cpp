@@ -11,7 +11,11 @@ void Rock::Update(float deltaTime)
 	{
 		BeenHit = true;
 		Enabled = false;
-		PlaySound(SoundMain);
+
+		if (!player->gameOver)
+		{
+			PlaySound(SoundMain);
+		}
 		//exploder->Spawn(Position, 15, Radius);
 	}
 }

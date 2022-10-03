@@ -91,13 +91,14 @@ bool Game::Load()
 	Sound ufoExpS = LoadSound("sounds/UFOExplosion.wav");
 	Sound ufoBigS = LoadSound("sounds/UFOLarge.wav");
 	Sound ufoSmallS = LoadSound("sounds/UFOSmall.wav");
+	Sound ufoFire = LoadSound("sounds/UFOFire.wav");
 
 	player->LoadModel(playerShipModel, shot, playerFlame);
 	player->LoadSound(fireS, thrustS, playerExpS);
 	rockControl->LoadModel(rockOne, rockTwo, rockThree, rockFour);
 	rockControl->LoadSound(rockExpS);
 	theUFOControl->LoadModel(modelUFO, shot);
-	theUFOControl->LoadSound(ufoExpS, ufoBigS, ufoSmallS);
+	theUFOControl->LoadSound(ufoExpS, ufoBigS, ufoSmallS, ufoFire);
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -268,7 +269,7 @@ void Game::Draw()
 		ship.Draw();
 	}
 
-#ifdef DEBUG
+#ifdef _DEBUG
 	DrawLine3D({ -player->WindowWidth, player->WindowHeight,0 },
 		{ player->WindowWidth, player->WindowHeight, 0 },
 		{ 200,100,250,250 });

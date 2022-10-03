@@ -124,12 +124,13 @@
       <AdditionalIncludeDirectories>$(SolutionDir)\..\..\raylib-master\src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)\..\..\raylib-master\projects\VS2022\build\raylib\bin\x64\Release.DLL</AdditionalLibraryDirectories>
       <AdditionalDependencies>raylib.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/ENTRY:"mainCRTStartup" %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -176,6 +177,7 @@
     </ClInclude>
     <ClInclude Include="Player.h" />
     <ClInclude Include="PositionedObject.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Rock.h" />
     <ClInclude Include="RockControl.h" />
     <ClInclude Include="Shot.h" />
@@ -186,6 +188,13 @@
       <SubType>
       </SubType>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Icon.bmp" />
+    <Image Include="..\Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Asteroids.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

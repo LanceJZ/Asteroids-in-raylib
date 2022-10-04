@@ -33,8 +33,8 @@ Player::Player(float windowWidth, float windowHeight) : Entity()
 
 void Player::Hit()
 {
-	PlaySound(SoundThird);
-	StopSound(SoundSecond);
+	PlaySound(Sound03);
+	StopSound(Sound02);
 
 	BeenHit = true;
 	Enabled = false;
@@ -68,13 +68,13 @@ void Player::LoadModel(Model model, Model shotmodel, Model flamemodel)
 
 void Player::LoadSound(Sound fireS, Sound thrustS, Sound exp)
 {
-	SoundMain = fireS;
-	SoundSecond = thrustS;
-	SoundThird = exp;
+	Sound01 = fireS;
+	Sound02 = thrustS;
+	Sound03 = exp;
 
-	SetSoundVolume(SoundMain, 0.25f);
-	SetSoundVolume(SoundSecond, 0.5f);
-	SetSoundVolume(SoundThird, 0.5f);
+	SetSoundVolume(Sound01, 0.25f);
+	SetSoundVolume(Sound02, 0.5f);
+	SetSoundVolume(Sound03, 0.5f);
 }
 
 void Player::Input()
@@ -136,9 +136,9 @@ void Player::Draw()
 
 void Player::ThrustOn()
 {
-	if (!IsSoundPlaying(SoundSecond))
+	if (!IsSoundPlaying(Sound02))
 	{
-		PlaySound(SoundSecond);
+		PlaySound(Sound02);
 	}
 
 	Acceleration.x = (cos(RotationZ) * 0.1f);
@@ -163,7 +163,7 @@ void Player::Fire()
 	{
 		if (!shot->Enabled)
 		{
-			PlaySound(SoundMain);
+			PlaySound(Sound01);
 			shot->Spawn(Position, velocity, 1.5f);
 			break;
 		}

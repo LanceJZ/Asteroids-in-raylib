@@ -11,14 +11,15 @@ void UFO::LoadModel(Model model, Model shotmodel)
 
 void UFO::LoadSound(Sound exp, Sound big, Sound small, Sound fire)
 {
-	SoundMain = exp;
-	SoundSecond = big;
-	SoundThird = small;
-	SoundForth = fire;
+	Sound01 = exp;
+	Sound02 = big;
+	Sound03 = small;
+	Sound04 = fire;
 
-	SetSoundVolume(SoundMain, 0.5f);
-	SetSoundVolume(SoundSecond, 0.5f);
-	SetSoundVolume(SoundThird, 0.5f);
+	SetSoundVolume(Sound01, 0.5f);
+	SetSoundVolume(Sound02, 0.5f);
+	SetSoundVolume(Sound03, 0.5f);
+	SetSoundVolume(Sound04, 0.5f);
 }
 
 void UFO::Update(float deltaTime)
@@ -54,15 +55,15 @@ void UFO::Update(float deltaTime)
 			switch (size)
 			{
 			case UFO::Small:
-				if (!IsSoundPlaying(SoundThird))
+				if (!IsSoundPlaying(Sound03))
 				{
-					PlaySound(SoundThird);
+					PlaySound(Sound03);
 				}
 				break;
 			case UFO::Large:
-				if (!IsSoundPlaying(SoundSecond))
+				if (!IsSoundPlaying(Sound02))
 				{
-					PlaySound(SoundSecond);
+					PlaySound(Sound02);
 				}
 				break;
 			default:
@@ -76,9 +77,13 @@ void UFO::Update(float deltaTime)
 		Enabled = false;
 		BeenHit = true;
 		exploder->Spawn(Position, 15, radius / 2.0f);
-		PlaySound(SoundMain);
-		StopSound(SoundSecond);
-		StopSound(SoundThird);
+
+		if (!player->gameOver)
+		{
+			PlaySound(Sound01);
+			StopSound(Sound02);
+			StopSound(Sound03);
+		}
 	}
 }
 
@@ -168,10 +173,13 @@ void UFO::FireShot()
 
 	if (!shot->Enabled)
 	{
-		Vector3 offset = Vector3Add(VelocityFromAngleZ(ang, Radius), Position);
+		if (!player->gameOver)
+		{
+			PlaySound(Sound04);
+		}
 
-		shot->Spawn(offset,	VelocityFromAngleZ(ang, shotSpeed), 1.75f);
-	}
+		Vector3 offset = Vector3Add(VelocityFromAngleZ(ang, Radius), Position);
+		shot->Spawn(offset,	VelocityFromAngleZ(ang, shotSpeed), 1.75f);	}
 }
 
 void UFO::GiveScore()

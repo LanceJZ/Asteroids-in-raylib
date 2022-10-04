@@ -1,8 +1,6 @@
 #include "Game.h"
 #include "raymath.h"
-#include <vector>
 #include <string>
-using namespace std;
 
 Game::Game()
 {
@@ -52,7 +50,7 @@ bool Game::Initialise()
 
 	for (int i = 0; i < 4; i++)
 	{
-		playerShips.push_back(Entity());
+		playerShips->push_back(Entity());
 	}
 
 	testVectorModel = new VectorModel();
@@ -105,9 +103,10 @@ bool Game::Load()
 
 	for (int i = 0; i < 4; i++)
 	{
-		playerShips[i].LoadModel(playerShipModel);
-		playerShips[i].Scale = player->Scale;
-		playerShips[i].Enabled = false;
+		playerShips[i] = new Entity();
+		playerShips[i]->LoadModel(playerShipModel);
+		playerShips[i]->Scale = player->Scale;
+		playerShips[i]->Enabled = false;
 	}
 
 	return 0;
@@ -269,7 +268,7 @@ void Game::Draw()
 
 	for (auto ship : playerShips)
 	{
-		ship.Draw();
+		ship->Draw();
 	}
 
 #ifdef _DEBUG
@@ -303,21 +302,21 @@ void Game::PlayerShipDisplay()
 
 	if (player->lives > playerShips.size())
 	{
-		playerShips.push_back(Entity());
+		playerShips->push_back(Entity());
 	}
 
 	for (int i = 0; i < playerShips.size(); i++)
 	{
-		playerShips[i].Y(line);
-		playerShips[i].X(column);
-		playerShips[i].TheModel.transform = MatrixRotateZ(PI / 2);
-		playerShips[i].Enabled = false;
+		playerShips[i]->Y(line);
+		playerShips[i]->X(column);
+		playerShips[i]->TheModel.transform = MatrixRotateZ(PI / 2);
+		playerShips[i]->Enabled = false;
 		column += 1.125f;
 	}
 
 	for (int i = 0; i < player->lives; i++)
 	{
-		playerShips[i].Enabled = true;
+		playerShips[i]->Enabled = true;
 	}
 }
 

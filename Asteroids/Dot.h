@@ -2,9 +2,8 @@
 #include "raylib.h"
 #include "Entity.h"
 #include "Timer.h"
-#include "Common.h"
 
-class Dot : public Entity, Common
+class Dot : public Entity
 {
 public:
 	virtual void Update(float deltaTime);

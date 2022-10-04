@@ -128,7 +128,7 @@ void RockControl::SpawnRocks(Vector3 pos, int count, Rock::RockSize size)
 	for (int rock = 0; rock < count; rock++)
 	{
 		bool spawnnewrock = true;
-		int rockN = rocks.size();
+		int rockN = (int)rocks.size();
 		float maxSpeed = 10.666f;
 
 		for (int rockcheck = 0; rockcheck < rockN; rockcheck++)

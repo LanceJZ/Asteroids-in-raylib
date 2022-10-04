@@ -26,7 +26,7 @@ void Exploder::Spawn(Vector3 position, int count, float radius)
 	for (int i = 0; i < count; i++)
 	{
 		bool spawnDot = true;
-		int dot = dots.size();
+		int dot = (int)dots.size();
 
 		for (int c = 0; c < dot; c++)
 		{

@@ -4,9 +4,8 @@
 #include "Shot.h"
 #include "Exploder.h"
 #include "Timer.h"
-#include "Common.h"
 
-class UFO : public Entity, Common
+class UFO : public Entity
 {
 public:
 	enum Size

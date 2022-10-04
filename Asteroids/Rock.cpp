@@ -14,7 +14,7 @@ void Rock::Update(float deltaTime)
 
 		if (!player->gameOver)
 		{
-			PlaySound(SoundMain);
+			PlaySound(Sound01);
 		}
 		//exploder->Spawn(Position, 15, Radius);
 	}
@@ -70,8 +70,8 @@ void Rock::LoadModel(Model model)
 
 void Rock::LoadSound(Sound exp)
 {
-	SoundMain = exp;
-	SetSoundVolume(SoundMain, 0.5f);
+	Sound01 = exp;
+	SetSoundVolume(Sound01, 0.5f);
 }
 
 Rock::Rock(float windowWidth, float windowHeight, Player* player, UFO* ufo)

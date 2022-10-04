@@ -79,7 +79,7 @@ bool Entity::CirclesIntersect(Entity* target)
 
 float Entity::AngleFromVectorZ(Vector3 target)
 {
-	return atan2(target.y - Y(), target.x - X());
+	return (float)atan2(target.y - Y(), target.x - X());
 }
 
 Vector3 Entity::VelocityFromAngleZ(float rotation, float magnitude)
@@ -90,7 +90,7 @@ Vector3 Entity::VelocityFromAngleZ(float rotation, float magnitude)
 
 Vector3 Entity::VelocityFromAngleZ(float magnitude)
 {
-	float ang = GetRandomValue(0, PI * 2);
+	float ang = GetRandomFloat(0, PI * 2);
 
 	return VelocityFromAngleZ(ang, magnitude);
 }

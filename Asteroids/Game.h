@@ -5,6 +5,8 @@
 #include "UFOControl.h"
 #include "VectorModel.h"
 #include "HighScore.h"
+#include <vector>
+using namespace std;
 
 enum GameState
 {
@@ -45,7 +47,7 @@ private:
 	RockControl* rockControl;
 	UFOControl* theUFOControl;
 	HighScore* highscores;
-	vector<Entity> playerShips;
+	vector<Entity*> playerShips;
 
 	VectorModel* testVectorModel;
 };

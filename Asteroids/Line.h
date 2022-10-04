@@ -1,10 +1,9 @@
 #pragma once
 #include "raylib.h"
 #include "Entity.h"
-#include "Common.h"
 #include "Timer.h"
 
-class Line : public Entity, Common
+class Line : public Entity
 {
 public:
 	Vector3 startPos = { 0 };

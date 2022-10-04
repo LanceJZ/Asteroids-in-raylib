@@ -1,8 +1,9 @@
 #pragma once
 #include "raylib.h"
 #include "PositionedObject.h"
+#include "Common.h"
 
-class Entity : public PositionedObject
+class Entity : public PositionedObject, public Common
 {
 public:
 	//using PositionedObject::MaxSpeed;
@@ -29,10 +30,10 @@ public:
 	virtual void Z(float z);
 
 	Model TheModel;
-	Sound SoundMain;
-	Sound SoundSecond;
-	Sound SoundThird;
-	Sound SoundForth;
+	Sound Sound01;
+	Sound Sound02;
+	Sound Sound03;
+	Sound Sound04;
 
 	virtual void LoadModel(Model model);
 	virtual void Update(float deltaTime);

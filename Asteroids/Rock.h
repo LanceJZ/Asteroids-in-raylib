@@ -1,11 +1,10 @@
 #pragma once
 #include "Entity.h"
-#include "Common.h"
 #include "Player.h"
 #include "UFO.h"
 #include "Exploder.h"
 
-class Rock : public Entity, Common
+class Rock : public Entity
 {
 public:
 	enum RockSize

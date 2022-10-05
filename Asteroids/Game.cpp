@@ -58,7 +58,7 @@ bool Game::Initialise()
 	return false;
 }
 
-bool Game::Load()
+bool Game::Load()//TODO: Add free player ship sound. Player shot stops moving when player is hit, before spawning. (Update stops)
 {
 	playerShipModel = LoadModel("models/playership.obj");
 	playerShipModel.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =

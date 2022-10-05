@@ -177,6 +177,7 @@ void Game::Update(float deltaTime)
 
 	rockControl->Update(deltaTime);
 	theUFOControl->Update(deltaTime);
+	player->Update(deltaTime);
 
 	for (auto line : player->lines)
 	{
@@ -186,7 +187,6 @@ void Game::Update(float deltaTime)
 
 	if (player->Enabled)
 	{
-		player->Update(deltaTime);
 		playerClear.Enabled = false;
 
 		if (player->newLife)

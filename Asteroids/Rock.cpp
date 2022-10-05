@@ -4,7 +4,7 @@
 void Rock::Update(float deltaTime)
 {
 	Entity::Update(deltaTime);
-	//exploder->Update(deltaTime);
+	exploder->Update(deltaTime);
 	CheckScreenEdge();
 
 	if (CheckCollision())
@@ -23,7 +23,7 @@ void Rock::Update(float deltaTime)
 void Rock::Draw()
 {
 	Entity::Draw();
-	//exploder->Draw();
+	exploder->Draw();
 }
 
 bool Rock::Initialise()

@@ -42,18 +42,14 @@ void RockControl::Update(float deltaTime)
 
 	for (auto rock : rocks)
 	{
-		rock->exploder->Update(deltaTime);
-
 		if (rock->BeenHit)
 		{
 			rockHit = true;
 			rockWasHit = rock;
 			rockWasHit->BeenHit = false;
 		}
-		else if (rock->Enabled)
-		{
-			rock->Update(deltaTime);
-		}
+
+		rock->Update(deltaTime);
 	}
 
 	if (rockHit)
@@ -66,12 +62,7 @@ void RockControl::Draw(void)
 {
 	for (auto rock : rocks)
 	{
-		rock->exploder->Draw();
-
-		if (rock->Enabled)
-		{
-			rock->Draw();
-		}
+		rock->Draw();
 	}
 }
 

@@ -50,7 +50,7 @@ bool Game::Initialise()
 
 	for (int i = 0; i < 4; i++)
 	{
-		playerShips->push_back(Entity());
+		playerShips.push_back(new Entity());
 	}
 
 	testVectorModel = new VectorModel();
@@ -184,11 +184,6 @@ void Game::Update(float deltaTime)
 	}
 
 
-	for (auto shot : player->shots)
-	{
-		shot->Update(deltaTime);
-	}
-
 	if (player->Enabled)
 	{
 		player->Update(deltaTime);
@@ -261,11 +256,6 @@ void Game::Draw()
 
 	//testVectorModel->Draw();
 
-	for (auto shot : player->shots)
-	{
-		shot->Draw();
-	}
-
 	for (auto ship : playerShips)
 	{
 		ship->Draw();
@@ -302,7 +292,7 @@ void Game::PlayerShipDisplay()
 
 	if (player->lives > playerShips.size())
 	{
-		playerShips->push_back(Entity());
+		playerShips.push_back(new Entity());
 	}
 
 	for (int i = 0; i < playerShips.size(); i++)

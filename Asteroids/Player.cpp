@@ -121,6 +121,11 @@ void Player::Update(float deltaTime)
 	{
 		ThrustOff(deltaTime);
 	}
+
+	for (auto shot : shots)
+	{
+		shot->Update(deltaTime);
+	}
 }
 
 void Player::Draw()
@@ -131,6 +136,11 @@ void Player::Draw()
 	for (auto line : lines)
 	{
 		line->Draw();
+	}
+
+	for (auto shot : shots)
+	{
+		shot->Draw();
 	}
 }
 

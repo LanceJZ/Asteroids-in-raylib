@@ -58,7 +58,7 @@ bool Game::Initialise()
 	return false;
 }
 
-bool Game::Load()//TODO: Add free player ship sound. Player shot stops moving when player is hit, before spawning. (Update stops)
+bool Game::Load()
 {
 	playerShipModel = LoadModel("models/playership.obj");
 	playerShipModel.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
@@ -88,6 +88,7 @@ bool Game::Load()//TODO: Add free player ship sound. Player shot stops moving wh
 	Sound fireS = LoadSound("sounds/playerfire.wav");
 	Sound thrustS = LoadSound("sounds/thrust2.wav");
 	Sound playerExpS = LoadSound("sounds/PlayerExplode.wav");
+	Sound playerBonusS = LoadSound("sounds/BonusShip.wav");
 	Sound rockExpS = LoadSound("sounds/RockExplosion.wav");
 	Sound ufoExpS = LoadSound("sounds/UFOExplosion.wav");
 	Sound ufoBigS = LoadSound("sounds/UFOLarge.wav");
@@ -95,7 +96,7 @@ bool Game::Load()//TODO: Add free player ship sound. Player shot stops moving wh
 	Sound ufoFire = LoadSound("sounds/UFOFire.wav");
 
 	player->LoadModel(playerShipModel, shot, playerFlame);
-	player->LoadSound(fireS, thrustS, playerExpS);
+	player->LoadSound(fireS, thrustS, playerExpS, playerBonusS);
 	rockControl->LoadModel(rockOne, rockTwo, rockThree, rockFour);
 	rockControl->LoadSound(rockExpS);
 	theUFOControl->LoadModel(modelUFO, shot);
@@ -168,11 +169,21 @@ void Game::ProcessInput()
 		PlayerShipDisplay();
 		highscores->gameOver = false;
 	}
+
+	if (IsKeyPressed(KEY_PAUSE) && !player->gameOver)
+	{
+		player->paused = !player->paused;
+	}
 }
 
 
 void Game::Update(float deltaTime)
 {
+	if (player->paused)
+	{
+		return;
+	}
+
 	UpdateCamera(&camera);
 
 	rockControl->Update(deltaTime);
@@ -237,10 +248,10 @@ void Game::Update(float deltaTime)
 		}
 	}
 
-	testVectorModel->Update(deltaTime);
+	//testVectorModel->Update(deltaTime);
 
-	if (testVectorModel->Position.x > 3)
-		testVectorModel->Position.x = -3;
+	//if (testVectorModel->Position.x > 3)
+	//	testVectorModel->Position.x = -3;
 }
 
 void Game::Draw()
@@ -279,6 +290,12 @@ void Game::Draw()
 	EndMode3D();
 	//2D drawing, fonts go here.
 	highscores->Draw();
+
+	if (player->paused)
+	{
+		DrawText("Paused", (GetScreenWidth() / 2) - 80, (GetScreenHeight() / 2) - 20, 50, WHITE);
+	}
+
 	DrawText(const_cast<char*>(to_string(player->score).c_str()), 200, 5, 45, WHITE);
 	DrawText(const_cast<char*>(to_string(player->highScore).c_str()), GetScreenWidth() / 2, 4, 20, WHITE);
 	DrawText("(C) 1979 ATARI INC", (GetScreenWidth() / 2) - 15, GetScreenHeight() - 12, 8, WHITE);

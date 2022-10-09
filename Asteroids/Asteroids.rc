@@ -52,10 +52,8 @@ END
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_ICON1               ICON                    "D:\\Documents\\Visual Studio 2022\\Projects\\C++\\raylib\\Asteroids\\Icon.ico"
+IDI_ICON1               ICON                    "C:\\users\\lance\\Documents\\Visual Studio 2022\\Projects\\C++\\raylib\\Asteroids\\Icon.ico"
 //C:\Users\lance\Documents\Visual Studio 2022\Projects\C++\raylib\Asteroids
-//C:\\users\\lance\\Documents\\Visual Studio 2022\\Projects\\C++\\raylib\\Asteroids\\Icon.ico
-//D:\\Documents\\Visual Studio 2022\\Projects\\C++\\raylib\\Asteroids\\Icon.ico
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 

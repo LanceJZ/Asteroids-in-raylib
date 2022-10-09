@@ -64,15 +64,17 @@ void Player::LoadModel(string shipmodel, Model shotmodel, string flamemodel)
 	}
 }
 
-void Player::LoadSound(Sound fireS, Sound thrustS, Sound exp)
+void Player::LoadSound(Sound fireS, Sound thrustS, Sound exp, Sound bonus)
 {
 	Sound01 = fireS;
 	Sound02 = thrustS;
 	Sound03 = exp;
+	Sound04 = bonus;
 
 	SetSoundVolume(Sound01, 0.25f);
 	SetSoundVolume(Sound02, 0.5f);
 	SetSoundVolume(Sound03, 0.5f);
+	SetSoundVolume(Sound04, 0.75f);
 }
 
 void Player::Input()
@@ -140,18 +142,16 @@ void Player::Draw()
 	}
 }
 
-void Player::ThrustOn()
+void Player::Hit()
 {
-	if (!IsSoundPlaying(Sound02))
-	{
-		PlaySound(Sound02);
-	}
+	PlaySound(Sound03);
+	StopSound(Sound02);
 
-	Acceleration.x = (cos(RotationZ) * 0.1f);
-	Acceleration.y = (sin(RotationZ) * 0.1f);
-	thrustOff = false;
-	flame->Enabled = true;
-}
+	BeenHit = true;
+	Enabled = false;
+	thrustOff = true;
+	lives--;
+	exploding = true;
 
 void Player::ThrustOff(float deltaTime)
 {
@@ -163,21 +163,10 @@ void Player::ThrustOff(float deltaTime)
 	Acceleration.x = (-Velocity.x * 0.1f) * deltaTime;
 	Acceleration.y = (-Velocity.y * 0.1f) * deltaTime;
 	flame->Enabled = false;
-}
 
-void Player::Fire()
-{
-	float speed = 25.5f;
-	Vector3 velocity = {((float)cos(RotationZ) * speed), ((float)sin(RotationZ) * speed), 0};
-
-	for (auto shot : shots)
+	for (auto line : lines)
 	{
-		if (!shot->Enabled)
-		{
-			PlaySound(Sound01);
-			shot->Spawn(Position, velocity, 1.5f);
-			break;
-		}
+		line->Spawn(Position);
 	}
 }
 
@@ -192,6 +181,7 @@ void Player::ScoreUpdate(int addToScore)
 
 	if (score > nextNewLifeScore)
 	{
+		PlaySound(Sound04);
 		nextNewLifeScore += 10000;
 		lives++;
 		newLife = true;
@@ -218,5 +208,41 @@ void Player::Reset()
 	for (auto line : lines)
 	{
 		line->Clear();
+	}
+}
+
+void Player::ThrustOn()
+{
+	if (!IsSoundPlaying(Sound02))
+	{
+		PlaySound(Sound02);
+	}
+
+	Acceleration.x = (cos(RotationZ) * 0.1f);
+	Acceleration.y = (sin(RotationZ) * 0.1f);
+	thrustOff = false;
+	flame->Enabled = true;
+}
+
+void Player::ThrustOff(float deltaTime)
+{
+	Acceleration.x = (-Velocity.x * 0.1f) * deltaTime;
+	Acceleration.y = (-Velocity.y * 0.1f) * deltaTime;
+	flame->Enabled = false;
+}
+
+void Player::Fire()
+{
+	float speed = 25.5f;
+	Vector3 velocity = { ((float)cos(RotationZ) * speed), ((float)sin(RotationZ) * speed), 0 };
+
+	for (auto shot : shots)
+	{
+		if (!shot->Enabled)
+		{
+			PlaySound(Sound01);
+			shot->Spawn(Position, velocity, 1.5f);
+			break;
+		}
 	}
 }

@@ -8,13 +8,14 @@
 class Player : public LineModel
 {
 public:
+	bool paused = false;
+	bool newLife = false;
+	bool exploding = false;
+	bool gameOver = true;
 	int wave { 0 };
 	int score { 0 };
 	int highScore{ 0 };
 	int lives { 0 };
-	bool newLife = false;
-	bool exploding = false;
-	bool gameOver = true;
 
 	Shot* shots[4];
 	vector<Line*> lines;
@@ -23,6 +24,7 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void Draw();
 
+	void Hit();
 	void ScoreUpdate(int addToScore);
 	void NewGame();
 	void Reset();

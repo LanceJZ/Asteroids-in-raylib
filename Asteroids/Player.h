@@ -24,13 +24,12 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void Draw();
 
-	void Hit();
 	void ScoreUpdate(int addToScore);
 	void NewGame();
 	void Reset();
 	void Hit();
 	void LoadModel(string shipmodel, Model shotmodel, string flamemodel);
-	void LoadSound(Sound fireS, Sound thrustS, Sound exp);
+	void LoadSound(Sound fireS, Sound thrustS, Sound exp, Sound bonus);
 	Player(float windowWidth, float windowHeight);
 
 private:

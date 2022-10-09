@@ -89,19 +89,11 @@ bool Game::Load()
 	Sound ufoFire = LoadSound("sounds/UFOFire.wav");
 
 	player->LoadModel("Models/PlayerShip.vec", shot, "Models/PlayerFlame.vec");
-	player->LoadSound(fireS, thrustS, playerExpS);
+	player->LoadSound(fireS, thrustS, playerExpS, playerBonusS);
 	rockControl->LoadModel(rockOne, rockTwo, rockThree, rockFour);
 	rockControl->LoadSound(rockExpS);
-	theUFOControl->LoadModel(modelUFO, shot);
+	theUFOControl->LoadModel("Models/UFO.vec", shot);
 	theUFOControl->LoadSound(ufoExpS, ufoBigS, ufoSmallS, ufoFire);
-
-	for (int i = 0; i < 4; i++)
-	{
-		playerShips[i] = new Entity();
-		playerShips[i]->LoadModel(playerShipModel);
-		playerShips[i]->Scale = player->Scale;
-		playerShips[i]->Enabled = false;
-	}
 
 	return 0;
 }
@@ -114,7 +106,8 @@ bool Game::BeginRun()
 	for (int i = 0; i < 4; i++)
 	{
 		playerShips.push_back(new LineModel());
-		playerShips[i]->SetModel(player->GetModel());
+		playerShips[playerShips.size()-1]->SetModel(player->GetModel());
+		playerShips[i]->Scale = player->Scale;
 		playerShips[i]->Enabled = false;
 	}
 
@@ -171,8 +164,6 @@ void Game::Update(float deltaTime)
 		line->Update(deltaTime);
 	}
 
-	player->Update(deltaTime);
-
 	if (player->Enabled)
 	{
 		playerClear.Enabled = false;
@@ -224,11 +215,6 @@ void Game::Update(float deltaTime)
 			highscores->Update(deltaTime);
 		}
 	}
-
-	testVectorModel->Update(deltaTime);
-
-	if (testVectorModel->Position.x > 3)
-		testVectorModel->Position.x = -3;
 }
 
 void Game::Draw()

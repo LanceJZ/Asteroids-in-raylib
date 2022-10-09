@@ -14,7 +14,14 @@ void LineModel::Update(float deltaTime)
 void LineModel::Draw()
 {
 	if (!Enabled)
+	{
 		return;
+	}
+
+	if (lines.size() < 2)
+	{
+		return;
+	}
 
 	rlPushMatrix();
 	rlTranslatef(Position.x, Position.y, 0);

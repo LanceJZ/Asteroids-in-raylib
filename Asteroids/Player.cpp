@@ -26,35 +26,8 @@ Player::Player(float windowWidth, float windowHeight) : LineModel()
 	}
 }
 
-void Player::Hit()
-{
-	PlaySound(Sound03);
-	StopSound(Sound02);
-
-	BeenHit = true;
-	Enabled = false;
-	thrustOff = true;
-	lives--;
-	exploding = true;
-
-	flame->Enabled = false;
-
-	for (auto line : lines)
-	{
-		line->Spawn(Position);
-	}
-
-	if (lives == 0)
-	{
-		//SaveFileText("HighScore", const_cast<char*>(to_string(highScore).c_str()));
-	}
-}
-
 void Player::LoadModel(string shipmodel, Model shotmodel, string flamemodel)
 {
-	//TheModel = model;
-	//flame->LoadModel(flamemodel);
-
 	LineModel::LoadModel(shipmodel);
 	flame->LoadModel(flamemodel);
 
@@ -153,15 +126,6 @@ void Player::Hit()
 	lives--;
 	exploding = true;
 
-void Player::ThrustOff(float deltaTime)
-{
-	if (IsSoundPlaying(Sound02))
-	{
-		StopSound(Sound02);
-	}
-
-	Acceleration.x = (-Velocity.x * 0.1f) * deltaTime;
-	Acceleration.y = (-Velocity.y * 0.1f) * deltaTime;
 	flame->Enabled = false;
 
 	for (auto line : lines)
@@ -218,14 +182,20 @@ void Player::ThrustOn()
 		PlaySound(Sound02);
 	}
 
-	Acceleration.x = (cos(RotationZ) * 0.1f);
-	Acceleration.y = (sin(RotationZ) * 0.1f);
+	float thrust = 0.075f;
+	Acceleration.x = (cos(RotationZ) * thrust);
+	Acceleration.y = (sin(RotationZ) * thrust);
 	thrustOff = false;
 	flame->Enabled = true;
 }
 
 void Player::ThrustOff(float deltaTime)
 {
+	if (IsSoundPlaying(Sound02))
+	{
+		StopSound(Sound02);
+	}
+
 	Acceleration.x = (-Velocity.x * 0.1f) * deltaTime;
 	Acceleration.y = (-Velocity.y * 0.1f) * deltaTime;
 	flame->Enabled = false;

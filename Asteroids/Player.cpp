@@ -2,16 +2,15 @@
 #include "raymath.h"
 #include <string>
 
-Player::Player(float windowWidth, float windowHeight) : Entity()
+Player::Player(float windowWidth, float windowHeight) : LineModel()
 {
 	WindowWidth = windowWidth;
 	WindowHeight = windowHeight;
 	MaxSpeed = 20;
 	Radius = 0.6f;
-	Scale = 0.2f;
 	Enabled = false;
 
-	flame = new Entity();
+	flame = new LineModel();
 	flame->Scale = Scale;
 	flame->Radius = 0.1f;
 	flame->Enabled = false;
@@ -25,10 +24,6 @@ Player::Player(float windowWidth, float windowHeight) : Entity()
 	{
 		lines.push_back(new Line());
 	}
-
-	//highScore = atoi(LoadFileText("HighScore")); //LoadText high score.
-
-
 }
 
 void Player::Hit()
@@ -55,9 +50,12 @@ void Player::Hit()
 	}
 }
 
-void Player::LoadModel(Model model, Model shotmodel, Model flamemodel)
+void Player::LoadModel(string shipmodel, Model shotmodel, string flamemodel)
 {
-	TheModel = model;
+	//TheModel = model;
+	//flame->LoadModel(flamemodel);
+
+	LineModel::LoadModel(shipmodel);
 	flame->LoadModel(flamemodel);
 
 	for (auto shot : shots)
@@ -111,9 +109,7 @@ void Player::Update(float deltaTime)
 	Entity::Update(deltaTime);
 	Entity::CheckScreenEdge();
 
-	Vector3 offset = VelocityFromAngleZ(RotationZ, -Radius * 1.25f);
-
-	flame->Position = Vector3Add(offset, Position);
+	flame->Position = Position;
 	flame->RotationZ = RotationZ;
 	flame->Update(deltaTime);
 
@@ -130,7 +126,7 @@ void Player::Update(float deltaTime)
 
 void Player::Draw()
 {
-	Entity::Draw();
+	LineModel::Draw();
 	flame->Draw();
 
 	for (auto line : lines)
@@ -159,6 +155,11 @@ void Player::ThrustOn()
 
 void Player::ThrustOff(float deltaTime)
 {
+	if (IsSoundPlaying(Sound02))
+	{
+		StopSound(Sound02);
+	}
+
 	Acceleration.x = (-Velocity.x * 0.1f) * deltaTime;
 	Acceleration.y = (-Velocity.y * 0.1f) * deltaTime;
 	flame->Enabled = false;

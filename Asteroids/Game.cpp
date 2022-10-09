@@ -48,20 +48,13 @@ bool Game::Initialise()
 	highscores->Load();
 	player->highScore = highscores->highScore;
 
-	for (int i = 0; i < 4; i++)
-	{
-		playerShips.push_back(new Entity());
-	}
-
-	testVectorModel = new VectorModel();
-
 	return false;
 }
 
 bool Game::Load()//TODO: Add free player ship sound. Player shot stops moving when player is hit, before spawning. (Update stops)
 {
-	playerShipModel = LoadModel("models/playership.obj");
-	playerShipModel.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
+	//playerShipModel = LoadModel("models/playership.obj");
+	//playerShipModel.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
 		LoadTexture("models/playership.png");
 	Model playerFlame = LoadModel("models/playerflame.obj");
 	playerFlame.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
@@ -94,20 +87,12 @@ bool Game::Load()//TODO: Add free player ship sound. Player shot stops moving wh
 	Sound ufoSmallS = LoadSound("sounds/UFOSmall.wav");
 	Sound ufoFire = LoadSound("sounds/UFOFire.wav");
 
-	player->LoadModel(playerShipModel, shot, playerFlame);
+	player->LoadModel("Models/PlayerShip.vec", shot, "Models/PlayerFlame.vec");
 	player->LoadSound(fireS, thrustS, playerExpS);
 	rockControl->LoadModel(rockOne, rockTwo, rockThree, rockFour);
 	rockControl->LoadSound(rockExpS);
-	theUFOControl->LoadModel(modelUFO, shot);
+	theUFOControl->LoadModel("Models/UFO.vec", shot);
 	theUFOControl->LoadSound(ufoExpS, ufoBigS, ufoSmallS, ufoFire);
-
-	for (int i = 0; i < 4; i++)
-	{
-		playerShips[i] = new Entity();
-		playerShips[i]->LoadModel(playerShipModel);
-		playerShips[i]->Scale = player->Scale;
-		playerShips[i]->Enabled = false;
-	}
 
 	return 0;
 }
@@ -117,29 +102,12 @@ bool Game::BeginRun()
 	rockControl->NewGame();
 	theUFOControl->NewGame();
 
-	Vector3 one = { 0 };
-	one.x = -1;
-	one.y = 1;
-
-	Vector3 two = { 0 };
-	two.x = 1;
-	two.y = 1;
-
-	Vector3 three = { 0 };
-	three.x = -1;
-	three.y = -1;
-
-	Vector3 four = { 0 };
-	four.x = 1;
-	four.y = -1;
-
-
-	testVectorModel->verts.push_back(one);
-	testVectorModel->verts.push_back(two);
-	testVectorModel->verts.push_back(three);
-	testVectorModel->verts.push_back(four);
-
-	testVectorModel->Velocity.x = 1;
+	for (int i = 0; i < 4; i++)
+	{
+		playerShips.push_back(new LineModel());
+		playerShips[i]->SetModel(player->GetModel());
+		playerShips[i]->Enabled = false;
+	}
 
 	return false;
 }
@@ -183,10 +151,10 @@ void Game::Update(float deltaTime)
 		line->Update(deltaTime);
 	}
 
+	player->Update(deltaTime);
 
 	if (player->Enabled)
 	{
-		player->Update(deltaTime);
 		playerClear.Enabled = false;
 
 		if (player->newLife)
@@ -236,11 +204,6 @@ void Game::Update(float deltaTime)
 			highscores->Update(deltaTime);
 		}
 	}
-
-	testVectorModel->Update(deltaTime);
-
-	if (testVectorModel->Position.x > 3)
-		testVectorModel->Position.x = -3;
 }
 
 void Game::Draw()
@@ -253,8 +216,6 @@ void Game::Draw()
 	rockControl->Draw();
 	player->Draw();
 	playerClear.Draw();
-
-	//testVectorModel->Draw();
 
 	for (auto ship : playerShips)
 	{
@@ -292,14 +253,15 @@ void Game::PlayerShipDisplay()
 
 	if (player->lives > playerShips.size())
 	{
-		playerShips.push_back(new Entity());
+		playerShips.push_back(new LineModel());
+		playerShips[playerShips.size()-1]->SetModel(player->GetModel());
 	}
 
 	for (int i = 0; i < playerShips.size(); i++)
 	{
 		playerShips[i]->Y(line);
 		playerShips[i]->X(column);
-		playerShips[i]->TheModel.transform = MatrixRotateZ(PI / 2);
+		playerShips[i]->RotationZ = PI / 2;
 		playerShips[i]->Enabled = false;
 		column += 1.125f;
 	}

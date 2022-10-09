@@ -1,7 +1,7 @@
 #include "UFOControl.h"
 #include "raymath.h"
 
-void UFOControl::LoadModel(Model theModel, Model shot)
+void UFOControl::LoadModel(string theModel, Model shot)
 {
 	ufo->LoadModel(theModel, shot);
 }
@@ -67,14 +67,14 @@ void UFOControl::SpawnUFO()
 	if (GetRandomFloat(0, 99) < spawnPercent - player->score / 500)
 	{
 		ufo->size = UFO::Large;
-		ufo->Scale = 0.4f;
+		ufo->Scale = 1;
 		ufo->MaxSpeed = 5.0f;
 		ufo->Radius = 0.75f;
 	}
 	else
 	{
 		ufo->size = UFO::Small;
-		ufo->Scale = 0.2f;
+		ufo->Scale = 0.5f;
 		ufo->MaxSpeed = 7.0f;
 		ufo->Radius = 0.4f;
 	}

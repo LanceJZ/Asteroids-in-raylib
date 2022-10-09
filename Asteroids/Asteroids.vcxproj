@@ -148,6 +148,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="LineModel.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PositionedObject.cpp" />
     <ClCompile Include="Rock.cpp" />
@@ -175,6 +176,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="LineModel.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PositionedObject.h" />
     <ClInclude Include="resource.h" />

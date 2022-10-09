@@ -35,7 +35,6 @@ public:
 
 
 private:
-	Model playerShipModel;
 	void ProcessInput();
 	void Update(float deltaTime);
 	void Draw();
@@ -47,8 +46,6 @@ private:
 	RockControl* rockControl;
 	UFOControl* theUFOControl;
 	HighScore* highscores;
-	vector<Entity*> playerShips;
-
-	VectorModel* testVectorModel;
+	vector<LineModel*> playerShips;
 };
 

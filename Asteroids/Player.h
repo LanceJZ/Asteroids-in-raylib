@@ -1,11 +1,11 @@
 #pragma once
 #include "Entity.h"
 #include "Shot.h"
-#include "VectorModel.h"
+#include "LineModel.h"
 #include "Line.h"
 #include <vector>
 
-class Player : public Entity
+class Player : public LineModel
 {
 public:
 	int wave { 0 };
@@ -27,7 +27,7 @@ public:
 	void NewGame();
 	void Reset();
 	void Hit();
-	void LoadModel(Model model, Model shotmodel, Model flamemodel);
+	void LoadModel(string shipmodel, Model shotmodel, string flamemodel);
 	void LoadSound(Sound fireS, Sound thrustS, Sound exp);
 	Player(float windowWidth, float windowHeight);
 
@@ -37,7 +37,7 @@ private:
 	float thrustSoundTime = { 0 };
 	Color color{ RAYWHITE };
 
-	Entity* flame;
+	LineModel* flame;
 
 	void ThrustOn();
 	void ThrustOff(float deltaTime);

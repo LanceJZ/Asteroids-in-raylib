@@ -26,15 +26,10 @@ Player::Player(float windowWidth, float windowHeight) : LineModel()
 	}
 }
 
-void Player::LoadModel(string shipmodel, Model shotmodel, string flamemodel)
+void Player::LoadModel(string shipmodel, string flamemodel)
 {
 	LineModel::LoadModel(shipmodel);
 	flame->LoadModel(flamemodel);
-
-	for (auto shot : shots)
-	{
-		shot->LoadModel(shotmodel);
-	}
 }
 
 void Player::LoadSound(Sound fireS, Sound thrustS, Sound exp, Sound bonus)

@@ -53,30 +53,23 @@ bool Game::Initialise()
 
 bool Game::Load()
 {
-	//playerShipModel = LoadModel("models/playership.obj");
-	//playerShipModel.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
-		LoadTexture("models/playership.png");
-	Model playerFlame = LoadModel("models/playerflame.obj");
-	playerFlame.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
-		LoadTexture("models/playerflame.png");
-	Model shot = LoadModel("models/shot.obj");
-	shot.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
-		LoadTexture("models/shot.png");
-	Model rockOne = LoadModel("models/rockone.obj");
-	rockOne.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
-		LoadTexture("models/rockone.png");
-	Model rockTwo = LoadModel("models/rocktwo.obj");
-	rockOne.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
-		LoadTexture("models/rocktwo.png");
-	Model rockThree = LoadModel("models/rockthree.obj");
-	rockOne.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
-		LoadTexture("models/rockthree.png");
-	Model rockFour = LoadModel("models/RockFour.obj");
-	rockOne.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
-		LoadTexture("models/RockFour.png");
-	Model modelUFO = LoadModel("models/UFO.obj");
-	modelUFO.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
-		LoadTexture("models/UFO.png");
+	//Model rockOne = LoadModel("models/rockone.obj");
+	//rockOne.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
+	//	LoadTexture("models/rockone.png");
+	//Model rockTwo = LoadModel("models/rocktwo.obj");
+	//rockOne.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
+	//	LoadTexture("models/rocktwo.png");
+	//Model rockThree = LoadModel("models/rockthree.obj");
+	//rockOne.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
+	//	LoadTexture("models/rockthree.png");
+	//Model rockFour = LoadModel("models/RockFour.obj");
+	//rockOne.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
+	//	LoadTexture("models/RockFour.png");
+
+	string rockOne = "Models/RockOne.vec";
+	string rockTwo = "Models/RockTwo.vec";
+	string rockThree = "Models/RockThree.vec";
+	string rockFour = "Models/RockFour.vec";
 
 	Sound fireS = LoadSound("sounds/playerfire.wav");
 	Sound thrustS = LoadSound("sounds/thrust2.wav");
@@ -88,11 +81,11 @@ bool Game::Load()
 	Sound ufoSmallS = LoadSound("sounds/UFOSmall.wav");
 	Sound ufoFire = LoadSound("sounds/UFOFire.wav");
 
-	player->LoadModel("Models/PlayerShip.vec", shot, "Models/PlayerFlame.vec");
+	player->LoadModel("Models/PlayerShip.vec", "Models/PlayerFlame.vec");
 	player->LoadSound(fireS, thrustS, playerExpS, playerBonusS);
 	rockControl->LoadModel(rockOne, rockTwo, rockThree, rockFour);
 	rockControl->LoadSound(rockExpS);
-	theUFOControl->LoadModel("Models/UFO.vec", shot);
+	theUFOControl->LoadModel("Models/UFO.vec");
 	theUFOControl->LoadSound(ufoExpS, ufoBigS, ufoSmallS, ufoFire);
 
 	return 0;

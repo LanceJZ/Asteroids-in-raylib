@@ -22,7 +22,7 @@ void RockControl::NewWave(void)
 }
 
 
-void RockControl::LoadModel(Model modelOne, Model modelTwo, Model modelThree, Model modelFour)
+void RockControl::LoadModel(string modelOne, string modelTwo, string modelThree, string modelFour)
 {
 	rockModels[0] = modelOne;
 	rockModels[1] = modelTwo;
@@ -135,7 +135,8 @@ void RockControl::SpawnRocks(Vector3 pos, int count, Rock::RockSize size)
 		if (spawnnewrock)
 		{
 			rocks.push_back(new Rock(GameScreenWidth, GameScreenHeight, player, ufo));
-			rocks[rockN]->LoadModel(rockModels[GetRandomValue(0, 3)]);
+			//rocks[rockN]->LoadModel(rockModels[GetRandomValue(0, 3)]);
+			rocks[rockN]->LoadModel(rockModels[1]);
 			rocks[rockN]->LoadSound(Explode);
 			rocks[rockN]->Initialise();
 		}

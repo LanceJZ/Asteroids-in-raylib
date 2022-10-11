@@ -21,7 +21,7 @@ public:
 	Timer* vectorTimer;
 	Exploder* exploder;
 
-	void LoadModel(string model, Model shotmodel);
+	void LoadModel(string ship);
 	void LoadSound(Sound exp, Sound big, Sound small, Sound fire);
 	virtual void Update(float deltaTime);
 	virtual void Draw();

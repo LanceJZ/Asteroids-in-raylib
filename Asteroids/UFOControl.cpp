@@ -1,16 +1,15 @@
 #include "UFOControl.h"
 #include "raymath.h"
 
-void UFOControl::LoadModel(string theModel, Model shot)
+void UFOControl::LoadModel(string ship)
 {
-	ufo->LoadModel(theModel, shot);
+	ufo->LoadModel(ship);
 }
 
 void UFOControl::Update(float deltaTime)
 {
 	ufo->Update(deltaTime);
 	timer->Update(deltaTime);
-	ufo->shot->Update(deltaTime);
 
 	if (timer->Elapsed() && !ufo->Enabled)
 	{
@@ -30,7 +29,6 @@ void UFOControl::LoadSound(Sound exp, Sound big, Sound small, Sound fire)
 void UFOControl::Draw()
 {
 	ufo->Draw();
-	ufo->shot->Draw();
 }
 
 bool UFOControl::Initialise()

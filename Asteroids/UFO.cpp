@@ -1,11 +1,10 @@
 #include "UFO.h"
 #include "raymath.h"
 
-void UFO::LoadModel(string model, Model shotmodel)
+void UFO::LoadModel(string ship)
 {
 	//TheModel = model;
-	LineModel::LoadModel(model);
-	shot->LoadModel(shotmodel);
+	LineModel::LoadModel(ship);
 	Enabled = false;
 	BeenHit = false;
 }
@@ -27,6 +26,7 @@ void UFO::Update(float deltaTime)
 {
 	Entity::Update(deltaTime);
 	exploder->Update(deltaTime);
+	shot->Update(deltaTime);
 
 	if (Enabled)
 	{
@@ -94,6 +94,7 @@ void UFO::Draw()
 		LineModel::Draw();
 
 	exploder->Draw();
+	shot->Draw();
 }
 
 bool UFO::Initialise()

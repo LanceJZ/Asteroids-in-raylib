@@ -28,7 +28,7 @@ public:
 	void NewGame();
 	void Reset();
 	void Hit();
-	void LoadModel(string shipmodel, Model shotmodel, string flamemodel);
+	void LoadModel(string shipmodel, string flamemodel);
 	void LoadSound(Sound fireS, Sound thrustS, Sound exp, Sound bonus);
 	Player(float windowWidth, float windowHeight);
 

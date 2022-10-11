@@ -53,19 +53,6 @@ bool Game::Initialise()
 
 bool Game::Load()
 {
-	//Model rockOne = LoadModel("models/rockone.obj");
-	//rockOne.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
-	//	LoadTexture("models/rockone.png");
-	//Model rockTwo = LoadModel("models/rocktwo.obj");
-	//rockOne.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
-	//	LoadTexture("models/rocktwo.png");
-	//Model rockThree = LoadModel("models/rockthree.obj");
-	//rockOne.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
-	//	LoadTexture("models/rockthree.png");
-	//Model rockFour = LoadModel("models/RockFour.obj");
-	//rockOne.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture =
-	//	LoadTexture("models/RockFour.png");
-
 	string rockOne = "Models/RockOne.vec";
 	string rockTwo = "Models/RockTwo.vec";
 	string rockThree = "Models/RockThree.vec";
@@ -227,18 +214,15 @@ void Game::Draw()
 	}
 
 #ifdef _DEBUG
+	Color lineColor = { 200,100,250,250 };
 	DrawLine3D({ -player->WindowWidth, player->WindowHeight,0 },
-		{ player->WindowWidth, player->WindowHeight, 0 },
-		{ 200,100,250,250 });
+		{ player->WindowWidth, player->WindowHeight, 0 }, lineColor);
 	DrawLine3D({ -player->WindowWidth, -player->WindowHeight,0 },
-		{ player->WindowWidth, -player->WindowHeight, 0 },
-		{ 200,100,250,250 });
+		{ player->WindowWidth, -player->WindowHeight, 0 }, lineColor);
 	DrawLine3D({ -player->WindowWidth, -player->WindowHeight,0 },
-		{ -player->WindowWidth, player->WindowHeight, 0 },
-		{ 200,100,250,250 });
+		{ -player->WindowWidth, player->WindowHeight, 0 }, lineColor);
 	DrawLine3D({ player->WindowWidth, -player->WindowHeight,0 },
-		{ player->WindowWidth, player->WindowHeight, 0 },
-		{ 200,100,250,250 });
+		{ player->WindowWidth, player->WindowHeight, 0 }, lineColor);
 #endif
 
 	EndMode3D();

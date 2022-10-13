@@ -76,6 +76,16 @@ void Rock::Spawn(Vector3 pos, float speed, RockSize size)
 	case Large:
 		Scale = scale;
 		Radius = 2.10f;
+
+		if (Velocity.x > 0)
+		{
+			X(-WindowWidth);
+		}
+		else
+		{
+			X(WindowWidth);
+		}
+
 		break;
 	}
 

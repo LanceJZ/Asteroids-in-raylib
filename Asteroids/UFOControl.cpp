@@ -1,9 +1,30 @@
 #include "UFOControl.h"
 #include "raymath.h"
 
+UFOControl::UFOControl(float playScreenW, float playScreenH, Player* player)
+{
+	GameScreenWidth = playScreenW;
+	GameScreenHeight = playScreenH;
+	UFOControl::player = player;
+
+	ufo = new UFO(playScreenW, playScreenH, player);
+
+	timer = new Timer();
+}
+
 void UFOControl::LoadModel(string ship)
 {
 	ufo->LoadModel(ship);
+}
+
+void UFOControl::LoadSound(Sound exp, Sound big, Sound small, Sound fire)
+{
+	ufo->LoadSound(exp, big, small, fire);
+}
+
+bool UFOControl::Initialise()
+{
+	return false;
 }
 
 void UFOControl::Update(float deltaTime)
@@ -21,19 +42,9 @@ void UFOControl::Update(float deltaTime)
 	}
 }
 
-void UFOControl::LoadSound(Sound exp, Sound big, Sound small, Sound fire)
-{
-	ufo->LoadSound(exp, big, small, fire);
-}
-
 void UFOControl::Draw()
 {
 	ufo->Draw();
-}
-
-bool UFOControl::Initialise()
-{
-	return false;
 }
 
 void UFOControl::NewGame()
@@ -42,17 +53,6 @@ void UFOControl::NewGame()
 	spawnCount = 0;
 	ufo->Enabled = false;
 	ufo->shot->Enabled = false;
-}
-
-UFOControl::UFOControl(float playScreenW, float playScreenH, Player* player)
-{
-	GameScreenWidth = playScreenW;
-	GameScreenHeight = playScreenH;
-	UFOControl::player = player;
-
-	ufo = new UFO(playScreenW, playScreenH, player);
-
-	timer = new Timer();
 }
 
 void UFOControl::SpawnUFO()

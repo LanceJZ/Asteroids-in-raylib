@@ -43,5 +43,6 @@ private:
 	void ThrustOn();
 	void ThrustOff(float deltaTime);
 	void Fire();
+	void Hyperspace();
 };
 

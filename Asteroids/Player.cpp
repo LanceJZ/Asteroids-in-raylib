@@ -68,9 +68,14 @@ void Player::Input()
 		thrustOff = true;
 	}
 
-	if (IsKeyPressed(KEY_RIGHT_CONTROL) || IsKeyPressed(KEY_LEFT_CONTROL) || IsKeyPressed(KEY_SPACE))
+	if (IsKeyPressed(KEY_LEFT_CONTROL) || IsKeyPressed(KEY_SPACE))
 	{
 		Fire();
+	}
+
+	if (IsKeyPressed(KEY_RIGHT_CONTROL))
+	{
+		Hyperspace();
 	}
 }
 
@@ -210,4 +215,11 @@ void Player::Fire()
 			break;
 		}
 	}
+}
+
+void Player::Hyperspace()
+{
+	Velocity = { 0 };
+	Position.x = GetRandomFloat(-WindowWidth, WindowWidth);
+	Position.y = GetRandomFloat(-WindowHeight, WindowHeight);
 }

@@ -1,6 +1,17 @@
 #include "UFO.h"
 #include "raymath.h"
 
+UFO::UFO(float windowWidth, float windowHeight, Player* player)
+{
+	shot = new Shot(windowWidth, windowHeight);
+	UFO::player = player;
+	WindowWidth = windowWidth;
+	WindowHeight = windowHeight;
+	fireTimer = new Timer();
+	vectorTimer = new Timer();
+	exploder = new Exploder();
+}
+
 void UFO::LoadModel(string ship)
 {
 	//TheModel = model;
@@ -20,6 +31,11 @@ void UFO::LoadSound(Sound exp, Sound big, Sound small, Sound fire)
 	SetSoundVolume(Sound02, 0.5f);
 	SetSoundVolume(Sound03, 0.5f);
 	SetSoundVolume(Sound04, 0.5f);
+}
+
+bool UFO::Initialise()
+{
+	return false;
 }
 
 void UFO::Update(float deltaTime)
@@ -97,11 +113,6 @@ void UFO::Draw()
 	shot->Draw();
 }
 
-bool UFO::Initialise()
-{
-	return false;
-}
-
 void UFO::Spawn(Vector3 pos, Vector3 vel)
 {
 	Position = pos;
@@ -112,17 +123,6 @@ void UFO::Spawn(Vector3 pos, Vector3 vel)
 	ResetVectorTimer();
 	ResetFireTimer();
 	ChangeVector();
-}
-
-UFO::UFO(float windowWidth, float windowHeight, Player* player)
-{
-	shot = new Shot(windowWidth, windowHeight);
-	UFO::player = player;
-	WindowWidth = windowWidth;
-	WindowHeight = windowHeight;
-	fireTimer = new Timer();
-	vectorTimer = new Timer();
-	exploder = new Exploder();
 }
 
 void UFO::ResetFireTimer()

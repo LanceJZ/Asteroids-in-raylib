@@ -1,6 +1,29 @@
 #include "LineModel.h"
 #include "rlgl.h"
 
+LineModel::LineModel()
+{
+
+}
+
+LineModel::~LineModel()
+{
+}
+
+void LineModel::Load()
+{
+
+}
+
+void LineModel::LoadModel(string fileName)
+{
+	if (FileExists(const_cast<char*>(fileName.c_str())))
+	{
+		string linestemp = LoadFileText(const_cast<char*>(fileName.c_str()));
+		lines = ConvertStringToVector(linestemp);
+	}
+}
+
 void LineModel::Input()
 {
 
@@ -25,7 +48,7 @@ void LineModel::Draw()
 
 	rlPushMatrix();
 	rlTranslatef(Position.x, Position.y, 0);
-	rlRotatef(RotationZ * (180.0/3.141592653589793238463), 0, 0, 1); //Must be in degrees.
+	rlRotatef(RotationZ * (float)(180.0/3.14159), 0, 0, 1); //Must be in degrees.
 	rlScalef(Scale, Scale, Scale);
 
 	for (int i = 0; i < lines.size()-1; i = i + 2)
@@ -41,20 +64,6 @@ void LineModel::Draw()
 
 }
 
-void LineModel::Load()
-{
-
-}
-
-void LineModel::LoadModel(string fileName)
-{
-	if (FileExists(const_cast<char*>(fileName.c_str())))
-	{
-		string linestemp = LoadFileText(const_cast<char*>(fileName.c_str()));
-		lines = ConvertStringToVector(linestemp);
-	}
-}
-
 vector<Vector3> LineModel::GetModel()
 {
 	return lines;
@@ -63,15 +72,6 @@ vector<Vector3> LineModel::GetModel()
 void LineModel::SetModel(vector<Vector3> lines)
 {
 	LineModel::lines = lines;
-}
-
-LineModel::LineModel()
-{
-
-}
-
-LineModel::~LineModel()
-{
 }
 
 vector<Vector3> LineModel::ConvertStringToVector(string linesString)

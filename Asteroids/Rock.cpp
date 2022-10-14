@@ -1,6 +1,14 @@
 #include "Rock.h"
 #include "raymath.h"
 
+Rock::Rock(float windowWidth, float windowHeight, Player* player, UFO* ufo)
+{
+	WindowWidth = windowWidth;
+	WindowHeight = windowHeight;
+	Rock::player = player;
+	Rock::ufo = ufo;
+}
+
 void Rock::LoadModel(string rockModel)
 {
 	LineModel::LoadModel(rockModel);
@@ -12,17 +20,16 @@ void Rock::LoadSound(Sound exp)
 	SetSoundVolume(Sound01, 0.5f);
 }
 
-Rock::Rock(float windowWidth, float windowHeight, Player* player, UFO* ufo)
+bool Rock::Initialize()
 {
-	WindowWidth = windowWidth;
-	WindowHeight = windowHeight;
-	Rock::player = player;
-	Rock::ufo = ufo;
+	exploder = new Exploder();
+
+	return false;
 }
 
 void Rock::Update(float deltaTime)
 {
-	Entity::Update(deltaTime);
+	PositionedObject::Update(deltaTime);
 	exploder->Update(deltaTime);
 	CheckScreenEdge();
 
@@ -35,7 +42,8 @@ void Rock::Update(float deltaTime)
 		{
 			PlaySound(Sound01);
 		}
-		//exploder->Spawn(Position, 15, Radius);
+
+		exploder->Spawn(Position, 15, Radius);
 	}
 }
 
@@ -43,13 +51,6 @@ void Rock::Draw()
 {
 	LineModel::Draw();
 	exploder->Draw();
-}
-
-bool Rock::Initialise()
-{
-	exploder = new Exploder();
-
-	return false;
 }
 
 void Rock::Spawn(Vector3 pos, float speed, RockSize size)

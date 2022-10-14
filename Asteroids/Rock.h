@@ -19,7 +19,7 @@ public:
 	Exploder* exploder;
 	virtual void Update(float deltaTime);
 	virtual void Draw();
-	bool Initialise();
+	bool Initialize();
 
 	void Spawn(Vector3 pos, float speed, RockSize size);
 	void LoadModel(string rockModel);

@@ -168,7 +168,14 @@ void UFO::FireShot()
 		ang = GetRandomRadian();
 		break;
 	case UFO::Small:
-		ang = AimedShot();
+		if (player->Enabled)
+		{
+			ang = AimedShot();
+		}
+		else
+		{
+			ang = GetRandomRadian();
+		}
 		break;
 	}
 
